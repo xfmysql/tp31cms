@@ -68,8 +68,8 @@
         <li>
             <div class="am-gallery-item am_list_block">
                 <a href="<{:reurl($article['id'],'download')}>" class="am_img_bg">
-                    <img class="am_img animated" src="img/loading.gif"
-                         data-original="data/news/<{$article.imgurl}>"
+                    <img class="am_img animated" src="<{$article.imgurl}>"
+                         data-original="<{$article.imgurl}>"
                          alt="<{$article.title}>"/>
                 </a>
  <div class="am_listimg_info"><span class="am-icon-heart"> <{$article.clicks}></span><span
