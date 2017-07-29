@@ -1,0 +1,150 @@
+<tagLib name="tpl" />
+<include file="Public:header" />
+<style type="text/css">
+#ad_image img{ 
+	width:300px;
+}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$("#type").change(function(){
+			$(".bill_media").hide();
+			$("#ad_"+$(this).val()).show();
+		});
+		$("#type").change();
+		
+		//获取版块允许的广告类型
+		$("#board_id").change(function(){									  
+			var allowtype = $("#board_id option:selected").attr('allowtype');
+			var allowtype_arr = allowtype.split("|");
+			$("#type option").hide();
+			for(i=0; i<allowtype_arr.length; i++) {
+			    $("#type option").each(function(){
+					if($(this).val() == allowtype_arr[i]){
+						$(this).show();
+					}
+				});
+			}
+			$("#type").change();
+		});
+		$("#board_id").change();
+	})
+</script>
+<div class="pad_10">
+<form action="{:u('Resume/edit')}" method="post" name="myform" id="myform" enctype="multipart/form-data">
+<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+	<tr> 
+      <th width="80">{:L('name')}:</th>
+      <td>{$ad_info.xingming}</td>
+    </tr>
+    <tr> 
+      <th>{:L('Gender')} :</th>
+      <td>{$ad_type_arr[$ad_info['gender']]}</td>
+    </tr>
+    <tr>
+      <th>{:L('birthday')} :</th>
+      <td>
+      	{$ad_info.birthday}
+      </td>
+    </tr>
+    <tr>
+      <th>{:L('jiguan')}:</th>
+      <td>
+      	{$ad_info.jiguan}
+      </td>
+    </tr>
+	 <tr>
+      <th>{:L('mianmao')}:</th>
+      <td>
+      	{$ad_info.mianmao}
+      </td>
+    </tr>
+    <tr id="ad_text" class="bill_media"> 
+      <th>{:L('mobile')} :</th>
+      <td>{$ad_info.mobile}</td>
+    </tr>
+<tr>
+      <th>{:L('email')}:</th>
+      <td>
+      	{$ad_info.email}
+      </td>
+    </tr>
+
+<tr>
+      <th>{:L('pingjia')}:</th>
+      <td>
+      	{$ad_info.pingjia}
+      </td>
+    </tr>
+	<tr>
+      <th>{:L('zhiye')}:</th>
+      <td>
+      	{$ad_info.zhiye}
+      </td>
+    </tr>
+	<tr>
+      <th>{:L('salary')}:</th>
+      <td>
+      	{$ad_info.salary}
+      </td>
+    </tr>
+	<tr>
+      <th>{:L('daogang')}:</th>
+      <td>
+      	{$ad_info.daogang}
+      </td>
+    </tr>
+	<tr>
+      <th>{:L('jingyan')}:</th>
+      <td>
+      	{$ad_info.jingyan}
+      </td>
+    </tr>
+	<tr>
+      <th>{:L('xueli')}:</th>
+      <td>
+      	{$xueli_type_arr[$ad_info['xueli']]}
+      </td>
+    </tr>
+
+	
+<tr>
+      <th>{:L('school')}:</th>
+      <td>
+      	{$ad_info.school}
+      </td>
+    </tr>
+	<tr>
+      <th>{:L('biyetime')}:</th>
+      <td>
+      	{$ad_info.biyetime}
+      </td>
+    </tr>
+<tr>
+      <th>{:L('zhuanye')}:</th>
+      <td>
+      	{$ad_info.zhuanye}
+      </td>
+    </tr>
+
+    <tr>
+        <th>{:L('status')} :</th>
+        <td>
+            <input type="radio" <if condition="$ad_info['status'] eq '1'">checked="checked"</if> value="1" name="status"> {:L('noread')} &nbsp;&nbsp;
+            <input type="radio" <if condition="$ad_info['status'] eq '2'">checked="checked"</if> value="2" name="status">{:L('isread')} 
+        </td>
+    </tr>
+</table>
+<input type="hidden" name="id" id="id" value="{$ad_info.id}" />
+<input type="submit" name="dosubmit" id="dosubmit" class="dialog" value=" ">
+</form>
+<script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'250',height:'50'}, function(){this.close();$(obj).focus();})}});
+		
+		$("#name").formValidator({onshow:"不能为空",onfocus:"不能为空"}).inputValidator({min:1,onerror:"请填写广告名称"});
+	})
+</script>
+</div>
+</body>
+</html>
