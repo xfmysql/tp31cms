@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><{$article.title}> | <{$set.site_title}></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../Public/css/amazeui.min.css">
+    <link rel="stylesheet" href="../Public/css/petshow.css?6">
+    <link rel="stylesheet" href="../Public/css/animate.min.css">
+    <script src="../Public/js/jquery.min.js"></script>
+    <script src="../Public/js/amazeui.min.js"></script>
+    <script src="../Public/js/amazeui.lazyload.min.js"></script>
+</head>
+<body>
+<include file="Public:header" />
+
+<div class="am-g bdfw_nr" style="min-height: 204px;">
+
+<ol class="am-breadcrumb bdfw_link">
+  <li><a href="/" class="am-icon-home">首页</a></li>
+  <{$bread}>
+</ol>
+  <div class="am-u-sm-12">
+    <div class="bdfw_nr_block">
+    <div class="bdfw_nr_block_l">
+  <div class="bdfw_nr_title"><{$article.title}></div>
+
+	<div class="bdfw_nr_brief_address">时间：<{$article.addtime|date='Y-m-d',###}></div>
+    <div class="bdfw_nr_smalltitle">更多信息</div>
+    <div class="bdfw_nr_brief_info_nr">
+        <div class="bdfw_nr_brief_info_nr">
+            <span>点击：</span>
+            <span><{$article.clicks}></span>
+        </div>
+         <div class="bdfw_nr_brief_info_nr">
+            <span>下载：</span>
+            <span><{$article.downloads}></span>
+        </div>
+		<div class="bdfw_nr_brief_info_nr">
+            <span>主页：</span>
+            <span><{$article.officialurl}></span>
+        </div>
+    </div>
+  </div>
+
+
+<div class="bdfw_nr_block_r">
+<a href="###"><img src="data/news/<{$article.imgurl}>" alt=""></a>
+<div class="bdfw_nr_block_r_info">
+<span><i class="am-icon-camera"></i> <{$article.title}></span>
+</div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="am_tuya">
+
+
+<div class="am_tuya_content">
+<div class="am_tuya_content_l">
+  <div class="am_albums">
+	  <{$article.detail}>
+  </div>
+
+<div class="am_tuya_more_1">
+  <div class="am_tuya_oneword">下载地址</div>
+  
+  <foreach name="softlist" item="soft"> 
+	  <div class="am_tuya_oneword">
+      <span><a href="<{$soft.durl}>"> <{$soft.sitename}></a></span><br/>
+	   </div>
+  </foreach>
+
+ 
+  </div>
+
+  
+</div>
+<div class="am_tuya_content_r">
+
+<ul class="am_tuya_tag">
+    <li><span class="am_tuya_tag_title">TAG</span></li>
+    <li><a href=""><span>行业</span><span>
+	<volist name="project_list" id="project"><{$project.name}> </volist></span></a></li>
+    <!-- <li><a href=""><span>颜色</span><span>红色</span></a></li>
+    <li><a href=""><span>关键词</span><span>54</span></a></li> -->
+</ul>
+<div class="page_hot">
+            <div class="page_hot_title">人气模板</div>
+            <div class="page_hot_list">
+
+<volist name="newlist" id="article" >
+<div class="page_hot_block">
+    <dl>
+        <dt><a href="<{:reurl($article['id'],'download')}>"><img src="data/news/<{$article.imgurl}>" alt="<{$article.title}>"></a></dt>
+        <dd>
+            <i><{$article.title}></i>
+            <em></em>
+            <div class="hot_block_info">
+                <div class="hot_info_l am-icon-heart"><{$article.clicks}></div>
+                <div class="hot_info_r am-icon-comments"><{$article.downloads}></div>
+            </div>
+        </dd>
+    </dl>
+</div>
+</volist>
+
+
+</div>
+          </div>
+</div>
+</div>
+</div>
+<div class="am_tuya_cai">
+<div class="am_tuya_cai_ti">相关模板</div>
+<div class="am-g am-imglist">
+    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-4 am-gallery-default" >
+
+  <volist name="clickslist" id="article" >
+
+ <li>
+    <div class="am-gallery-item am_list_block">
+      <a href="<{:reurl($article['id'],'download')}>" class="am_img_bg">
+        <img class="am_img animated" src="img/loading.gif"    data-original="data/news/<{$article.imgurl}>" alt="<{$article.title}>"/></a>
+
+    </div>
+    <a class="am_imglist_user"><span class="am_imglist_user_ico"></span><span class="am_imglist_user_font"><{$article.title}></span></a>
+  </li>
+
+</volist>
+
+
+</ul>
+<div class="am_tuya_ckgd"><i class="am-icon-spinner am-icon-spin"></i><a href=""> 查看更多</a></div>
+</div>
+
+
+</div>
+
+
+<include file="Public:footer" />
+<script src="../Public/js/petshow.js"></script>
+<script>
+ $(function(){
+  if ($(window).width() < 600 ) {
+ $('.am_list_item_text').each(
+  function(){
+     if($(this).text().length >= 26){
+        $(this).html($(this).text().substr(0,26)+'...');
+     }});}[]
+
+});
+
+</script>
+</body>
+</html>

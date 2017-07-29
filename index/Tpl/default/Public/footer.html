@@ -1,0 +1,43 @@
+
+<footer class="am_footer">
+    <div class="am_footer_con">
+        <div class="am_footer_link">
+            <span>关于<{$set.site_name}></span>
+            <ul>
+			<volist name="bottomList" id="catalog" offset='0' length='10'>
+                <li><a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a></li>
+             
+				</volist>
+            </ul>
+        </div>
+
+
+        <div class="am_footer_don">
+            <span><{$set.site_name}></span>
+            <dl>
+                <dt><img src="<{$set.site_logo}>" alt=""></dt>
+                <dd><{$set.site_description}>
+                    <a href="###" class="footdon_pg ">
+                        <div class="foot_d_pg am-icon-apple "> App store</div>
+                    </a><a href="###" class="footdon_az animated">
+                        <div class="foot_d_az am-icon-android "> Android</div>
+                    </a></dd>
+
+            </dl>
+        </div>
+
+        <div class="am_footer_erweima">
+            <div class="am_footer_weixin"><img src="../Public/img/wx.jpg" alt="">
+
+                <div class="am_footer_d_gzwx am-icon-weixin"> 关注微信</div>
+            </div>
+            <div class="am_footer_ddon"><img src="../Public/img/wx.jpg" alt="">
+
+                <div class="am_footer_d_dxz am-icon-cloud-download"> 扫码下载</div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="am_info_line">Copyright(c)2017 <span><{$set.site_name}></span> All Rights Reserved.</div>
+</footer>

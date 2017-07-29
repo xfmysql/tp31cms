@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><{$set.site_name}> | <{$set.site_title}></title>
+	<meta name="keywords" content="<{$set.site_keyword}>">
+	<meta name="description" content="">
+
+
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../Public/css/amazeui.min.css">
+    <link rel="stylesheet" href="../Public/css/petshow.css?6">
+    <link rel="stylesheet" href="../Public/css/animate.min.css">
+    <script src="../Public/js/jquery.min.js"></script>
+    <script src="../Public/js/amazeui.min.js"></script>
+    <script src="../Public/js/countUp.min.js"></script>
+    <script src="../Public/js/amazeui.lazyload.min.js"></script>
+
+
+</head>
+<body>
+<include file="Public:header" />
+
+<div class="banner_navbg">
+    <div class="am-g">
+
+    </div>
+</div>
+<!-- //loop ishot catalog-->
+<volist name="hotCatalogList" id="catalog" offset='0' length='10'>
+
+
+<!-- //start middle image-->
+<div class="am-g am-imglist">
+
+<div class="am-u-sm-12">
+    <div class="ztlb_nr_block">
+<div class="ztlb_nr_block_l">
+  <img src="<{$catalog.icourl}>" alt="<{$catalog.name}>">
+</div>
+<div class="ztlb_nr_block_r">
+<div class="ztlb_nr_block_r_info">
+    <div class="ztlb_nr_block_r_info_l">
+<div class="ztlb_nr_block_r_info_num"><{$catalog['clicks']}></div>
+<div>人气</div>
+    </div>
+    <div class="ztlb_nr_block_r_info_r">
+<div class="ztlb_nr_block_r_info_num"><{$catalog['downs']}></div>
+<div>下载</div>
+    </div>
+</div>
+<a class="ztlb_nr_block_r_title" href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a>
+<span class="ztlb_nr_block_r_nr"><{$catalog.seo_desc}></span>
+
+</div>
+  </div>
+
+
+
+  </div>
+
+
+    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-6 am-gallery-default">
+
+  <volist name="catalog['child']" id="article" offset='0' length='20'>
+
+        <li>
+            <div class="am-gallery-item am_list_block">
+                <a href="<{:reurl($article['id'],'download')}>" class="am_img_bg">
+                    <img class="am_img animated" src="../Public/img/loading.gif"
+                         data-original="data/news/<{$article.imgurl}>"
+                         alt="<{$article.title}>"/>
+                </a>
+
+                <div class="am_listimg_info"><span class="am-icon-heart"> <{$article.clicks}></span><span
+                        class="am-icon-comments"> n</span><span class="am_imglist_time"> <{$article.addtime|date='Y-m-d',###}></span></div>
+
+            </div>
+            <a class="am_imglist_user"><span class="am_imglist_user_ico"></span><span
+                    class="am_imglist_user_font"><{$article.title}></span></a>
+        </li>
+		</volist>
+		
+    </ul>
+
+</div>
+</volist><!-- //end catalog-->
+
+
+<include file="Public:footer" />
+<script src="../Public/js/petshow.js"></script>
+</body>
+</html>

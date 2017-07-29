@@ -1,0 +1,65 @@
+
+<header class="am-topbar am-topbar-inverse">
+    <div class="amz-container">
+        <h1 class="am-topbar-brand">
+            <a href="#" class="am-topbar-logo">
+                <img src="<{$set.site_logo}>" alt="">
+            </a>
+        </h1>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+        data-am-collapse="{target: '#doc-topbar-collapse-5'}">
+            <span class="am-sr-only">
+                导航切换
+            </span>
+            <span class="am-icon-bars">
+            </span>
+        </button>
+        <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse-5">
+            <ul class="am-nav am-nav-pills am-topbar-nav">
+                <li class="am-active"><a href="/"><{$set.site_name}></a></li>
+				<volist name="catalogList" id="catalog" offset='0' length='10'>
+				 <if condition="($catalog['childcount'] eq '0')">
+                <li>
+					<if condition="($catalog['channel'] eq '3')">
+					<a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a>
+					<else />
+					<a href="<{:reurl($catalog['id'],'articlelist')}>"><{$catalog.name}></a>
+					</if>
+				</li>
+				<else /><li class="am-dropdown" data-am-dropdown="">
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                        <{$catalog.name}><span class="am-icon-caret-down"></span></a>
+                    <ul class="am-dropdown-content">
+                        <volist name="catalog['child']" id="childcatalog" offset='0' length='10'>
+						
+						<if condition="($childcatalog['channel'] eq '3')">
+						<li><a href="<{:reurl($childcatalog['id'],'downloadlist')}>"><{$childcatalog.name}></a></li>
+						<else />
+						<li><a href="<{:reurl($childcatalog['id'],'articlelist')}>"><{$childcatalog.name}></a></li>
+						</if>
+
+                        </volist>
+                    </ul>
+                </li>
+</if>
+				</volist>
+
+
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="get">
+    <div class="am-g">
+        <div class="am-u-lg-12">
+            <div class="get-title">
+                <div class="get_font_left"><img src="../Public/img/font_yjy.png" alt=""></div>
+                <div class="get_font_center" id="banner_num" data-num="<{$dataNum}>"></div>
+                <div class="get_font_rigth"><img src="../Public/img/font_zty.png" alt=""></div>
+            </div>
+
+            <div class="font_line">这样真的号码</div>
+           
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      <title><{$list_catalog.name}>-<{$set.site_name}></title>
+        <meta name="keywords" content="<{$catalog.keyword}>" /> 
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../Public/css/amazeui.min.css">
+    <link rel="stylesheet" href="../Public/css/petshow.css?6">
+    <link rel="stylesheet" href="../Public/css/animate.min.css">
+    <script src="../Public/js/jquery.min.js"></script>
+    <script src="../Public/js/amazeui.min.js"></script>
+	<script src="../Public/js/countUp.min.js"></script>
+    <script src="../Public/js/amazeui.lazyload.min.js"></script>
+
+
+</head>
+<body>
+<include file="Public:header" />     
+
+
+<div class="am-g ztlb_nr ztlb_nr_list">
+
+<ol class="am-breadcrumb bdfw_link">
+  <li><a href="/" class="am-icon-home">首页</a></li>
+  <{$bread}>
+</ol>
+
+
+  <div class="am-u-sm-12">
+    <div class="ztlb_nr_block">
+<div class="ztlb_nr_block_l">
+  <img src="<{$list_catalog.icourl}>" alt="">
+</div>
+<div class="ztlb_nr_block_r">
+<div class="ztlb_nr_block_r_info">
+    <div class="ztlb_nr_block_r_info_l">
+<div class="ztlb_nr_block_r_info_num"><{$count}></div>
+<div>收录</div>
+    </div>
+    <div class="ztlb_nr_block_r_info_r">
+<div class="ztlb_nr_block_r_info_num"><{$clicks}></div>
+<div>人气</div>
+    </div>
+</div>
+<a class="ztlb_nr_block_r_title"><{$list_catalog.name}></a>
+<span class="ztlb_nr_block_r_nr"><{$list_catalog.seo_desc}></span>
+<!-- div class="ztlb_nr_block_r_user">
+参与用户 <img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt="">
+</div -->
+</div>
+  </div>
+  </div>
+
+</div>
+  <div class="ztlb_nr_block_r_user ztlb_nr_block_r_user_copy">
+<span>参与用户</span> <img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt=""><img src="img/kj.png" alt="">
+</div>
+
+<div class="am-g ztlb_nrlist">
+  <div class="am-u-sm-12">
+
+    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+  am-avg-md-3 am-avg-lg-6 am-gallery-default">
+
+   <volist name="list" id="article" >
+        <li>
+            <div class="am-gallery-item am_list_block">
+                <a href="<{:reurl($article['id'],'download')}>" class="am_img_bg">
+                    <img class="am_img animated" src="img/loading.gif"
+                         data-original="data/news/<{$article.imgurl}>"
+                         alt="<{$article.title}>"/>
+                </a>
+ <div class="am_listimg_info"><span class="am-icon-heart"> <{$article.clicks}></span><span
+                        class="am-icon-comments"> <{$article.downloads}></span><span class="am_imglist_time"> <{$article.addtime|date='Y-m-d',###}></span></div>
+
+            </div>
+            <a class="am_imglist_user"><span class="am_imglist_user_ico"></span><span
+                    class="am_imglist_user_font"><{$article.title}></span></a>
+
+
+           
+        </li>
+       </volist>
+    </ul>
+
+	<{$show}>
+  </div>
+</div>
+
+
+
+
+
+<include file="Public:footer" />
+<script src="../Public/js/petshow.js"></script>
+<script>
+ $(function(){
+  ZhuanTi_list_user()
+$(window).resize(function() {
+  ZhuanTi_list_user()
+});
+function ZhuanTi_list_user(){
+if($(window).width() < 810)
+$('.ztlb_nr_block_r_user').each(function(){$(this).children().each(function(index){if(index>5){$(this).hide()}else{$(this).show()}})});
+ }
+});
+
+</script>
+</body>
+</html>
