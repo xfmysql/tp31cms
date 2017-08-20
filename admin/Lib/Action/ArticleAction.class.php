@@ -42,14 +42,14 @@ class ArticleAction extends BaseAction
 		import("ORG.Util.Page");
 		$count = $article_mod->where($where)->count();
 		$p = new Page($count,20);
-		$article_list = $article_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order('add_time DESC,ordid ASC')->select();
+		$article_list = $article_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order('addtime DESC,sort desc')->select();
 
 		$key = 1;
 		foreach($article_list as $k=>$val){
 			$article_list[$k]['key'] = ++$p->firstRow;
-			$article_list[$k]['cate_name'] = $article_cate_mod->field('name')->where('id='.$val['cate_id'])->find();
+			$article_list[$k]['cate_name'] = $article_cate_mod->field('name')->where('id='.$val['pid'])->find();
 		}
-		$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort ASC')->select();
+		$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort desc')->select();
     	$cate_list = array();
     	foreach ($result as $val) {
     	    if ($val['pid']==0) {
@@ -71,13 +71,14 @@ class ArticleAction extends BaseAction
 		if(isset($_POST['dosubmit'])){
 			$article_mod = D('article');	
 			$data = $article_mod->create();
-			if($data['cate_id']==0){
+			if($data['pid']==0){
 				$this->error('请选择资讯分类');
 			}
-			if ($_FILES['img']['name']!='') {
-			    $upload_list = $this->upload("article");
-			    $data['img'] = $upload_list['0']['savename'];
+			if ($_FILES['icourl']['name']!='') {
+			    $upload_url = $this->upload("article");
+			    $data['icourl'] = $upload_url;
 			}			
+			$data['edittime']=date('Y-m-d H:i:s',time());
 			$result = $article_mod->save($data);
 			if(false !== $result){
 				$this->success(L('operation_success'),U('Article/index'));
@@ -100,7 +101,6 @@ class ArticleAction extends BaseAction
 		    	}
 		    }
 			$article_info = $article_mod->where('id='.$article_id)->find();		
-			$this->assign('show_header', false);
 	    	$this->assign('cate_list',$cate_list);
 			$this->assign('article',$article_info);
 			$this->display();
@@ -120,20 +120,17 @@ class ArticleAction extends BaseAction
 			if(false === $data = $article_mod->create()){
 				$this->error($article_mod->error());
 			}
-			if ($_FILES['img']['name']!='') {
-				$upload_list = $this->upload("article");
-				$data['img'] = $upload_list['0']['savename'];
+			if ($_FILES['icourl']['name']!='') {
+				$upload_url = $this->upload("article");
+				$data['icourl'] = $upload_url;
 			}
-			$data['add_time']=date('Y-m-d H:i:s',time());
+			$data['addtime']=date('Y-m-d H:i:s',time());
 			$result = $article_mod->add($data);
-			if($result){
-				$cate = M('catalog')->field('id,pid')->where("id=".$data['cate_id'])->find();
-				if( $cate['pid']!=0 ){
-					M('catalog')->where("id=".$cate['pid'])->setInc('article_nums');
-					M('catalog')->where("id=".$data['cate_id'])->setInc('article_nums');
-				}else{
-					M('catalog')->where("id=".$data['cate_id'])->setInc('article_nums');
-				}
+			if($result){//记录文章数量
+				//$cate = M('catalog')->field('id,pid')->where("id=".$data['cate_id'])->find();
+				///if( $cate['pid']!=0 ){
+				//	M('catalog')->where("id=".$cate['id'])->setInc('article_nums');
+				//}
 				$this->success('添加成功');
 			}else{
 				$this->error('添加失败');

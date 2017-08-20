@@ -71,7 +71,24 @@
 	 </volist>
 
 </volist>
-        
+
+
+   <volist name="articlelist" id="article" offset='0' length='12'>
+          <article class="am-g blog-entry-article">
+            <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
+                <img src="<{$article.icourl}>" alt="" class="am-u-sm-12">
+            </div>
+            <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
+                <span><a href="<{:reurl($article['id'],'article')}>" class="blog-color">article &nbsp;</a></span>
+                <span> @amazeUI &nbsp;</span>
+                <span><{$article.addtime|date='Y-m-d',###}></span>
+                <h1><a href=">"><{$article.title}></a></h1>
+                <p><{$article.intro}></p>
+                <p><a href="" class="blog-continue">continue reading</a></p>
+            </div>
+        </article>
+   </volist>
+
    
 
         

@@ -12,7 +12,7 @@ $(function(){
     <div class="col-tab">
       <ul class="tabBut cu-li">
         <li id="tab_setting_1" class="on" onclick="SwapTab('setting','on','',2,1);">{$Think.lang.general_info}</li>
-        <li id="tab_setting_2" onclick="SwapTab('setting','on','',2,2);">{$Think.lang.article_seo}</li>
+        <!--li id="tab_setting_2" onclick="SwapTab('setting','on','',2,2);">{$Think.lang.article_seo}</li-->
       </ul>
       <div id="div_setting_1" class="contentList pad-10">
         <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
@@ -20,13 +20,10 @@ $(function(){
             <th width="100">{:L('title')}:</th>
             <td><input type="text" name="title" id="title" class="input-text" size="60"></td>
           </tr>
-		  <tr>
-            <th width="100">{:L('url')}:</th>
-            <td><input type="text" name="url" id="url" class="input-text" size="60"></td>
-          </tr>
+		 
           <tr>
-            <th>{:L('cate_id')}:</th>
-            <td><select name="cate_id" id="cate_id" style="width:200px;">
+            <th>{:L('catalog')}:</th>
+            <td><select name="pid" id="pid" style="width:200px;">
             	<option value="0">--请选择分类--</option>
                 <volist name="cate_list['parent']" id="val">
                   <option value="{$val.id}">{$val.name}</option>
@@ -43,34 +40,40 @@ $(function(){
                 </volist>
               </select></td>
           </tr>
-          <tr>
-          	<th>{:L('orig')} :</th>
-            <td><input type="text" name="orig" id="orig" class="input-text" size="30"></td>
-          </tr>
-          <tr>
-          	<th>{:L('img')} :</th>
-            <td><input type="file" name="img" id="img" class="input-text"  style="width:200px;" /></td>
-          </tr>
-          <tr>
-            <th>{:L('abst')} :</th>
-            <td><textarea name="abst" id="abst" style="width:68%;height:50px;"></textarea></td>
-          </tr>
            <tr>
-            <th>{:L('info')} :</th>
+            <th width="100">{:L('alias')}:</th>
+            <td><input type="text" name="alias" id="alias" class="input-text" size="30"></td>
+          </tr>
+          <tr>
+            <th>{:L('intro')} :</th>
+            <td><textarea name="intro" id="intro" style="width:68%;height:50px;"></textarea></td>
+          </tr>
+          <tr>
+          	<th>{:L('icourl')} :</th>
+            <td><input type="file" name="icourl" id="icourl" class="input-text"  style="width:200px;" /></td>
+          </tr>
+         
+           <tr>
+            <th>{:L('content')} :</th>
             <td>            	
-				<tpl:editor id="info" name="info" type="KINDEDITOR" style="width:70%;height:350px;" ></tpl:editor>
+				<tpl:editor id="content" name="content" type="KINDEDITOR" style="width:70%;height:350px;" ></tpl:editor>
 			</td>
           </tr>
-          <tr>
-            <th>{:L('ordid')} :</th>
-            <td><input type="text" name="ordid" id="ordid" class="input-text" size="8"></td>
-          </tr>
-          <tr>
-        	<th>{:L('is_hot')}:</th>
-        	<td>
-            	<input type="checkbox" name="is_hot" id="is_hot" value="1"> &nbsp;热门&nbsp;&nbsp;&nbsp;
-                <input type="checkbox" name="is_best" id="is_best" value="1"> &nbsp;推荐&nbsp;&nbsp;&nbsp;
+            <tr>
+        	<th>{:L('istop')}:</th>
+        	<td><input type="radio" name="istop" class="radio_style" value="1">
+              &nbsp;推荐&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="istop" class="radio_style" value="0" checked="checked">
+              &nbsp;不推荐
             </td>
+          </tr>
+            <tr>
+            <th>{:L('ishomepage')} :</th>
+            <td><input type="radio" name="ishomepage" class="radio_style" value="1">
+              &nbsp;首页显示&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="ishomepage" class="radio_style" value="0" checked="checked">
+              &nbsp;不显示
+              </td>
           </tr>
          <tr>
             <th>{:L('status')} :</th>
@@ -80,10 +83,19 @@ $(function(){
               &nbsp;待审核
               </td>
           </tr>
+           <tr>
+            <th>{:L('sort')} :</th>
+            <td><input type="text" name="sort" id="sort" class="input-text" size="8" value="0">
+              &nbsp;&nbsp;&nbsp;{:L('clicks')} :&nbsp;<input type="text" name="clicks" id="clicks" class="input-text" size="8" value="0">
+              &nbsp;&nbsp;&nbsp;{:L('zan')} :&nbsp;<input type="text" name="zan" id="zan" class="input-text" size="8" value="0">
+              &nbsp;&nbsp;&nbsp;{:L('cai')} :&nbsp;<input type="text" name="cai" id="cai" class="input-text" size="8" value="0">
+            </td>
+          </tr>
+          
         </table>
       </div>
       
-      <div id="div_setting_2" class="contentList pad-10 hidden">
+      <!--div id="div_setting_2" class="contentList pad-10 hidden">
         <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
           <tr>
             <th width="100">{$Think.lang.seo_title} :</th>
@@ -98,7 +110,7 @@ $(function(){
             <td><textarea name="seo_desc" id="seo_desc" cols="80" rows="8"></textarea></td>
           </tr>
         </table>
-      </div>
+      </div-->
       <div class="bk15"></div>
       <div class="btn"><input type="submit" value="{$Think.lang.submit}" onclick="return submitFrom();" name="dosubmit" class="button" id="dosubmit"></div>
     </div>

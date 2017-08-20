@@ -14,7 +14,7 @@ class ArticleAction extends CommonAction
 			M('Article')->execute("update __TABLE__  set clicks=clicks+1 where id=$article_id");
 		}
 		$this->assign('article',$article);//文章		
-		$cate = D('article_cate')->where("id=".$article['cate_id'])->find();
+		$cate = D('catalog')->where("id=".$article['pid'])->find();
 		$this->assign('cate',$cate);//分类
 		//图片5张=
 		$imglist=M('article')->limit(4)->where(" cate_id=".$article['cate_id']." and status=1 and img <>''")->order('ordid asc')->select();

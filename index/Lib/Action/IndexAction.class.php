@@ -12,8 +12,11 @@ class IndexAction extends CommonAction
 		$adList = $ad_mod->limit('5')->where("  type='image'")->order('ordid ASC')->select();
 		$this->assign('adList',$adList);	
 		
+
+		$articlelist=M('article')->limit(12)->where("  status=1 and ishomepage=1 and icourl<>''")->order('addtime desc')->select();
+
 		//显示推荐栏目 
-		$hotCatalogList=M('catalog')->where('istuijian=1 and status=1')->order('sort asc')->select();
+		$hotCatalogList=M('catalog')->where('isnav=1 and status=1')->order('sort asc')->select();
 		foreach ($hotCatalogList as $key=>$value) {
 			$archiveList=M('download')->limit('12')->where(" state=1 and catalogid=".$value['id'])->order('addtime desc')->select();
 			$hotCatalogList[$key]['child'] = $archiveList;
@@ -22,7 +25,7 @@ class IndexAction extends CommonAction
 			$hotCatalogList[$key]['clicks'] = $clicks;
 			
 		}
-		$this->assign('hotCatalogList',$hotCatalogList);
+		//$this->assign('hotCatalogList',$hotCatalogList);
 		
 		
 		//$Model = M('article_cate');// join
@@ -37,6 +40,8 @@ class IndexAction extends CommonAction
 		$this->assign('linkimg',$linkImgList);	
 		
 	
+	$this->assign('articlelist',$articlelist);	
+
 		//显示模板	
 		$this->display('index');
 	}
