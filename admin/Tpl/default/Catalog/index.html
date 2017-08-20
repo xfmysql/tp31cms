@@ -29,7 +29,7 @@
 			<td align="center"><em style="color:red;">{$val.article_nums}</em></td>
             <td align="center"><input type="text" class="input-text-c input-text" value="{$val.sort}" id="sort_{$val.id}" onblur="sort({$val.id},'sort_order',this.value)" size="4" name="listorders[{$val.id}]"></td>
             <td align="center" onclick="status({$val.id},'status')" id="status_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.status}.gif"</td>
-            <td align="center"><img src="__ROOT__/statics/images/status_{$val.isshow}.gif"</td>
+            <td align="center"><img src="__ROOT__/statics/images/status_{$val.status}.gif"</td>
             <td align="center"><a class="blue" href="javascript:edit({$val.id},'{$val.name}')">{$Think.lang.edit}</a></td>
         </tr>
         	<volist name="article_cate_list['sub'][$val['id']]" id='sval'>

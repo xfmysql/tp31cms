@@ -15,16 +15,19 @@ class IndexAction extends CommonAction
 		//显示推荐栏目 
 		$hotCatalogList=M('catalog')->where('istuijian=1 and status=1')->order('sort asc')->select();
 		foreach ($hotCatalogList as $key=>$value) {
-			$downloadList=M('download')->limit('12')->where(" state=1 and catalogid=".$value['id'])->order('addtime desc')->select();
-			$hotCatalogList[$key]['child'] = $downloadList;
+			$archiveList=M('download')->limit('12')->where(" state=1 and catalogid=".$value['id'])->order('addtime desc')->select();
+			$hotCatalogList[$key]['child'] = $archiveList;
 
 			$clicks = M('download')->where(" state=1 and catalogid=".$value['id'])->sum('clicks');
-			$downs = M('download')->where(" state=1 and catalogid=".$value['id'])->sum('downloads');
 			$hotCatalogList[$key]['clicks'] = $clicks;
-			$hotCatalogList[$key]['downs'] = $downs;
 			
 		}
 		$this->assign('hotCatalogList',$hotCatalogList);
+		
+		
+		//$Model = M('article_cate');// join
+		//$joinArticle= $Model->table('cms_article_cate c')->join('cms_article a on c.id = //a.cate_id')->field('a.*')->where('a.status=1')->order('a.add_time asc')->select();
+		//print_r($joinArticle);
 		
 		//linkList
 		$linkTxt=M('flink');

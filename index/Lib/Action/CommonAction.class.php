@@ -17,7 +17,7 @@ class CommonAction extends Action
 		}
 		$this->setting = $set; 
 		//全局首页，显示推荐栏目，用户个人中心导航分类展示
-		$catalogList=M('catalog')->where('shownav=1 and status=1 and pid=0')->order('sort asc')->select();
+		$catalogList=M('catalog')->where('isnav=1 and status=1 and pid=0')->order('sort asc')->select();
 		foreach ($catalogList as $key=>$value) {
 			$childList=M('catalog')->where('pid='.$value["id"])->order('sort asc')->select();
 			$catalogList[$key]['childcount'] = count($childList);
@@ -32,20 +32,30 @@ class CommonAction extends Action
 			$catalogList[$key]['child'] = $childList;
 		}
 		$this->assign('bottomList',$bottomList);
+
+		$article=M('article');
+		$catalog = M('article_cate');
+		//热门文章
+	$bestArticleList=$article->limit('6')->where(" status=1 and is_best=1")->order('clicks desc')->select();
+		$this->assign('bestArticleList',$bestArticleList);	
+	//最新文章
+	$newArticleList=$article->limit('6')->where(" status=1 ")->order('add_time desc')->select();	
+	$this->assign('newArticleList',$newArticleList);
+	//标签
+ 	$keyword_mod = M('keyword');
+    $KeywordList = $keyword_mod->order('id desc')->select();    
+$this->assign('KeywordList',$KeywordList);
+
+
+
+
+
+
 		//banner跳动的总数
 		$allCount = M('download')->where(" state=1")->count();
 		$this->assign('dataNum',$allCount);
 
 		
-
-		$article=M('article');
-		$catalog = M('article_cate');
-		//推荐文章
-	$bestArticleList=$article->limit('6')->where(" status=1 and is_best=1 and img<>''")->order('clicks desc')->select();
-		$this->assign('bestArticleList',$bestArticleList);	
-	//热评文章
-	$hotArticleList=$article->limit('6')->where(" status=1 ")->order('clicks desc')->select();	
-	$this->assign('hotArticleList',$hotArticleList);
 	//分类目录
 	$childCatalogList = $catalog->limit('6')->where('status=1 and pid=0')->order('sort_order desc')->select();
 	$this->assign('childCatalogList',$childCatalogList);

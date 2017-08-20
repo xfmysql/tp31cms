@@ -36,48 +36,58 @@
       <td><input type="text" name="alias" id="alias" class="input-text" value="{$article_cate_info.alias}"></td>
     </tr>
 	<tr>
-      <th>{:L('CHANNEL')} :</th>
-      <td><input type="radio" name="channel" value="1" checked>&nbsp;内容&nbsp;&nbsp;&nbsp;
-      	  <input type="radio" name="channel" value="2">&nbsp;文章&nbsp;&nbsp;&nbsp;
-      	  <input type="radio" name="channel" value="3">&nbsp;下载&nbsp;&nbsp;&nbsp;
-		  <input type="radio" name="channel" value="4">&nbsp;相册&nbsp;&nbsp;&nbsp;
+      <th>{:L('model')} :</th>
+      <td><input type="radio" name="model" value="{:c('Model_Content')}" >&nbsp;内容&nbsp;&nbsp;&nbsp;
+      	  <input type="radio" name="model" value="{:c('Model_Article')}" checked>&nbsp;文章&nbsp;&nbsp;&nbsp;
+      	  <input type="radio" name="model" value="{:c('Model_Download')}">&nbsp;下载&nbsp;&nbsp;&nbsp;
+		  <input type="radio" name="model" value="{:c('Model_Album')}">&nbsp;相册&nbsp;&nbsp;&nbsp;
 		  </td>
     </tr>
 	<tr>
       <th width="100">{:L('sort')} :</th>
-      <td><input type="text" name="sort" id="sort" class="input-text" size="4" onkeyup="value=value.replace(/[^\d]/g,'')"onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"></td>
+      <td><input type="text" name="sort" id="sort" class="input-text" size="4" value="0" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"></td>
     </tr>
 	<tr>
       <th>{:L('status')} :</th>
-      <td><input type="radio" name="status" value="1" checked>&nbsp;&nbsp;已经审核&nbsp;&nbsp;
+      <td><input type="radio" name="status" value="1" checked>&nbsp;&nbsp;审核&nbsp;&nbsp;
       	  <input type="radio" name="status" value="0" >&nbsp;未审核</td>
     </tr>
     <tr>
-      <th>{:L('shownav')} :</th>
-      <td><input type="radio" name="shownav" value="1">&nbsp;&nbsp;显示导航&nbsp;&nbsp;
-      	  <input type="radio" name="shownav" value="0" checked>&nbsp;不显示</td>
+      <th>{:L('isnav')} :</th>
+      <td><input type="radio" name="isnav" value="1">&nbsp;&nbsp;显示导航&nbsp;&nbsp;
+      	  <input type="radio" name="isnav" value="0" >&nbsp;不显示</td>
     </tr>
 	 <tr>
-      <th>{:L('showbottom')} :</th>
-      <td><input type="radio" name="showbottom" value="1" >&nbsp;&nbsp;底部显示&nbsp;&nbsp;
-      	  <input type="radio" name="showbottom" value="0" checked>&nbsp;不显示</td>
+      <th>{:L('isbottom')} :</th>
+      <td><input type="radio" name="isbottom" value="1" >&nbsp;&nbsp;底部显示&nbsp;&nbsp;
+      	  <input type="radio" name="isbottom" value="0" >&nbsp;不显示</td>
     </tr>
 	 <tr>
-      <th>{:L('istuijian')} :</th>
+      <th>{:L('istop')} :</th>
       <td><input type="radio" name="istop" value="1" >&nbsp;&nbsp;已经推荐&nbsp;&nbsp;
-      	  <input type="radio" name="istop" value="0" checked>&nbsp;不推荐</td>
+      	  <input type="radio" name="istop" value="0" >&nbsp;不推荐</td>
+    </tr>
+    <tr>
+      <th>{:L('ishomepage')} :</th>
+      <td><input type="radio" name="ishomepage" value="1" >&nbsp;&nbsp;首页显示&nbsp;&nbsp;
+          <input type="radio" name="ishomepage" value="0" >&nbsp;首页不显示</td>
+    </tr>
+    <tr>
+      <th>{:L('isslider')} :</th>
+      <td><input type="radio" name="isslider" value="1" >&nbsp;&nbsp;侧栏显示&nbsp;&nbsp;
+          <input type="radio" name="isslider" value="0" >&nbsp;侧栏不显示</td>
     </tr>
     <tr>
       <th width="100">{:L('seotitle')} :</th>
-      <td><input type="text" name="seo_title" id="seo_title" class="input-text" value="{$article_cate_info.seo_title}" size="50"></td>
+      <td><input type="text" name="seotitle" id="seotitle" class="input-text"  size="50"></td>
     </tr>
     <tr>
       <th width="100">{:L('seokeyword')} :</th>
-      <td><input type="text" name="seo_keys" id="seo_keys" class="input-text" value="{$article_cate_info.seo_keys}" size="50"></td>
+      <td><input type="text" name="seokeyword" id="seokeyword" class="input-text"  size="50"></td>
     </tr>
     <tr>
       <th width="100">{:L('seodescript')} :</th>
-      <td><textarea name="seo_desc" cols="47" rows="4">{$article_cate_info.seo_desc}</textarea></td>
+      <td><textarea name="seodescript" cols="47" rows="4"></textarea></td>
     </tr>
 </table>
 <input type="submit" name="dosubmit" id="dosubmit" class="dialog" value=" ">

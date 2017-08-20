@@ -1,10 +1,10 @@
 
-<header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
+<!--header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
     <div class="am-u-sm-8 am-u-sm-centered">
         <img width="200" src="http://s.amazeui.org/media/i/brand/amazeui-b.png" alt="Amaze UI Logo"/>
         <h2 class="am-hide-sm-only"><{$set.site_name}></h2>
     </div>
-</header>
+</header-->
 <hr>
 <!-- nav start -->
 <nav class="am-g am-g-fixed blog-fixed blog-nav">
@@ -13,23 +13,33 @@
   <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
       <li class="am-active"><a href="/">首页</a></li>
-	  <foreach name="catalogList" item="cats">
-	   <li><a href="<{:RewriteURL($cats['id'],2)}>"><{$cats.name}></a></li>
-      </foreach>
+	  <foreach name="catalogList" item="catalog">
 
-
-      <!-- li class="am-dropdown" data-am-dropdown>
+	   <if condition="($catalog['childcount'] eq '0')">
+			<if condition="($catalog['channel'] eq C('Model_Download'))">
+			<li><a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a></li>
+			<else />
+			<li><a href="<{:reurl($catalog['id'],'articlelist')}>"><{$catalog.name}></a></li>
+			</if>
+		<else />
+		<li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-          首页布局 <span class="am-icon-caret-down"></span>
+          <{$catalog.name}><span class="am-icon-caret-down"></span>
         </a>
         <ul class="am-dropdown-content">
-          <li><a href="lw-index.html">1. blog-index-standard</a></li>         
-          <li><a href="lw-index-nosidebar.html">2. blog-index-nosidebar</a></li>
-          <li><a href="lw-index-center.html">3. blog-index-layout</a></li>
-          <li><a href="lw-index-noslider.html">4. blog-index-noslider</a></li>
+          <volist name="catalog['child']" id="childcatalog" offset='0' length='10'>
+						
+						<if condition="($childcatalog['channel'] eq C('Model_Download'))">
+						<li><a href="<{:reurl($childcatalog['id'],'downloadlist')}>"><{$childcatalog.name}></a></li>
+						<else />
+						<li><a href="<{:reurl($childcatalog['id'],'articlelist')}>"><{$childcatalog.name}></a></li>
+						</if>
+         </volist>
         </ul>
       </li>
- -->  
+	</if>
+      </foreach>
+  
     </ul>
     <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
       <div class="am-form-group">

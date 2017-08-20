@@ -49,7 +49,7 @@ class ArticleAction extends BaseAction
 			$article_list[$k]['key'] = ++$p->firstRow;
 			$article_list[$k]['cate_name'] = $article_cate_mod->field('name')->where('id='.$val['cate_id'])->find();
 		}
-		$result = $article_cate_mod->where(" channel=2")->order('sort ASC')->select();
+		$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort ASC')->select();
     	$cate_list = array();
     	foreach ($result as $val) {
     	    if ($val['pid']==0) {
@@ -75,7 +75,7 @@ class ArticleAction extends BaseAction
 				$this->error('请选择资讯分类');
 			}
 			if ($_FILES['img']['name']!='') {
-			    $upload_list = $this->_upload();
+			    $upload_list = $this->upload("article");
 			    $data['img'] = $upload_list['0']['savename'];
 			}			
 			$result = $article_mod->save($data);
@@ -90,7 +90,7 @@ class ArticleAction extends BaseAction
 				$article_id = isset($_GET['id']) && intval($_GET['id']) ? intval($_GET['id']) : $this->error(L('please_select'));
 			}
 			$article_cate_mod = D('catalog');
-		    $result = $article_cate_mod->where(" channel=2")->order('sort ASC')->select();
+		    $result = $article_cate_mod->where(" model=".C("Model_Article") )->order('sort ASC')->select();
 		    $cate_list = array();
 		    foreach ($result as $val) {
 		    	if ($val['pid']==0) {
@@ -112,15 +112,16 @@ class ArticleAction extends BaseAction
 	function add()
 	{
 		if(isset($_POST['dosubmit'])){
+			
 			$article_mod = D('article');		
 			if($_POST['title']==''){
-				$this->error(L('input').L('article_title'));
+				$this->error(L('input').L('title'));
 			}
 			if(false === $data = $article_mod->create()){
 				$this->error($article_mod->error());
 			}
 			if ($_FILES['img']['name']!='') {
-				$upload_list = $this->_upload();
+				$upload_list = $this->upload("article");
 				$data['img'] = $upload_list['0']['savename'];
 			}
 			$data['add_time']=date('Y-m-d H:i:s',time());
@@ -139,7 +140,7 @@ class ArticleAction extends BaseAction
 			}
 		}else{
 			$article_cate_mod = D('catalog');
-	    	$result = $article_cate_mod->where(" channel=2")->order('sort ASC')->select();
+	    	$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort ASC')->select();
 	    	$cate_list = array();
 	    	foreach ($result as $val) {
 	    	    if ($val['pid']==0) {
@@ -206,25 +207,6 @@ class ArticleAction extends BaseAction
     }
 
 
-    public function _upload()
-    {
-    	import("ORG.Net.UploadFile");
-        $upload = new UploadFile();
-        //设置上传文件大小
-        $upload->maxSize = 3292200;
-        //$upload->allowExts = explode(',', 'jpg,gif,png,jpeg');
-        $upload->savePath = './data/news/';
-
-        $upload->saveRule = uniqid;
-        if (!$upload->upload()) {
-            //捕获上传异常
-            $this->error($upload->getErrorMsg());
-        } else {
-            //取得成功上传的文件信息
-            $uploadList = $upload->getUploadFileInfo();
-        }
-        return $uploadList;
-    }
 
 	function sort_order()
     {

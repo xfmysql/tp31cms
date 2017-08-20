@@ -222,8 +222,12 @@ class BaseAction extends Action {
 		//设置上传文件大小
 		$upload->maxSize = 32922000;
 		$upload->allowExts = explode(',', 'jpg,gif,png,jpeg');
-		$upload->savePath = ROOT_PATH.'/data/'.$savePath.'/';
+		$upload->savePath = ROOT_PATH.C('config_upload_dir').$savePath.'/';
 		$upload->saveRule = uniqid;
+		if(!file_exists(ROOT_PATH.C('config_upload_dir'))){
+			@mkdir(ROOT_PATH.C('config_upload_dir'), 0777); 
+		}
+		
 		if(!file_exists($upload->savePath)){
 			@mkdir($upload->savePath, 0777); 
 		}
@@ -234,7 +238,7 @@ class BaseAction extends Action {
 			//取得成功上传的文件信息
 			$uploadList = $upload->getUploadFileInfo();
 		}
-		$uploadList='./data/'.$savePath.'/'.$uploadList['0']['savename'];		
+		$uploadList='.'.C('config_upload_dir').$savePath.'/'.$uploadList['0']['savename'];		
 		return $uploadList;
 	}
 	//发送邮件

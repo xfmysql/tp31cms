@@ -36,6 +36,33 @@ CREATE TABLE `cms_admin` (
 INSERT INTO `cms_admin` VALUES ('1', 'lianx314', '3109c2ee735c83fac824c73786246361', '1431999838', null, '1', '1');
 INSERT INTO `cms_admin` VALUES ('2', 'zhang', 'cd726acaf264667c5f08507ed6c2dff8', '1495769686', '1495769686', '1', '2');
 
+DROP TABLE IF EXISTS `cms_archive`;
+CREATE TABLE `cms_archive` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catalogid` tinyint(4) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+   `alias` varchar(255)  NULL,
+  `imgurl` varchar(255) NULL,
+  `url` varchar(255) NOT NULL,
+  `addtime` datetime NOT NULL,
+  `edittime` datetime NOT NULL,
+ `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-待审核 1-已审核',
+ `clicks` int(11) NOT NULL DEFAULT '0',
+  `approval` int(11) NOT NULL DEFAULT '0' COMMENT '赞的数量',
+  `opposition` int(11) NOT NULL DEFAULT '0' COMMENT '踩的数量',
+
+  `ordid` tinyint(4) NOT NULL,
+  `istop` tinyint(1) NOT NULL DEFAULT '0' COMMENT '推荐',
+  `ishome` tinyint(1) NOT NULL DEFAULT '0' COMMENT '首页显示',
+ 
+  `seotitle` varchar(255) NOT NULL,
+  `seokeyword` varchar(255) NOT NULL,
+  `seodescript` text NOT NULL,
+ 
+  PRIMARY KEY (`id`)
+)  ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
 -- ----------------------------
 -- Table structure for `cms_album`
 -- ----------------------------
@@ -156,26 +183,31 @@ CREATE TABLE `cms_catalog` (
   `icourl` varchar(100) DEFAULT NULL,
   `alias` varchar(50) NOT NULL,
   `pid` smallint(4) unsigned NOT NULL,
-  `channel` smallint(4) NOT NULL DEFAULT '2',
+  `model` smallint(4) NOT NULL DEFAULT '2',
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `shownav` tinyint(1) NOT NULL DEFAULT '0',
-  `showbottom` tinyint(1) unsigned NOT NULL,
-  `istuijian` tinyint(1) NOT NULL,
+  `addtime` datetime NOT NULL,
+  `edittime` datetime NOT NULL,
+  `isnav` tinyint(1) NOT NULL DEFAULT '0',
+  `isbottom` tinyint(1) unsigned NOT NULL,
+  `istop` tinyint(1) NOT NULL,
+  `ishomepage` tinyint(1) NOT NULL,
+  `isslider` tinyint(1) NOT NULL,
   `sort` smallint(4) unsigned NOT NULL,
-  `seo_title` varchar(255) DEFAULT NULL,
-  `seo_keys` varchar(255) DEFAULT NULL,
-  `seo_desc` text,
+  `outurl` varchar(500) DEFAULT NULL,
+  `seotitle` varchar(255) DEFAULT NULL,
+  `seokeyword` varchar(255) DEFAULT NULL,
+  `seodescript` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_catalog
 -- ----------------------------
-INSERT INTO `cms_catalog` VALUES ('1', 'html模板', 'psd17174.JPG', 'htmltemplate', '0', '3', '1', '1', '0', '0', '2', '', '', 'html描述');
-INSERT INTO `cms_catalog` VALUES ('3', '整站模板', './data/setting/597bddbc63340.JPG', 'sitetemplate', '0', '3', '1', '1', '0', '1', '4', '', '', '');
-INSERT INTO `cms_catalog` VALUES ('4', '关于我们', null, 'aboutus', '0', '2', '1', '1', '1', '0', '99', '', '', '');
-INSERT INTO `cms_catalog` VALUES ('5', 'wap站点1', './data/setting/597bdd4a695e6.JPG', 'wap', '1', '3', '1', '1', '0', '0', '2', '', '', '');
-INSERT INTO `cms_catalog` VALUES ('6', '1', './data/setting/597bdb189b801.JPG', '1', '0', '1', '1', '0', '0', '0', '1', '', '', '');
+INSERT INTO `cms_catalog` VALUES ('1', 'html模板', 'psd17174.JPG', 'htmltemplate', '0', '3', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', '0', '0', '0', '0', '2', null, '', '', 'html描述');
+INSERT INTO `cms_catalog` VALUES ('3', '整站模板', './data/setting/597bddbc63340.JPG', 'sitetemplate', '0', '3', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', '0', '1', '0', '0', '4', null, '', '', '');
+INSERT INTO `cms_catalog` VALUES ('4', '关于我们', null, 'aboutus', '0', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', '1', '1', '0', '0', '99', null, '', '', '');
+INSERT INTO `cms_catalog` VALUES ('5', 'wap站点1', './data/setting/597c1287a464f.JPG', 'wap', '1', '3', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', '1', '1', '0', '0', '2', null, '', '', '');
+INSERT INTO `cms_catalog` VALUES ('6', '1', './data/setting/597bdb189b801.JPG', '1', '0', '1', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', '0', '1', '0', '0', '1', null, '', '', '');
 
 -- ----------------------------
 -- Table structure for `cms_download`

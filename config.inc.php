@@ -7,8 +7,10 @@ return array (
   'DB_PORT' => '3306',
   'DB_PREFIX' => 'cms_',
   'Model_Content'=>1,
-'Model_Article'=>2,
-'Model_Download'=>3,
-'Model_Album'=>4,
+  'Model_Article'=>2,
+  'Model_Download'=>3,
+  'Model_Album'=>4,
+
+  'config_upload_dir'=>'/uploads/',
 ); 
 ?>

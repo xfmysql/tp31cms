@@ -56,9 +56,9 @@ class CatalogAction extends BaseAction
 		    if($result != 0){
 		        $this->error('该分类已经存在');
 		    }
-			 if ($_FILES['icourl']!='') {
-				$upload_list = $this->upload('setting');
-				$vo['icourl'] = $upload_list;	
+			 if ($_FILES['icourl']['name']!='') {//上传时是个数组
+			 	$uploadurl = $this->upload('catalog');
+				$vo['icourl'] = $uploadurl;	
 			}
 			//保存当前数据
 		    $article_cate_id = $article_cate_mod->add($vo);
@@ -124,8 +124,8 @@ class CatalogAction extends BaseAction
 	    	$data = $article_cate_mod->create();
 			
 			 if ($_FILES['icourl']['name']!='') {
-				$upload_list = $this->upload('setting');
-				$data['icourl'] = $upload_list;	
+				$upload_url= $this->upload('catalog');
+				$data['icourl'] = $upload_url;	
 			}	
 			$result = $article_cate_mod->save($data);//$result = $article_cate_mod->save();
 			

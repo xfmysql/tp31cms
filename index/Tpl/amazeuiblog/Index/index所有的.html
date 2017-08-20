@@ -1,0 +1,455 @@
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<link type="text/css" media="all" href="../Public/static/style.css" rel="stylesheet">
+<link type="text/css" media="all" href="../Public/static/font.css" rel="stylesheet">
+<title><{$set.site_name}> - <{$set.site_title}></title>
+<meta name="description" content="<{$set.site_description}>">
+<meta name="keywords" content="<{$set.site_keyword}>">
+<script type="text/javascript" src="../Public/static/jquery.js"></script>
+<script type="text/javascript" src="../Public/static/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="../Public/static/main.js"></script>
+<script type="text/javascript" src="../Public/static/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/static/scrollmonitor.js"></script>
+<script type="text/javascript" src="../Public/static/slides.js"></script>
+<script type="text/javascript" src="../Public/static/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="../Public/static/script.js"></script>
+<script type="text/javascript" src="../Public/static/flexisel.js"></script>
+</head>
+<body class="home blog" style="">
+<div id="page" class="hfeed site">
+ 	<include file="Public:header" />
+      <nav class="breadcrumb">
+    <div class="bull">本站公告</div>
+    <div id="scrolldiv">
+      <div class="scrolltext">
+        <ul style="margin-top: 0px;">
+          <li class="scrolltext-title"><a href="#" rel="bookmark">Begin主题2015年4月9日升级说明</a></li>
+          <li class="scrolltext-title"><a href="#" rel="bookmark">WordPress 4.2版本发布，begin 主题同时升级为1.3版</a></li>
+        </ul>
+      </div>
+    </div>
+    <script type="text/javascript">$(document).ready(function() {$("#scrolldiv").textSlider({line: 1, speed: 300, timer: 6000});})</script>
+  </nav>
+  
+  <div id="content" class="site-content">
+    <div class="clear"></div>
+    <!-- 左边 -->
+    <div id="primary" class="content-area">
+      <main id="main" class="site-main" role="main">
+      <!-- 幻灯 -->
+        <div id="slideshow">
+          <ul class="rslides rslides1" id="slider" style="max-width: 900px;">
+            <li id="rslides1_s0" class="rslides1_on" style="display: block; float: left; position: relative; opacity: 1; z-index: 2; -webkit-transition: opacity 800ms ease-in-out; transition: opacity 800ms ease-in-out;"> <a href="http://zmingcx.com/begin" target="_blank" rel="bookmark"><img src="../Public/static/Beginz.jpg" alt="WordPress多功能主题：Begin正式版"></a>
+              <p class="slider-caption">WordPress多功能主题：Begin正式版</p>
+            </li>
+            <li id="rslides1_s1" class="" style="float: none; position: absolute; opacity: 0; z-index: 1; display: list-item; -webkit-transition: opacity 800ms ease-in-out; transition: opacity 800ms ease-in-out;"> <a href="http://zmingcx.com/wordpress-theme-ality.html" rel="bookmark"><img src="../Public/static/show1.jpg" alt="WordPress 主题：Ality"></a>
+              <p class="slider-caption">WordPress 主题：Ality</p>
+            </li>
+            <li id="rslides1_s2" style="float: none; position: absolute; opacity: 0; z-index: 1; display: list-item; -webkit-transition: opacity 800ms ease-in-out; transition: opacity 800ms ease-in-out;" class=""> <a href="http://zmingcx.com/wei-wordpress-wen-zhang-zi-dong-tian-jia-zi-ding-yi-lan-mu.html" rel="bookmark"><img src="../Public/static/show2.jpg" alt="为WordPress文章自动添加自定义栏目"></a>
+              <p class="slider-caption">为WordPress文章自动添加自定义栏目</p>
+            </li>
+          </ul>
+          <ul class="rslides_tabs rslides1_tabs">
+            <li class="rslides1_s1 rslides_here"><a href="#" class="rslides1_s1">1</a></li>
+            <li class="rslides1_s2"><a href="#" class="rslides1_s2">2</a></li>
+            <li class="rslides1_s3"><a href="#" class="rslides1_s3">3</a></li>
+          </ul>
+        </div>        
+        <!--itnews top 6-->
+        <volist name="topList" id="article" offset='0' length='2'>
+        <article id="post-6564" class="post-6564 post type-post status-publish format-standard hentry category-information tag-wordpress tag-information">
+          <figure class="thumbnail box-hide box-show"> <a href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>"><img src="/data/news/<{$article.img}>" alt="<{$article.title}>"></a> <span class="cat"><a href="<{:U('Index/List/index',array('id'=>$article['cate_id']))}>"><{$article.cate_id|getCatalog}></a></span> </figure>
+          <header class="entry-header">
+            <h2 class="entry-title"><a href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>" rel="bookmark"><{$article.title}></a></h2>
+          </header>
+          <div class="entry-content">
+            <div class="archive-content"><{$article.abst}></div>
+            <span class="title-l"></span> <span class="new-icon">最新</span> <span class="entry-meta"> <span class="date"><{$article1.add_time}> </span> <span class="comment"><a href="http://zmingcx.com/wordpress-4-3-beta-2.html#comments"><i class="icon-scroll-c"></i> 评论 6 </a></span> <span class="views"> 阅读 120</span> </span>
+            <div class="clear"></div>
+          </div>
+          <span class="entry-more"><a href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>" rel="bookmark">阅读全文</a></span> </article>          
+        </volist>
+        
+        <div class="clear"></div>        
+        <!-- 几张图片 -->
+        <div class="line-four">        
+         <volist name="topList" id="article" offset='2' length='4'>
+          <div class="xl4 xm4">
+            <div class="picture-h">
+              <figure class="picture-h-img"> <a href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>"><img src="/data/news/<{$article.img}>" data-original="/data/news/<{$article.img}>" alt="<{$article.title}>" style="display: block;"></a> </figure>
+              <h3 class="picture-h-title"><a href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>" rel="bookmark"><{$article.title}></a></h3>
+            </div>
+          </div>
+          </volist>
+          
+          <div class="clear"></div>
+        </div>
+        
+        <!-- 文章 -->
+       <div class="line-one">
+          <div class="cat-box">
+            <h3 class="cat-title"><i class="icon-cat"></i><a href="#" title="记录分享WP使用经验和技巧">新硬件<i class="icon-m"></i></a></h3>
+            <div class="clear"></div>
+            <div class="cat-site">
+            <volist name="topList" id="article" offset='0' length='1'>
+              <figure class="line-one-thumbnail"> <a href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>"><img src="<{$article.img}>" data-original="/data/news/<{$article.img}>" alt="<{$article.title}>" style="display: inline;"></a> </figure>
+              </volist>
+              <ul class="cat-one-list">
+              <volist name="topList" id="article" offset='1' length='5'>
+                <span class="list-date"><{$article.add_time}></span>
+                <li class="list-title"><i class="icon-li"></i><a href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>" rel="bookmark">
+                <{$article.title}></a></li>
+                </volist>
+                </ul>
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>  
+        <!--广告-->
+        <div class="ad-pc ad-site"><a href="http://zmingcx.com/begin" target="_blank"><img src="../Public/static/beginad.jpg" alt="Begin主题购买"></a></div>   
+        <!-- 4个视频 -->
+        <div class="line-four">
+        
+        <volist name="topList" id="article" offset='0' length='4'>
+          <div class="xl4 xm4">
+            <div class="picture-h">
+              <figure class="picture-h-img"> <a class="videos" href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>"><img src="/data/news/<{$article.img}>" data-original="/data/news/<{$article.img}>" alt="<{$article.img}>" style="display: block;"><i class="icon-btnPlay"></i></a> </figure>
+              <h3 class="picture-h-title"><a href="<{:U('Index/Article/index/',array('id'=>$article['id']))}>" rel="bookmark"><{$article.title}></a></h3>
+            </div>
+          </div>
+           </volist>
+          
+         
+          <div class="clear"></div>
+        </div>
+                            
+        
+        <!-- 文章 2个分类 -->
+        <div class="line-small">
+          <div class="xl2 xm2">
+            <div class="cat-box">
+              <h3 class="cat-title"><i class="icon-cat"></i><a href="http://zmingcx.com/category/works" title="">原创主题<i class="icon-m"></i></a></h3>
+              <div class="clear"></div>
+              <div class="cat-site">
+                <h2 class="entry-title"><a href="http://zmingcx.com/video-mv.html" rel="bookmark">视频MV</a></h2>
+                <figure class="thumbnail box-hide box-show"> <a href="http://zmingcx.com/video-mv.html"><img src="../Public/static/ladyx.jpg" data-original="http://zmingcx.com/wp-content/uploads/2015/03/ladyx.jpg" alt="视频MV" style="display: inline;"></a> </figure>
+                <div class="cat-main"> 优酷、搜狐视频、土豆、56、腾讯视频等网站视频弹窗播放，支持手机、平板等设备，视频链...</div>
+                <div class="clear"></div>
+                <ul class="cat-list">
+                  <span class="list-date">02/13</span>
+                  <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/wordpress-theme-begin.html" rel="bookmark">WordPress主题: Begin</a></li>
+                  <span class="list-date">02/06</span>
+                  <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/begin-function-and-progress.html" rel="bookmark">Begin主题制作进展及功能简介</a></li>
+                  <span class="list-date">01/23</span>
+                  <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/begin-theme-based-template-completed.html" rel="bookmark">Begin主题基础模板制作完成</a></li>
+                  <span class="list-date">01/19</span>
+                  <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/wordpress-theme-begin-line-test.html" rel="bookmark">WordPress主题：begin 上线测试</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="xl2 xm2">
+            <div class="cat-box">
+              <h3 class="cat-title"><i class="icon-cat"></i><a href="http://zmingcx.com/category/works/ality-original" title="">Ality主题<i class="icon-m"></i></a></h3>
+              <div class="clear"></div>
+              <div class="cat-site">
+                <h2 class="entry-title"><a href="http://zmingcx.com/ality-theme-0-32-released.html" rel="bookmark">Ality主题 0.32 版发布</a></h2>
+                <figure class="thumbnail box-hide box-show"> <a href="http://zmingcx.com/ality-theme-0-32-released.html"><img src="../Public/static/ality-280x210.jpg" data-original="http://zmingcx.com/wp-content/uploads/2014/09/ality-280x210.jpg" alt="Ality主题 0.32 版发布" style="display: inline;"></a> </figure>
+                <div class="cat-main"> 在没有重大BUG的情况下，Ality主题近期不会再更新。鉴于主题一直在零碎的更新，不可避免...</div>
+                <div class="clear"></div>
+                <ul class="cat-list">
+                  <span class="list-date">11/04</span>
+                  <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/ality-themes-faq.html" rel="bookmark">Ality主题常见问题</a></li>
+                  <span class="list-date">11/02</span>
+                  <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/ality-theme-version-0-3.html" rel="bookmark">Ality主题 0.3 版发布</a></li>
+                  <span class="list-date">10/12</span>
+                  <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/ality-theme-more-version-0-21.html" rel="bookmark">Ality主题更新至0.2.1版</a></li>
+                  <span class="list-date">09/17</span>
+                  <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/ality-theme-02-version.html" rel="bookmark">WordPress 主题：Ality 0.2 版发布</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <!-- 文章几个tab -->
+        <div class="tab-site">
+          <div id="layout-tab" class="tab-product">
+            <h2 class="tab-hd"> <span class="tab-hd-con current"><a href="javascript:">推荐</a></span> <span class="tab-hd-con"><a href="javascript:">专题文章</a></span> <span class="tab-hd-con"><a href="javascript:">随机文章</a></span></h2>
+            <ul class="tab-bd dom-display">
+              <div class="tab-bd-con current">
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/12-picture-carousel-jquery-plugins.html" rel="bookmark">12款经典图片轮播jquery插件</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/picture-slideshow-jquery-script-flexslider.html" rel="bookmark">JQuery图片幻灯脚本：Flexslider</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/responsive-menus-tutorials.html" rel="bookmark">Responsive Menus Tutorials</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/useful-list-of-responsive-navigation-and-menu-patterns.html" rel="bookmark">Useful List of Responsive Navigation and Menu Patterns</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/html-5-standards.html" rel="bookmark">HTML5标准制定完成</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/15-best-jquery-grid-plugins-for-developers.html" rel="bookmark">15款 jQuery 网格布局插件（Grid Plugins）</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/21-free-response-merry-go-round-jquery-plugin.html" rel="bookmark">21个免费响应旋转木马Jquery插件</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/30-ge-dan-ye-mian-gu-ding-dao-hang-cai-dan-an-li-xin-shang.html" rel="bookmark">30个单页面固定导航菜单案例欣赏</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/27-ge-you-yong-di-ui-she-ji-su-cai-he-gong-ju-bao-mian-fei-xia-zai.html" rel="bookmark">27个有用的UI设计素材和工具包免费下载</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/15-ge-xiang-ying-shi-she-ji-di-dao-hang-cai-dan-jquery-cha-jian.html" rel="bookmark">15个响应式设计的导航菜单jQuery插件</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/web-layout-patterns-and-more-devices.html" rel="bookmark">多设备的Web布局模式</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/waterfalls-flow-layout.html" rel="bookmark">瀑布流布局</a></li>
+              </div>
+              <div class="tab-bd-con" style="display: none;">
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/shielding-wordpress-useless-items.html" rel="bookmark">屏蔽WordPress后台无用项</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/5-wordpress-backend-options-framework.html" rel="bookmark">推荐5 款WordPress主题后台选项开发框架</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/call-the-same-custom-columns.html" rel="bookmark">调用具有相同自定义栏目名称及值的文章</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/html-5-standards.html" rel="bookmark">HTML5标准制定完成</a></li>
+              </div>
+              <div class="tab-bd-con" style="display: none;">
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/sticky-articles-category-page.html" rel="bookmark">WordPress分类归档页面调用本分类置顶文章</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/users-remarks-about-apple-products.html" rel="bookmark">网友关于苹果产品的言论</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/a-simple-solution-to-the-problem-of-slow-speed-of-windows-7-to-copy-files.html" rel="bookmark">简单解决 Windows 7 复制文件速度慢的问题</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/wordpress-sons-category.html" rel="bookmark">调用WordPress父子分类目录</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/introduction-to-the-theme-template-file-bbpress.html" rel="bookmark">bbPress论坛程序主题模版文件简介</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/download-god-machine-miaosuan-data-template.html" rel="bookmark">神机妙算资料模板下载</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/ma-gmail.html" rel="bookmark">俺要开gmail</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/the-embedded-in-the-rss-or-atom-feed-address.html" rel="bookmark">单篇文章嵌入不同的RSS或Atom feed地址</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/wordpress-file-upload-size-limit.html" rel="bookmark">解除 wordpress文件上传的大小限制</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/q-coins-under-the-control-of-privileged-life.html" rel="bookmark">Q币控制下的“特权人生”</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/support-for-css3-properties-ie9-case.html" rel="bookmark">IE9对CSS3属性的支持情况</a></li>
+                <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/wordpress-editor-increase-chinese-fonts.html" rel="bookmark">为wordpress编辑器增加中文字体</a></li>
+              </div>
+            </ul>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </main>
+    </div>
+    <!-- 右边 -->
+    <include file="Public:right" />
+    <div class="clear"></div>
+    <!-- 带标题图片 -->
+    <div class="nbs-flexisel-container">
+      <div class="nbs-flexisel-inner">
+        <ul id="flexisel" class="nbs-flexisel-ul" style="left: -264.5px;">
+          <li class="nbs-flexisel-item" style="width: 264.5px;"> <a href="http://zmingcx.com/wordpress-4-1-tabbed-navigation.html"><img src="../Public/static/703be3b1gw1etgfj40xyrj207s05udg0.jpg" alt="调用 WordPress 4.1 内置分页式导航"></a>
+            <h3 class="flexisel-h-title"><a href="http://zmingcx.com/wordpress-4-1-tabbed-navigation.html" rel="bookmark">调用 WordPress 4.1 内置分页式导航</a></h3>
+          </li>
+          <li class="nbs-flexisel-item" style="width: 264.5px;"> <a href="http://zmingcx.com/gravatar-avatar-apply.html"><img src="../Public/static/703be3b1gw1etgfj8ayd9j207s05uwf3.jpg" alt="全球通用头像Gravatar申请教程"></a>
+            <h3 class="flexisel-h-title"><a href="http://zmingcx.com/gravatar-avatar-apply.html" rel="bookmark">全球通用头像Gravatar申请教程</a></h3>
+          </li>
+          <li class="nbs-flexisel-item" style="width: 264.5px;"> <a href="http://zmingcx.com/wordpress-editor-increase-chinese-fonts.html"><img src="../Public/static/703be3b1gw1etgfiq77rpj207s05uaan.jpg" alt="为wordpress编辑器增加中文字体"></a>
+            <h3 class="flexisel-h-title"><a href="http://zmingcx.com/wordpress-editor-increase-chinese-fonts.html" rel="bookmark">为wordpress编辑器增加中文字体</a></h3>
+          </li>
+          <li class="nbs-flexisel-item" style="width: 264.5px;"> <a href="http://zmingcx.com/modify-the-wordpress-display-font.html"><img src="../Public/static/703be3b1gw1etgfin3tdyj207s05u3z4.jpg" alt="修改 WordPress 后台显示字体"></a>
+            <h3 class="flexisel-h-title"><a href="http://zmingcx.com/modify-the-wordpress-display-font.html" rel="bookmark">修改 WordPress 后台显示字体</a></h3>
+          </li>
+          <li class="nbs-flexisel-item" style="width: 264.5px;"> <a href="http://zmingcx.com/wordpress-4-1-tabbed-navigation.html"><img src="../Public/static/703be3b1gw1etgfj40xyrj207s05udg0.jpg" alt="调用 WordPress 4.1 内置分页式导航"></a>
+            <h3 class="flexisel-h-title"><a href="http://zmingcx.com/wordpress-4-1-tabbed-navigation.html" rel="bookmark">调用 WordPress 4.1 内置分页式导航</a></h3>
+          </li>
+          <li class="nbs-flexisel-item" style="width: 264.5px;"> <a href="http://zmingcx.com/gravatar-avatar-apply.html"><img src="../Public/static/703be3b1gw1etgfj8ayd9j207s05uwf3.jpg" alt="全球通用头像Gravatar申请教程"></a>
+            <h3 class="flexisel-h-title"><a href="http://zmingcx.com/gravatar-avatar-apply.html" rel="bookmark">全球通用头像Gravatar申请教程</a></h3>
+          </li>
+          <li class="nbs-flexisel-item" style="width: 264.5px;"> <a href="http://zmingcx.com/wordpress-editor-increase-chinese-fonts.html"><img src="../Public/static/703be3b1gw1etgfiq77rpj207s05uaan.jpg" alt="为wordpress编辑器增加中文字体"></a>
+            <h3 class="flexisel-h-title"><a href="http://zmingcx.com/wordpress-editor-increase-chinese-fonts.html" rel="bookmark">为wordpress编辑器增加中文字体</a></h3>
+          </li>
+          <li class="nbs-flexisel-item" style="width: 264.5px;"> <a href="http://zmingcx.com/modify-the-wordpress-display-font.html"><img src="../Public/static/703be3b1gw1etgfin3tdyj207s05u3z4.jpg" alt="修改 WordPress 后台显示字体"></a>
+            <h3 class="flexisel-h-title"><a href="http://zmingcx.com/modify-the-wordpress-display-font.html" rel="bookmark">修改 WordPress 后台显示字体</a></h3>
+          </li>
+        </ul>
+      </div>
+      <div class="nbs-flexisel-nav-left" style="visibility: visible; top: 99px;"><i class="icon-left"></i></div>
+      <div class="nbs-flexisel-nav-right" style="visibility: visible; top: 99px;"><i class="icon-right"></i></div>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    
+    <!-- 列表 -->
+    <div class="line-big">
+      <div class="xl3 xm3">
+        <div class="cat-box">
+          <h3 class="cat-title"><i class="icon-cat"></i><a href="http://zmingcx.com/category/webdesign" title="分享Web前端设计理念及技术">Web前端<i class="icon-m"></i></a></h3>
+          <div class="clear"></div>
+          <div class="cat-site">
+            <h2 class="entry-title"><a href="http://zmingcx.com/12-picture-carousel-jquery-plugins.html" rel="bookmark">12款经典图片轮播jquery插件</a></h2>
+            <figure class="thumbnail box-hide box-show"> <a href="http://zmingcx.com/12-picture-carousel-jquery-plugins.html"><img src="../Public/static/703be3b1gw1etgdmadu8cj207s05u74l.jpg" data-original="http://ww2.sinaimg.cn/mw690/703be3b1gw1etgdmadu8cj207s05u74l.jpg" alt="12款经典图片轮播jquery插件" style="display: inline;"></a> </figure>
+            <div class="cat-main"> 图片轮播是网站中的常用功能，用于在有限的网页空间内展示一组产品图片或者照片，同时还有非常吸引人的动画效果。本文向大家推荐12款实用的&nbsp;jQuery&nbsp;图片轮播效果插件，帮助你在你的项目中加入一...</div>
+            <div class="clear"></div>
+            <ul class="cat-list">
+              <span class="list-date">01/24</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/picture-slideshow-jquery-script-flexslider.html" rel="bookmark">JQuery图片幻灯脚本：Flexslider</a></li>
+              <span class="list-date">12/11</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/responsive-menus-tutorials.html" rel="bookmark">Responsive Menus Tutorials</a></li>
+              <span class="list-date">12/11</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/useful-list-of-responsive-navigation-and-menu-patterns.html" rel="bookmark">Useful List of Responsive Navigation and Menu Patterns</a></li>
+              <span class="list-date">10/30</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/html-5-standards.html" rel="bookmark">HTML5标准制定完成</a></li>
+              <span class="list-date">10/02</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/15-best-jquery-grid-plugins-for-developers.html" rel="bookmark">15款 jQuery 网格布局插件（Grid Plugins）</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="xl3 xm3">
+        <div class="cat-box">
+          <h3 class="cat-title"><i class="icon-cat"></i><a href="http://zmingcx.com/category/information" title="转载一些有价值的网文资讯">网文资讯<i class="icon-m"></i></a></h3>
+          <div class="clear"></div>
+          <div class="cat-site">
+            <h2 class="entry-title"><a href="http://zmingcx.com/player-success-or-failure-history.html" rel="bookmark">视频播放器成败史回顾</a></h2>
+            <figure class="thumbnail box-hide box-show"> <a href="http://zmingcx.com/player-success-or-failure-history.html"><img src="../Public/static/703be3b1gw1etgfilhk82j207s05uwev.jpg" data-original="http://ww1.sinaimg.cn/mw690/703be3b1gw1etgfilhk82j207s05uwev.jpg" alt="视频播放器成败史回顾" style="display: inline;"></a> </figure>
+            <div class="cat-main"> 现在在电脑里看视频和听音乐可简单了，只要你的电脑联网了，就能从各种的在线视频音频播放器中获得众多的资源，你只要选择喜欢的，就能在线观看。换了以前，这是不可想象的...</div>
+            <div class="clear"></div>
+            <ul class="cat-list">
+              <span class="list-date">03/23</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/baidu-search-site-logo-display.html" rel="bookmark">在百度搜索结果中显示站点Logo</a></li>
+              <span class="list-date">03/07</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/baidu-snapshot-time-to-exit.html" rel="bookmark">百度快照时间正式退出舞台</a></li>
+              <span class="list-date">01/01</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/articles-form-the-test-image.html" rel="bookmark">图像文章形式测试</a></li>
+              <span class="list-date">11/22</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/zombie-season-5.html" rel="bookmark">行尸走肉第五季</a></li>
+              <span class="list-date">10/12</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/video-popup-window.html" rel="bookmark">视频弹窗播放</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <!-- 几张图片 -->
+    <div class="line-tao">
+      <div class="xl4 xm4">
+        <div class="tao-h">
+          <figure class="tao-h-img"> <a href="http://zmingcx.com/tao/%e7%b2%89%e8%89%b2%e6%af%9b%e5%91%a2%e5%a4%a7%e8%a1%a3.html"><img src="../Public/static/TB1UBBBHXXXXXa3XXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg" data-original="http://gi3.md.alicdn.com/bao/uploaded/i3/TB1UBBBHXXXXXa3XXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg" alt="粉色毛呢大衣" style="display: block;"></a> </figure>
+        </div>
+      </div>
+      <div class="xl4 xm4">
+        <div class="tao-h">
+          <figure class="tao-h-img"> <a href="http://zmingcx.com/tao/%e4%b8%83%e5%88%86%e8%a2%96%e8%bf%9e%e8%a1%a3%e8%a3%99.html"><img src="../Public/static/TB1u1jZGFXXXXacXFXXXXXXXXXX_!!0-item_pic.jpg" data-original="http://img04.taobaocdn.com/bao/uploaded/i4/TB1u1jZGFXXXXacXFXXXXXXXXXX_!!0-item_pic.jpg" alt="七分袖连衣裙" style="display: block;"></a> </figure>
+        </div>
+      </div>
+      <div class="xl4 xm4">
+        <div class="tao-h">
+          <figure class="tao-h-img"> <a href="http://zmingcx.com/tao/tao1.html"><img src="../Public/static/TB2ygNCbVXXXXbIXXXXXXXXXXXX_!!1078674713.jpg_400x400.jpg" data-original="http://gd4.alicdn.com/bao/uploaded/i4/1078674713/TB2ygNCbVXXXXbIXXXXXXXXXXXX_!!1078674713.jpg_400x400.jpg" alt="tao1" style="display: block;"></a> </figure>
+        </div>
+      </div>
+      <div class="xl4 xm4">
+        <div class="tao-h">
+          <figure class="tao-h-img"> <a href="http://zmingcx.com/tao/%e5%8d%8a%e8%ba%ab%e8%a3%99%e6%97%b6%e5%b0%9a.html"><img src="../Public/static/TB1ZPrJHXXXXXceXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg" data-original="http://gi3.md.alicdn.com/bao/uploaded/i3/TB1ZPrJHXXXXXceXVXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg" alt="半身裙时尚" style="display: block;"></a> </figure>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <!-- 列表 -->
+    <div class="line-big">
+      <div class="xl3 xm3">
+        <div class="cat-box">
+          <h3 class="cat-title"><i class="icon-cat"></i><a href="http://zmingcx.com/category/uidesign" title="搜刮来的设计资源">设计资源<i class="icon-m"></i></a></h3>
+          <div class="clear"></div>
+          <div class="cat-site">
+            <ul class="cat-list">
+              <span class="list-date">07/23</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/design-of-logo.html" rel="bookmark">logo的设计</a></li>
+              <span class="list-date">07/22</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/19-sets-of-free-icon-fonts.html" rel="bookmark">19套免费图标字体</a></li>
+              <span class="list-date">04/17</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/bian-ping-hua-feng-ge-tu-biao.html" rel="bookmark">扁平化风格图标</a></li>
+              <span class="list-date">03/29</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/27-ge-you-yong-di-ui-she-ji-su-cai-he-gong-ju-bao-mian-fei-xia-zai.html" rel="bookmark">27个有用的UI设计素材和工具包免费下载</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="xl3 xm3">
+        <div class="cat-box">
+          <h3 class="cat-title"><i class="icon-cat"></i><a href="http://zmingcx.com/category/share/wpplugins" title="推荐功能不错的WP插件">plugins<i class="icon-m"></i></a></h3>
+          <div class="clear"></div>
+          <div class="cat-site">
+            <ul class="cat-list">
+              <span class="list-date">06/14</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/wordpress-multi-page-toolkit.html" rel="bookmark">WordPress文章分页插件：Multi-page Toolkit</a></li>
+              <span class="list-date">03/27</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/enable-media-replace.html" rel="bookmark">WordPress媒体文件替换插件：Enable Media Replace</a></li>
+              <span class="list-date">03/23</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/wordpress-user-avatar.html" rel="bookmark">让WordPress支持注册用户上传自定义头像功能</a></li>
+              <span class="list-date">11/21</span>
+              <li class="list-title"><i class="icon-li"></i><a href="http://zmingcx.com/velvet-blues-update-urls.html" rel="bookmark">WordPress站内链接修改插件：Velvet Blues Update URLs</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <!-- 链接 -->
+    <div id="links">
+      <ul>
+        <li id="linkcat-2" class="linkcat">
+          <h2>【A】 友情链接</h2>
+          <ul class="xoxo blogroll">
+            <li><a href="http://www.t4x.org/">Byrd's Weblog</a></li>
+            <li><a href="http://www.xuanhelou.com/">萱鹤楼</a></li>
+            <li><a href="http://huli.it/" title="关注Web、Wordpress、Google、淘宝的生活博客">狐狸博客</a></li>
+            <li><a href="http://429006.com/" title="操作系统和网络技术研究" target="_blank">Pop's Blog</a></li>
+            <li><a href="http://www.wpfault.com/">Wpfault</a></li>
+            <li><a href="http://www.woniu778.com/" target="_blank">小蜗牛</a></li>
+            <li><a href="http://www.i7086.com/" target="_blank">七零八落</a></li>
+            <li><a href="http://www.metals7.com/" title="宇航金属" target="_blank">宇航金属</a></li>
+            <li><a href="http://chenxuehu.com/" title="陈学虎的小窝" target="_blank">陈学虎的小窝</a></li>
+            <li><a href="http://www.myscope.cn/" title="让所有温暖的文字都能够被聆听" target="_blank">蚂蚁视界</a></li>
+            <li><a href="http://www.win7en.com/" title="网络动态、主题美化、升级指导、win7使用教程" target="_blank">win7en乐园</a></li>
+            <li><a href="http://reeoo.com/" target="_blank">网页设计</a></li>
+            <li><a href="http://www.onesmser.com/" title="专注行业短信群发平台博客" target="_blank">onesmser</a></li>
+            <li><a href="http://alishuji.com/" title="书籍推荐" target="_blank">阿里书籍</a></li>
+            <li><a href="http://2days.org/" title="把握今天，期待明天" target="_blank">两天的博客</a></li>
+            <li><a href="http://www.dntk.org/" title="电脑天空,收集OEM XP系统,WIN7系统,免费软件,破解软件,单机游戏,网游服务端,电脑知识">电脑天空</a></li>
+            <li><a href="http://www.yalanbooks.net/" title="黑摄会＂妖女＂" target="_blank">雅岚</a></li>
+            <li><a href="http://www.shenmet.net/" title="中铝沈加" target="_blank">shenmet</a></li>
+          </ul>
+        </li>
+        <li id="linkcat-364" class="linkcat">
+          <h2>【B】 友情链接</h2>
+          <ul class="xoxo blogroll">
+            <li><a href="http://zhangge.net/" target="_blank"><img src="../Public/static/logoz.png" alt="张戈博客"></a></li>
+            <li><a href="http://idc.wopus.org/host/yun/"><img src="../Public/static/idc.png" alt="wopus主机"></a></li>
+            <li><a href="http://www.wyl.cc/" title="经典语录" target="_blank"><img src="../Public/static/logow.png" alt="微语录" title="经典语录"></a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <include file="Public:footer" />
+    
+  <ul id="scroll">
+    <li><a class="scroll-t" title="返回顶部"><i class="icon-scroll-t"></i></a></li>
+    <li><a class="scroll-b" title="转到底部"><i class="icon-scroll-b"></i></a></li>
+  </ul>
+  
+  <div id="overlay"></div>
+<div id="overlay"></div>
+<div id="overlay"></div>
+<div id="overlay"></div>
+<div id="sidr-main" class="sidr left">
+  <div class="sidr-inner"><a href="http://zmingcx.com/#sidr-close" class="sidr-class-toggle-sidr-close">关闭</a></div>
+  <div class="sidr-inner"> <a href="http://zmingcx.com/#sidr-main" id="sidr-id-navigation-toggle" class="sidr-class-bars">导航</a>
+    <div class="sidr-class-menu-%sidr-class-e4%sidr-class-b8%sidr-class-bb%sidr-class-e5%sidr-class-af%sidr-class-bc%sidr-class-e8%sidr-class-88%sidr-class-aa-container">
+      <ul id="sidr-id-menu-%sidr-id-e4%sidr-id-b8%sidr-id-bb%sidr-id-e5%sidr-id-af%sidr-id-bc%sidr-id-e8%sidr-id-88%sidr-id-aa" class="sidr-class-down-menu sidr-class-nav-menu sidr-class-sf-js-enabled sidr-class-sf-arrows">
+        <li id="sidr-id-menu-item-6181" class="sidr-class-menu-item sidr-class-menu-item-type-custom sidr-class-menu-item-object-custom sidr-class-current-menu-item sidr-class-current_page_item sidr-class-menu-item-home sidr-class-menu-item-6181"><a href="../Public/static/index1.html"><i class="sidr-class-fa-home sidr-class-fa"></i><span class="sidr-class-fontawesome-text"> 返回首页</span></a></li>
+        <li id="sidr-id-menu-item-6316" class="sidr-class-menu-item sidr-class-menu-item-type-post_type sidr-class-menu-item-object-page sidr-class-menu-item-6316"><a href="http://zmingcx.com/blog"><i class="sidr-class-fa-sitemap sidr-class-fa"></i><span class="sidr-class-fontawesome-text"> 浏览博客</span></a></li>
+        <li id="sidr-id-menu-item-6554" class="sidr-class-menu-item sidr-class-menu-item-type-taxonomy sidr-class-menu-item-object-category sidr-class-menu-item-has-children sidr-class-menu-item-6554"><a href="http://zmingcx.com/category/share" class="sidr-class-sf-with-ul"><i class="sidr-class-fa-paper-plane sidr-class-fa"></i><span class="sidr-class-fontawesome-text"> 技术分享</span></a>
+          <ul class="sidr-class-sub-menu">
+            <li id="sidr-id-menu-item-6175" class="sidr-class-menu-item sidr-class-menu-item-type-taxonomy sidr-class-menu-item-object-category sidr-class-menu-item-6175"><a>WordPress</a></li>
+            <li id="sidr-id-menu-item-6176" class="sidr-class-menu-item sidr-class-menu-item-type-taxonomy sidr-class-menu-item-object-category sidr-class-menu-item-6176"><a href="http://zmingcx.com/category/share/wpplugins">plugins</a></li>
+            <li id="sidr-id-menu-item-6555" class="sidr-class-menu-item sidr-class-menu-item-type-taxonomy sidr-class-menu-item-object-category sidr-class-menu-item-6555"><a href="http://zmingcx.com/category/share/wordpresstheme">Themes</a></li>
+            <li id="sidr-id-menu-item-6177" class="sidr-class-menu-item sidr-class-menu-item-type-taxonomy sidr-class-menu-item-object-category sidr-class-menu-item-6177"><a href="http://zmingcx.com/category/works/hotnewspor">HotNews主题</a></li>
+            <li id="sidr-id-menu-item-6179" class="sidr-class-menu-item sidr-class-menu-item-type-taxonomy sidr-class-menu-item-object-category sidr-class-menu-item-6179"><a href="http://zmingcx.com/category/works/ality-original">Ality主题</a></li>
+          </ul>
+        </li>
+        <li id="sidr-id-menu-item-6543" class="sidr-class-menu-item sidr-class-menu-item-type-taxonomy sidr-class-menu-item-object-category sidr-class-menu-item-6543"><a href="http://zmingcx.com/category/works"><i class="sidr-class-fa-flask sidr-class-fa"></i><span class="sidr-class-fontawesome-text"> 原创主题</span></a></li>
+        <li id="sidr-id-menu-item-6184" class="sidr-class-menu-item sidr-class-menu-item-type-post_type sidr-class-menu-item-object-page sidr-class-menu-item-6184"><a href="http://zmingcx.com/guestbook"><i class="sidr-class-fa-reply sidr-class-fa"></i><span class="sidr-class-fontawesome-text"> 最近留言</span></a></li>
+        <li id="sidr-id-menu-item-6314" class="sidr-class-menu-item sidr-class-menu-item-type-taxonomy sidr-class-menu-item-object-category sidr-class-menu-item-6314"><a href="http://zmingcx.com/category/webdesign"><i class="sidr-class-fa-desktop sidr-class-fa"></i><span class="sidr-class-fontawesome-text"> 资源分享</span></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

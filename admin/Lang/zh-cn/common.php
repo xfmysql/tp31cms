@@ -133,14 +133,14 @@ return array(
 	'limage'=>'封面',
 	'lmodel'=>'模型',
 
-	'LLANGUAGE'=>'语言',
+	'llanguage'=>'语言',
 'lselectlanguage'=>'--选择语言--',
 
 	'lsort'=>'排序',
 	'lstate'=>'状态',
 	'laddtime'=>'添加时间',
 	'lcatalog'=>'上级分类',
-    'lselectcatalog' => '--顶级分类--',
+    'selectcatalog' => '--顶级分类--',
 	'ldescript' => '描述',
 	'loper'=>'操作',
 );
