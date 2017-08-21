@@ -6,9 +6,9 @@
 class CommonAction extends Action
 {
 	Public function _initialize(){
-		if (ismobile()) {
-            C('DEFAULT_THEME','mobile');
-        }
+		//if (ismobile()) {
+        //    C('DEFAULT_THEME','mobile');
+        //}
 		//获取网站配置信息
 		$setting_mod = M('setting');
 		$setting = $setting_mod->select();
