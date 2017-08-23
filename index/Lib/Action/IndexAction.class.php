@@ -32,15 +32,9 @@ class IndexAction extends CommonAction
 		//$joinArticle= $Model->table('cms_article_cate c')->join('cms_article a on c.id = //a.cate_id')->field('a.*')->where('a.status=1')->order('a.add_time asc')->select();
 		//print_r($joinArticle);
 		
-		//linkList
-		$linkTxt=M('flink');
-		$linkTxtList=$linkTxt->where("status=1 and img=''")->select();
-		$linkImgList=$linkTxt->where("status=1 and img<>''")->select();
-		$this->assign('linktxt',$linkTxtList);		
-		$this->assign('linkimg',$linkImgList);	
 		
 	
-	$this->assign('articlelist',$articlelist);	
+		$this->assign('articlelist',$articlelist);	
 
 		//显示模板	
 		$this->display('index');

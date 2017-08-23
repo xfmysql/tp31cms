@@ -36,17 +36,23 @@ class CommonAction extends Action
 		$article=M('article');
 		$catalog = M('article_cate');
 		//推荐文章
-	$bestArticleList=$article->limit('6')->where(" status=1 and istop=1")->order('clicks desc')->select();
-		$this->assign('bestArticleList',$bestArticleList);	
-	//最新文章
-	$newArticleList=$article->limit('6')->where(" status=1 ")->order('addtime desc')->select();	
-	$this->assign('newArticleList',$newArticleList);
-	//标签
- 	$keyword_mod = M('keyword');
-    $KeywordList = $keyword_mod->order('id desc')->select();    
-$this->assign('KeywordList',$KeywordList);
+		$bestArticleList=$article->limit('6')->where(" status=1 and istop=1")->order('clicks desc')->select();
+			$this->assign('bestArticleList',$bestArticleList);	
+		//最新文章
+		$newArticleList=$article->limit('6')->where(" status=1 ")->order('addtime desc')->select();	
+		$this->assign('newArticleList',$newArticleList);
+		//标签
+	 	$keyword_mod = M('keyword');
+	    $KeywordList = $keyword_mod->order('id desc')->select();    
+		$this->assign('KeywordList',$KeywordList);
 
-
+		//linkList
+		$linkTxt=M('flink');
+		$linkTxtList=$linkTxt->where("status=1")->select();
+		//$linkImgList=$linkTxt->where("status=1 and img<>''")->select();
+		$this->assign('linktxt',$linkTxtList);		
+		//$this->assign('linkimg',$linkImgList);	
+			
 
 
 
@@ -56,13 +62,13 @@ $this->assign('KeywordList',$KeywordList);
 		$this->assign('dataNum',$allCount);
 
 		
-	//分类目录
-	$childCatalogList = $catalog->limit('6')->where('status=1 and pid=0')->order('sort_order desc')->select();
-	$this->assign('childCatalogList',$childCatalogList);
-	//最近点赞
-	$commGoodlist=M('article')->limit('6')->where(" status=1 ")->order('approval desc')->select();
-	$this->assign('commGoodlist',$commGoodlist);	
-		
+		//分类目录
+		$childCatalogList = $catalog->limit('6')->where('status=1 and pid=0')->order('sort_order desc')->select();
+		$this->assign('childCatalogList',$childCatalogList);
+		//最近点赞
+		$commGoodlist=M('article')->limit('6')->where(" status=1 ")->order('approval desc')->select();
+		$this->assign('commGoodlist',$commGoodlist);	
+			
 		
 	}
 	
