@@ -78,15 +78,15 @@ $this->assign('KeywordList',$KeywordList);
 	 $uplevels = $cat->field("id,name,pid")->where("id=$catid")->find();
 	 if($uplevels['pid'] != 0)
 		$here .= $this->get_up_levels($uplevels['pid']);
-	 $here .= ' -> <a href="'.reurl($catid,'download').'">'.$uplevels['name']."</a>";
+	 $here .= ' -> <a href="'.reurl($catid,'article').'">'.$uplevels['name']."</a>";
 	 if($ext != '') $here .= ' -> '.$ext;
 	 return $here;
 	}
 	protected function get_up_levels($id){
-	 $cat = M("article_cate");
+	 $cat = M("catalog");
 	 $here = '';
 	 $uplevels = $cat->field("id,name,pid")->where("id=$id")->find();
-	  $here .= ' -> <a href="'.reurl($id,'download').'">'.$uplevels['name']."</a>";
+	  $here .= ' -> <a href="'.reurl($id,'article').'">'.$uplevels['name']."</a>";
 	 if($uplevels['pid'] != 0){
 	  $here = $this->get_up_levels($uplevels['pid']).$here;
 	 }

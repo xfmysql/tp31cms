@@ -16,20 +16,14 @@ class ArticleAction extends CommonAction
 		$this->assign('article',$article);//文章		
 		$cate = D('catalog')->where("id=".$article['pid'])->find();
 		$this->assign('cate',$cate);//分类
-		//图片5张=
-		$imglist=M('article')->limit(4)->where(" cate_id=".$article['cate_id']." and status=1 and img <>''")->order('ordid asc')->select();
-		$this->assign('imglist',$imglist);
-		$samelist=M('article')->limit(6)->where(" cate_id=".$article['cate_id']." and status=1 and img=''")->order('ordid asc')->select();
-		$this->assign('samelist',$samelist);
-		$goodlist=M('article')->limit(6)->where(" cate_id=".$article['cate_id']." and status=1")->order('approval desc')->select();
-		$this->assign('goodlist',$goodlist);
+		
 		//上一篇下一篇
-		$prearticle=M('Article')->where(" cate_id=".$article['cate_id']." and status=1 and id<".$article_id)->find();	
-		$nextarticle=M('Article')->where(" cate_id=".$article['cate_id']." and status=1 and id>".$article_id)->find();	
+		$prearticle=M('Article')->where(" pid=".$article['pid']." and status=1 and id<".$article_id)->find();	
+		$nextarticle=M('Article')->where(" pid=".$article['pid']." and status=1 and id>".$article_id)->find();	
 		$this->assign('prearticle',$prearticle);
 		$this->assign('nextarticle',$nextarticle);
 		//面包屑
-		$this->assign('bread',$this->now_here($article['cate_id'],$article['title']));
+		$this->assign('bread',$this->now_here($article['pid'],$article['title']));
 
 		if($cats['channel']==1){//内容
 			$this->display('content');

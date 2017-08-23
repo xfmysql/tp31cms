@@ -1,119 +1,106 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<link type="text/css" media="all" href="../Public/static/style.css" rel="stylesheet">
-<link type="text/css" media="all" href="../Public/static/font.css" rel="stylesheet">
-<title><{$catName}> - <{$set.site_title}></title>
-<meta name="description" content="" />
-<script type="text/javascript" src="../Public/static/jquery.js"></script>
-<script type="text/javascript" src="../Public/static/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="../Public/static/main.js"></script>
-<script type="text/javascript" src="../Public/static/jquery.min.js"></script>
-<script type="text/javascript" src="../Public/static/scrollmonitor.js"></script>
-<script type="text/javascript" src="../Public/static/slides.js"></script>
-<script type="text/javascript" src="../Public/static/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="../Public/static/script.js"></script>
-<script type="text/javascript" src="../Public/static/flexisel.js"></script>
-
-<script type='text/javascript' src='http://zmingcx.com/wp-content/themes/begin/js/jquery.nicescroll.min.js?ver=1.54'></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="<{$set.site_description}>">
+  <meta name="keywords" content="<{$set.site_keyword}>">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title><{$catName}> - <{$set.site_title}></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="icon" type="../Public/image/png" href="assets/i/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="../Public/assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="../Public/assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileImage" content="../Public/assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+  <link rel="stylesheet" href="../Public/assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="../Public/assets/css/app.css">
 </head>
-<body class="archive category category-works category-10">
-<div id="page" class="hfeed site">
-<header id="masthead" class="site-header">
 
+<body id="blog">
 <include file="Public:header" />
-<nav class="breadcrumb"> <a title="返回首页" href="/">首页</a> <{$bread}></nav>
 
-<div id="content" class="site-content">
-  <div class="clear"></div>
-  <section id="primary" class="content-area">
-    <main id="main" class="site-main" role="main">
-    
-    
-    
-    <foreach name="list" item="article" >    
-    <if condition= "$article.img eq ''" >    
-    <article id="post-6081" class="post-6081 post type-post status-publish format-aside hentry category-ality-original tag-ality-original tag-wordpress tag-341 post_format-post-format-aside">
-        <header class="entry-header"> <span class="aside-cat"><a href="/list-<{$article['cate_id']}>.html"><{$article.cate_id|getCatalog}></a></span>
-          <h2 class="entry-title"><a href="<{:RewriteURL($article['id'],3)}>" rel="bookmark"><{$article.title}></a></h2>
-        </header>
-        <div class="entry-content">
-          <div class="archive-content"> <{$article.abst}></div>
-          <span class="title-l"></span> <span class="entry-meta"> <span class="date"><{$article.add_time}></span> <span class="comment"><a href="<{:RewriteURL($article['id'],3)}>#comments"><i class="icon-scroll-c"></i> 评论  <{$article.approval}> </a></span> <span class="views"> 阅读 <{$article.clicks}></span> </span>
-          <div class="clear"></div>
-        </div>
-        <span class="entry-more"><a href="<{:RewriteURL($article['id'],3)}>" rel="bookmark">阅读全文</a></span> </article>
-     <else />
-     <article id="post-6318" class="post-6318 post type-post status-publish format-standard hentry category-works tag-begin tag-341">
-        <figure class="thumbnail"> <a href="<{:RewriteURL($article['id'],3)}>"><img src="/data/news/<{$article.img}>" alt="" /></a> <span class="cat"><a href="/list-<{$article['cate_id']}>.html"><{$article.cate_id|getCatalog}></a></span> </figure>
-        <header class="entry-header">
-          <h2 class="entry-title"><a href="<{:RewriteURL($article['id'],3)}>" rel="bookmark"><{$article.title}></a></h2>
-        </header>
-        <div class="entry-content">
-          <div class="archive-content"> <{$article.abst}></div>
-          <span class="title-l"></span> <span class="entry-meta"> <span class="date"><{$article.add_time}> </span> <span class="comment"><a href="<{:RewriteURL($article['id'],3)}>#comments"><i class="icon-scroll-c"></i> 评论  <{$article.approval}> </a></span> <span class="views"> 阅读 <{$article.clicks}></span> </span>
-          <div class="clear"></div>
-        </div>
-        <span class="entry-more"><a href="<{:RewriteURL($article['id'],3)}>" rel="bookmark">阅读全文</a></span> </article>
+
+<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed">
+    <div class="am-u-md-8 am-u-sm-12">
+<!--volist name="hotCatalogList" id="catalog" offset='0' length='10'>
+
+  <volist name="catalog['child']" id="article" offset='0' length='20'>
+  <article class="am-g blog-entry-article">
+            <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
+                <img src="data/news/<{$article.imgurl}>" alt="" class="am-u-sm-12">
+            </div>
+            <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
+                <span><a href="<{:reurl($article['id'],'download')}>" class="blog-color">article &nbsp;</a></span>
+                <span> @amazeUI &nbsp;</span>
+                <span><{$article.addtime|date='Y-m-d',###}></span>
+                <h1><a href=">"><{$article.title}></a></h1>
+                <p>这是描述</p>
+                <p><a href="" class="blog-continue">continue reading</a></p>
+            </div>
+        </article>
+   </volist>
+
+</volist-->
+
+
+   <volist name="list" id="article" offset='0' length='12'>
+          <article class="am-g blog-entry-article">
+            <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
+                <a href="<{:reurl($article['id'],'article')}>" class="blog-color"><img src="<{$article.icourl}>" alt="<{$article.title}>" class="am-u-sm-12"></a>
+            </div>
+            <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
+                <span><a href="<{:reurl($article['id'],'article')}>" class="blog-color">作者</a></span>
+                <!--span> @amazeUI &nbsp;</span-->
+                <span><{$article.addtime||substr=0,10}></span>
+                <h1><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></h1>
+                <p><{$article.intro}></p>
+                <p><a href="" class="blog-continue">continue reading</a></p>
+            </div>
+        </article>
+   </volist>
+
+   
+
         
-     </if>
-      </foreach>  
-        
-        
-      
-      <!-- ad <div class="ad-pc ad-site"><a href="http://zmingcx.com/begin" target="_blank"><img src="http://zmingcx.com/wp-content/uploads/2015/02/beginad.jpg" alt="Begin主题购买" /></a></div>-->
-      
-      
-    
-      <nav id="nav-below">
-        <div class="nav-next"></div>
-        <div class="nav-previous"><a href="#" ></a></div>
-      </nav>
-    </main>
-    <nav class="navigation pagination" role="navigation">
-      <div class="nav-links"><{$show}></div></nav>    
-  </section>
-  <!-- 右侧 -->
-  <include file="Public:right" />
-  
-  <div class="clear"></div>
+        <ul class="am-pagination">
+       <{$show}>   
+  <li class="am-pagination-prev"><a href="">&laquo; Prev</a></li>
+  <li class="am-pagination-next"><a href="">Next &raquo;</a></li>
+</ul>
+
+    </div>
+
+
+
+
+    <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
+        <include file="Public:right" />
+
+    </div>
 </div>
+<!-- content end -->
+
+
+
+
 
 
 <include file="Public:footer" />
-    
-
-<ul id="scroll">
-  <li><a class="scroll-t" title="返回顶部"><i class="icon-scroll-t"></i></a></li>
-  <li><a class="scroll-b" title="转到底部"><i class="icon-scroll-b"></i></a></li>
-</ul>
-<script type="text/javascript">document.onkeydown = chang_page;function chang_page(e) {
-        var e = e || event,
-        keycode = e.which || e.keyCode;
-        if (keycode == 37) location = 'http://zmingcx.com/category/works';
-        if (keycode == 39) location = 'http://zmingcx.com/category/works/page/2';
-    }</script>
-<script type='text/javascript' src='http://zmingcx.com/wp-content/themes/begin/js/superfish.js?ver=2015.07.11'></script>
-<script type='text/javascript' src='http://zmingcx.com/wp-content/themes/begin/js/infinite_scroll.js?ver=2.0.2'></script>
-<script type="text/javascript">$(document).ready(function(){
-            var infinite_scroll = {
-                loading: {
-                    img: "http://zmingcx.com/wp-content/themes/begin/img/loading.gif",
-                    msgText: "",
-                    finishedMsg: "滚动加载结束."
-                },
-                nextSelector:"#nav-below .nav-previous a",
-                navSelector:"#nav-below",
-                itemSelector:"article",
-				maxPage:"3",
-				contentSelector:"#main"
-            };
-            $( infinite_scroll.contentSelector ).infinitescroll( infinite_scroll );
-        });</script>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../Public/assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="../Public/assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<script src="../Public/assets/js/amazeui.min.js"></script>
 </body>
 </html>
