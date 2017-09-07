@@ -68,8 +68,8 @@ class BaseAction extends Action {
 		if ((!isset($_SESSION['admin_info']) || !$_SESSION['admin_info']) && !in_array(ACTION_NAME, array('login','verify'))) {
 			$this->redirect('Public/login');
 		}
-		//如果是超级管理员，则可以执行所有操作
-		if($_SESSION['admin_info']['id'] == 1) {
+		//如果是超级管理员，则可以执行所有操作，roleid=1
+		if($_SESSION['admin_info']['role_id'] == 1) {
 			return true;
 		}
 		if(in_array(ACTION_NAME,array('status','sort_order','ordid'))){
