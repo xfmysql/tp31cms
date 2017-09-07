@@ -13,7 +13,7 @@ class IndexAction extends CommonAction
 		$this->assign('adList',$adList);	
 		
 
-		$articlelist=M('article')->limit(12)->where("  status=1 and ishomepage=1 and icourl<>''")->order('addtime desc')->select();
+		$articlelist=M('article')->limit(12)->where("  status=1 and ishomepage=1 ")->order('addtime desc')->select();
 
 		//显示推荐栏目 
 		$hotCatalogList=M('catalog')->where('isnav=1 and status=1')->order('sort asc')->select();
