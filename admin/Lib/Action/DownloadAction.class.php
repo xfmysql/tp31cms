@@ -77,8 +77,8 @@ $project_mod = D('project');
 				$this->error(L('lselectcatalog'));
 			}
 			if ($_FILES['imgurl']['name']!='') {
-			    $upload_list = $this->_upload();
-			    $data['imgurl'] = $upload_list['0']['savename'];
+			    $upload_list = $this->upload("download");
+			    $data['imgurl'] = $upload_list;
 			}
 			if(isset($data['ishot1']) && $data['ishot1']=='1'){
 				$data['ishot1']='1';
@@ -178,8 +178,8 @@ $project_mod = D('project');
 				$this->error($download_mod->error());
 			}
 			if ($_FILES['imgurl']['name']!='') {
-				$upload_list = $this->_upload();
-				$data['imgurl'] = $upload_list['0']['savename'];
+				$upload_list =  $this->upload("download");
+				$data['imgurl'] = $upload_list;
 			}
 			$data['addtime']=time();
 			if(isset($data['ishot1']) && $data['ishot1']=='1'){
@@ -366,25 +366,6 @@ $project_mod = D('project');
     }
 
 
-    public function _upload()
-    {
-    	import("ORG.Net.UploadFile");
-        $upload = new UploadFile();
-        //设置上传文件大小
-        $upload->maxSize = 3292200;
-        //$upload->allowExts = explode(',', 'jpg,gif,png,jpeg');
-        $upload->savePath = './data/news/';
-
-        $upload->saveRule = uniqid;
-        if (!$upload->upload()) {
-            //捕获上传异常
-            $this->error($upload->getErrorMsg());
-        } else {
-            //取得成功上传的文件信息
-            $uploadList = $upload->getUploadFileInfo();
-        }
-        return $uploadList;
-    }
 
 	function sort_order()
     {

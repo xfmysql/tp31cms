@@ -29,7 +29,7 @@
     </div>
 </div>
 <!-- //loop ishot catalog-->
-<volist name="hotCatalogList" id="catalog" offset='0' length='10'>
+<volist name="downCatalogList" id="catalog" offset='0' length='10'>
 
 
 <!-- //start middle image-->
@@ -69,9 +69,9 @@
 
         <li>
             <div class="am-gallery-item am_list_block">
-                <a href="<{:reurl($article['id'],'download')}>" class="am_img_bg">
+                <a href="<{:reurl($article['id'],'download')}>" class="bdfw_nr_block_r am_img_bg">
                     <img class="am_img animated" src="../Public/img/loading.gif"
-                         data-original="data/news/<{$article.imgurl}>"
+                         data-original="<{$article.imgurl}>"
                          alt="<{$article.title}>"/>
                 </a>
 
