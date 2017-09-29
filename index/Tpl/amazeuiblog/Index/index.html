@@ -26,12 +26,12 @@
 <include file="Public:header" />
 
 <!-- banner start -->
-<!--div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-article-margin">
+<div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-article-margin">
     <div data-am-widget="slider" class="am-slider am-slider-b1" data-am-slider='{&quot;controlNav&quot;:false}' >
     <ul class="am-slides">
 	 <volist name="adList" id="article" offset='0' length='5'>
       <li>
-            <img src="/data/news/<{$article.img}>">
+            <img src="<{$article.img}>">
             <div class="blog-slider-desc am-slider-desc ">
                 <div class="blog-text-center blog-slider-con">
                     <span><a href="" class="blog-color">Article &nbsp;</a></span>               
@@ -46,7 +46,7 @@
 
     </ul>
     </div>
-</div-->
+</div>
 <!-- banner end -->
 
 
@@ -76,19 +76,21 @@
 
    <volist name="articlelist" id="article" offset='0' length='12'>
           <article class="am-g blog-entry-article">
-            <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
+            
+  <if condition="$article['icourl'] neq null ">
+<div class="m-u-md-12 am-u-sm-12 blog-entry-img">
                  <a href="<{:reurl($article['id'],'article')}>" class="blog-color"><img src="<{$article.icourl}>" alt="<{$article.title}>" class="am-u-sm-12"></a>
-                 
-               
-
             </div>
+  </if>
+
             <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="<{:reurl($article['id'],'article')}>" class="blog-color">作者</a></span>
-                <!--span> @amazeUI &nbsp;</span-->
-                <span><{$article.addtime||substr=0,10}></span>
+               
                 <h1><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></h1>
                 <p><{$article.intro}></p>
-                <p><a href="" class="blog-continue">continue reading</a></p>
+                 <span><a href="<{:reurl($article['id'],'article')}>" class="blog-color">作者</a></span>
+                <!--span> @amazeUI &nbsp;</span-->
+                <span><{$article.addtime||substr=0,10}></span>
+
             </div>
         </article>
    </volist>

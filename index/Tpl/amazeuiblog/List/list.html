@@ -52,16 +52,17 @@
 
    <volist name="list" id="article" offset='0' length='12'>
           <article class="am-g blog-entry-article">
+          <if condition="$article['icourl'] neq null ">
             <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
                 <a href="<{:reurl($article['id'],'article')}>" class="blog-color"><img src="<{$article.icourl}>" alt="<{$article.title}>" class="am-u-sm-12"></a>
             </div>
+            </if>
             <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="<{:reurl($article['id'],'article')}>" class="blog-color">作者</a></span>
-                <!--span> @amazeUI &nbsp;</span-->
-                <span><{$article.addtime||substr=0,10}></span>
+                
                 <h1><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></h1>
                 <p><{$article.intro}></p>
-                <p><a href="" class="blog-continue">continue reading</a></p>
+               <span><a href="<{:reurl($article['id'],'article')}>" class="blog-color">作者</a></span>
+                <span><{$article.addtime||substr=0,10}></span>
             </div>
         </article>
    </volist>
