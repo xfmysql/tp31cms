@@ -3,7 +3,7 @@
  * 前台登陆注册
  * @author  <[l@easycms.cc]>
  */
-class LoginAction extends Action{
+class LoginAction extends CommonAction {
 	//空操作
 	public function _empty(){
 		$this->redirect("Index/Index/index");
@@ -19,6 +19,7 @@ class LoginAction extends Action{
 
 
 	public function index(){
+		$this->assign('set',$this->setting);
 		$this->display('login');
 	}
 	public function checkLogin(){
