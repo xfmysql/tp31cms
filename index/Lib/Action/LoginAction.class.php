@@ -73,6 +73,7 @@ public function checkregs(){
 
 public function verify(){
 		import('ORG.Util.Image');
+		 ob_clean();  
 		Image::buildImageVerify();
 	}	
 
