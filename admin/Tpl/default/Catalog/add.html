@@ -43,6 +43,17 @@
 		  <input type="radio" name="model" value="{:c('Model_Album')}">&nbsp;相册&nbsp;&nbsp;&nbsp;
 		  </td>
     </tr>
+    <tr> 
+      <th>{:L('manager')} :</th>
+      <td><select name="managerid" style="width:150px;">
+            <option value="0">--请选择管理员--</option>
+             <volist  id="user" name="manger_list">
+                <option value="{$user.user_id}">&nbsp;&nbsp;&nbsp;&nbsp;{$user.username}</option>
+                </volist>
+          </select>
+        </td>
+    </tr>
+
 	<tr>
       <th width="100">{:L('sort')} :</th>
       <td><input type="text" name="sort" id="sort" class="input-text" size="4" value="0" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"></td>

@@ -26,7 +26,7 @@ class LoginAction extends CommonAction {
 		if($_SESSION["verify"]!=md5($_POST['code'])){
 			$this->error("验证码错误");
 		}
-		$User = M("Member_user"); 
+		$User = M("member_user"); 
 		if (!$User->create()){
 			 $this->error(($User->getError()));
 		}else{
@@ -54,7 +54,7 @@ public function checkregs(){
 	if($_SESSION["verify"]!=md5($_POST['code'])){
 			$this->error("验证码错误");
 		}
-		$User = D("Member_user"); 
+		$User = D("member_user"); 
 		$result=$User->create();
 		if (!$result){
 			 $this->error($User->getError());

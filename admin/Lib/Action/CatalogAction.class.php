@@ -37,7 +37,8 @@ class CatalogAction extends BaseAction
 
     	$this->assign('article_cate_list',$article_cate_list);
 		$big_menu = array('javascript:window.top.art.dialog({id:\'add\',iframe:\'?m=Catalog&a=add\', title:\''.L('add_cate').'\', width:\'500\', height:\'400\', lock:true}, function(){var d = window.top.art.dialog({id:\'add\'}).data.iframe;var form = d.document.getElementById(\'dosubmit\');form.click();return false;}, function(){window.top.art.dialog({id:\'add\'}).close()});void(0);', L('add_cate'));
-		$this->assign('big_menu',$big_menu);
+		$this->assign('big_menu',$big_menu);	
+
 		$this->display();
     }
 
@@ -76,6 +77,11 @@ class CatalogAction extends BaseAction
 	    	}
 	    	$this->assign('article_cate_list',$article_cate_list);
 	    	$this->assign('show_header', false);
+	    	//显示管理员下拉列表
+	    	$member_user = D('member_user');
+			$manger_list = $member_user->order('regtime desc')->select();
+			$this->assign('manger_list',$manger_list);
+
 	        $this->display();
     	}
 
@@ -154,6 +160,12 @@ class CatalogAction extends BaseAction
 		    $this->assign('cate_list', $cate_list);
 			$this->assign('article_cate_info',$article_cate_info);
 			$this->assign('show_header', false);
+
+			//显示管理员下拉列表
+	    	$member_user = D('member_user');
+			$manger_list = $member_user->order('regtime desc')->select();
+			$this->assign('manger_list',$manger_list);
+
 			$this->display();
     	}
 
