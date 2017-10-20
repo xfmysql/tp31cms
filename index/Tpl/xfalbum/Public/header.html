@@ -5,6 +5,11 @@
         <h2 class="am-hide-sm-only"><{$set.site_name}></h2>
     </div>
 </header-->
+<div class="am-g am-g-fixed blog-fixed">
+        <if condition="$_SESSION['_USERID'] neq '' "> 欢迎：<{:$_SESSION['_USERNAME']}> <span class="nav-set"> <span class="nav-login"> <a href="<{:U('login/doLogout','')}>" class="flatbtn" id="login-main">退出</a> </span> </span>
+          <else />
+          <a href="<{:U('login/checkreg','')}>" target="_blank">立即注册</a> <span class="nav-set"> <span class="nav-login"> <a href="<{:U('login/index','')}>" class="flatbtn" id="login-main">登录</a> </span> </span> </if>
+      </div>
 <hr>
 <!-- nav start -->
 <nav class="am-g am-g-fixed blog-fixed blog-nav">
