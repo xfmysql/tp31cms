@@ -40,7 +40,10 @@ class LoginAction extends CommonAction {
 		if($result!=null){
 			$_SESSION['_USERNAME']=$result['username'];
 			$_SESSION['_USERID']=$result["user_id"];
-			$this->success('登陆成功',U('Index/index'));
+			$catalog_mod = M('catalog');
+			$catalog = $catalog_mod->where("managerid='".$result["username"]."'")->find();
+			
+			$this->success('登陆成功',U('Albumn/index',array('catsid'=>$catalog["id"])));
 		}else{
 			$this->error('登陆失败',U('Login/index'));
 		}
