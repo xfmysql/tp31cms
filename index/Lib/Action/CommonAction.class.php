@@ -9,6 +9,19 @@ class CommonAction extends Action
 		//if (ismobile()) {
         //    C('DEFAULT_THEME','mobile');
         //}
+        if(empty($_SESSION['_USERNAME'])){//检查一下session是不是为空
+
+	         if(!empty($_COOKIE['username']) && !empty($_COOKIE['password'])){//如果session为空，并且用户没有选择记录登录状
+	         	$User = M("member_user"); 
+	         	$where['username']=strtolower($_COOKIE['username']);
+				$where['password']=$_COOKIE['password'];
+			  	$result =$User->where($where)->find();
+				if($result!=null){
+					$_SESSION['_USERNAME']=$result['username'];
+				}
+			  }
+		}
+
 		//获取网站配置信息
 		$setting_mod = M('setting');
 		$setting = $setting_mod->select();

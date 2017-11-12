@@ -10,11 +10,7 @@ class LoginAction extends CommonAction {
 	}
 
 	Public function _initialize(){
-   		// 控制器初始化方法
-   		// 判断是否手机访问
-   		if (ismobile()) {
-            C('DEFAULT_THEME','mobile');
-        }
+   		
 	}
 
 
@@ -30,25 +26,32 @@ class LoginAction extends CommonAction {
 		if (!$User->create()){
 			 $this->error(($User->getError()));
 		}else{
-		$name=$User->create();
-		$where['username']=strtolower($name['username']);
-		$where['password']=md5($name['password']);
-		$result =$User->where($where)->find();
-		if($result['islock']==1){
-			$this->error('您的账号已经被管理锁定，请联系管理员',U('Login/index'));
-		}
-		if($result!=null){
-			$_SESSION['_USERNAME']=$result['username'];
-			$_SESSION['_USERID']=$result["user_id"];
-			$catalog_mod = M('catalog');
-			$catalog = $catalog_mod->where("managerid='".$result["username"]."'")->find();
-			
-			$this->success('登陆成功',U('Albumn/index',array('catsid'=>$catalog["id"])));
-		}else{
-			$this->error('登陆失败',U('Login/index'));
+			$name=$User->create();
+			$where['username']=strtolower($name['username']);
+			$where['password']=md5($name['password']);
+			$result =$User->where($where)->find();
+			if($result['islock']==1){
+				$this->error('您的账号已经被管理锁定，请联系管理员',U('Login/index'));
+			}
+			if($result!=null){
+				$_SESSION['_USERNAME']=$result['username'];
+				$isremember=$_POST['isremember'];//是否自动登录标示
+				if(!empty($isremember)){//如果用户选择了，记录登录状态就把用户名和加了密的密码放到cookie里面
+				   setcookie("username",$_SESSION['_USERNAME'],time()+3600*24*30); 
+				   setcookie("password",md5($name['password']),time()+3600*24*30);
+				}
+
+
+				
+				$catalog_mod = M('catalog');
+				$catalog = $catalog_mod->where("managerid='".$result["username"]."'")->find();
+				
+				$this->success('登陆成功',U('Albumn/index',array('catsid'=>$catalog["id"])));
+			}else{
+				$this->error('登陆失败',U('Login/index'));
+			}
 		}
 	}
-}
 
 public function checkreg(){
 		$this->display('checkreg');
