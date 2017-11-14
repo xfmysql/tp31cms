@@ -14,13 +14,13 @@
     <script type="text/javascript" src="../Public/assets/js/jquery.min.js"></script>
    <script>
 function fleshVerify(type){ 
-console.log('__URL__/verify/adv/1/');
+
 	//重载验证码
 	var timenow = new Date().getTime();
 	if (type){
-		$('#verifyImg').attr("src", '__URL__/verify/adv/1/'+timenow);
+		$('#verifyImg').attr("src", '<{:U('Login/verify')}>');
 	}else{
-		$('#verifyImg').attr("src", '__URL__/verify/'+timenow);
+		$('#verifyImg').attr("src", '<{:U('Login/verify')}>');
 		
 	}
 }
@@ -50,7 +50,7 @@ console.log('__URL__/verify/adv/1/');
       <div class="am-form-group am-form-icon">
       <i class="am-icon-lock"></i>
        <input type="text"  name="code"  class="myapp-login-input-text am-form-field" placeholder="请输入验证码" style="width:200px;">
-       <img id="verifyImg" SRC="__URL__/verify/" onClick="fleshVerify()" border="0" alt="点击刷新验证码" style="cursor:pointer;width:80px;vertical-align:top;" align="absmiddle">
+       <img id="verifyImg" SRC="<{:U('Login/verify')}>" onClick="fleshVerify()" border="0" alt="点击刷新验证码" style="cursor:pointer;width:80px;vertical-align:top;" align="absmiddle">
     </div>
 
 <div class="a-form-group am-form-icon">

@@ -36,11 +36,13 @@ class AlbumnAction extends CommonAction
 		$this->assign('bread',$this->now_here($catsid));
 		//本人登录的栏目下的导航
 		$catalogList=M('catalog')->where('isnav=1 and status=1 and pid='.$catsid)->order('sort asc')->select();
+		/*
 		foreach ($catalogList as $key=>$value) {
 			$childList=M('catalog')->where('pid='.$value["id"])->order('sort asc')->select();
 			$catalogList[$key]['childcount'] = count($childList);
 			$catalogList[$key]['child'] = $childList;
 		}
+		*/
 		$this->assign('catalogList',$catalogList);
 		$this->display('list');
 
