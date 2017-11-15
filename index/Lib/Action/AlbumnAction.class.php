@@ -24,7 +24,7 @@ class AlbumnAction extends CommonAction
 		$page->setConfig('link',U("Index/List/index",'catsid='.$catsid.'&p='.__PAGE__));//分页变量名是p
 		
    		$show=$page->show();//返回分页信息
-		$articles=M('article')->where("pid in(select id from cms_catalog where id=$catsid or pid=$catsid) and status=1")->
+		$articles=M('article')->where("pid=$catsid and status=1")->
 		order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
 		$this->assign('show',$show);
 		$this->assign('count',$count);
@@ -34,11 +34,17 @@ class AlbumnAction extends CommonAction
 
 		//面包屑
 		$this->assign('bread',$this->now_here($catsid));
+		
+		$catalog_mod = M('catalog');
+		$catalog = $catalog_mod->where("managerid='".$_SESSION['_USERNAME']."'")->find();
+				
+		$myCatalogId = $catalog["id"];
+
 		//本人登录的栏目下的导航
-		$catalogList=M('catalog')->where('isnav=1 and status=1 and pid='.$catsid)->order('sort asc')->select();
-		/*
-		foreach ($catalogList as $key=>$value) {
-			$childList=M('catalog')->where('pid='.$value["id"])->order('sort asc')->select();
+		$catalogList=M('catalog')->where("isnav=1 and status=1 and (id=$myCatalogId or pid=$myCatalogId)")->order('id asc')->select();
+				/*
+				foreach ($catalogList as $key=>$value) {
+					$childList=M('catalog')->where('pid='.$value["id"])->order('sort asc')->select();"
 			$catalogList[$key]['childcount'] = count($childList);
 			$catalogList[$key]['child'] = $childList;
 		}

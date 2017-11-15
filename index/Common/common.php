@@ -235,6 +235,9 @@ function getCatalog($cid = 0)
 			case "download":
 			  return U("Index/Download/index",array('id'=>$id));
 			  break;
+			  case "albumn":
+			  return U("Index/Albumn/index",array('catsid'=>$id));
+			  break;
 			case "search":
 			  return U("Index/Search/index",0);
 			  break;
