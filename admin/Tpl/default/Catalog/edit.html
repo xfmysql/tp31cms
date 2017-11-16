@@ -58,7 +58,7 @@
       <td><select name="managerid" style="width:150px;">
             <option value="0">--请选择管理员--</option>
              <volist  id="user" name="manger_list">
-                <option value="{$user.user_id}" <if condition="$article_cate_info.managerid eq $user['user_id']">selected="selected"</if>>&nbsp;&nbsp;&nbsp;&nbsp;{$user.username}</option>
+                <option value="{$user.username}" <if condition="$article_cate_info.managerid eq $user['username']">selected="selected"</if>>&nbsp;&nbsp;&nbsp;&nbsp;{$user.username}</option>
                 </volist>
           </select>
         </td>

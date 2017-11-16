@@ -9,7 +9,7 @@
 // +----------------------------------------------------------------------
 class UserAction extends BaseAction{
 	public function index(){
-        $mod=D("user"); 
+        $mod=D("member_user"); 
         $pagesize=20;        
         import("ORG.Util.Page");
 		$where=" 1=1 ";
@@ -20,7 +20,7 @@ class UserAction extends BaseAction{
 		}
 		$count=$mod->where($where)->count();		
 		$p = new Page($count,$pagesize);		
-		$list=$mod->where($where)->order("last_time desc")->limit($p->firstRow.','.$p->listRows)->select();
+		$list=$mod->where($where)->order("regtime desc")->limit($p->firstRow.','.$p->listRows)->select();
 		$page=$p->show();  
 		$this->assign('list',$list);
 		$this->assign('page',$page);
@@ -28,14 +28,14 @@ class UserAction extends BaseAction{
 	}
 	function edit(){
 		if (isset($_POST['dosubmit'])) {
-			$mod = D('user');		
+			$mod = D('member_user');		
 			$user_data = $mod->create();			
 			$pass=trim($_REQUEST['password']);
 			
 			if(!empty($pass)){
 				$user_data['passwd']=md5(trim($_REQUEST['password']));
 			}
-			$result_info=$mod->where("id=". $user_data['id'])->save($user_data);
+			$result_info=$mod->where("user_id=". $user_data['id'])->save($user_data);
 			if(false !== $result_info){
 				$this->success(L('operation_success'), '', '', 'edit');
 			}else{				

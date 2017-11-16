@@ -37,11 +37,11 @@ class AlbumnAction extends CommonAction
 		
 		$catalog_mod = M('catalog');
 		$catalog = $catalog_mod->where("managerid='".$_SESSION['_USERNAME']."'")->find();
-				
+
 		$myCatalogId = $catalog["id"];
 
 		//本人登录的栏目下的导航
-		$catalogList=M('catalog')->where("isnav=1 and status=1 and (id=$myCatalogId or pid=$myCatalogId)")->order('id asc')->select();
+		$catalogList=M('catalog')->where("status=1 and (id=$myCatalogId or pid=$myCatalogId)")->order('id asc')->select();
 				/*
 				foreach ($catalogList as $key=>$value) {
 					$childList=M('catalog')->where('pid='.$value["id"])->order('sort asc')->select();"

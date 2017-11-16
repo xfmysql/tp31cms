@@ -6,6 +6,8 @@
 class IndexAction extends CommonAction
 { 
 	Public function index(){
+		$this->redirect(U('Login/index'),'',1);
+
 		$this->assign('set',$this->setting);
 		//ad
 		$ad_mod = D('ad');
@@ -49,6 +51,7 @@ class IndexAction extends CommonAction
 		
 		//显示模板	
 		$this->display('index');
+		
 	}
 	
 }

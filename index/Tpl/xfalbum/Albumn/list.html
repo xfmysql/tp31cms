@@ -28,7 +28,7 @@
 
   <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
-     	
+     	<li><a href="<{:U('login/doLogout','')}>"id="login-main">退出</a> </li>
 	  <foreach name="catalogList" item="catalog">
 			<if condition="($catalog['channel'] eq C('Model_Download'))">
 						<li><a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a></li>
