@@ -64,12 +64,12 @@ class BaseAction extends Action {
 	}
 	//检查权限
 	public function checkAuthority()
-	{
+	{ 
 		if ((!isset($_SESSION['admin_info']) || !$_SESSION['admin_info']) && !in_array(ACTION_NAME, array('login','verify'))) {
+			
 			 if(empty($_COOKIE['s35hfed'])||empty($_COOKIE['gj56d45'])){//如果session为空，并且用户没有选择记录登录状
 				$this->redirect('Public/login');
 			  }else{//用户选择了记住登录状态
-				
 				$username=$_COOKIE['s35hfed'];
 				$password=$_COOKIE['gj56d45'];
 				$admin_mod=M('admin');

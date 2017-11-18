@@ -1,6 +1,6 @@
 <?php
 return array (
-  'DB_HOST' => 'localhost',
+  'DB_HOST' => '127.0.0.1',
   'DB_NAME' => 'tp31cms',
   'DB_PWD' => 'root',
   'DB_USER' => 'root',
