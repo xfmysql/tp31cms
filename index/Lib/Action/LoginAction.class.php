@@ -33,7 +33,7 @@ class LoginAction extends CommonAction {
 				$where['username']=$_COOKIE['username'];
 				$where['password']=$_COOKIE['password'];
 				$result =$User->where($where)->find();
-				echo 1;
+				
 				if(!empty($result)){//用户名密码不对没到取到信息，转到登录页面	
 						
 					$_SESSION['_USERNAME']=$result['username'];

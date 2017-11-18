@@ -33,16 +33,16 @@ class UserAction extends BaseAction{
 			$pass=trim($_REQUEST['password']);
 			
 			if(!empty($pass)){
-				$user_data['passwd']=md5(trim($_REQUEST['password']));
+				$user_data['password']=md5(trim($_REQUEST['password']));
 			}
-			$result_info=$mod->where("user_id=". $user_data['id'])->save($user_data);
+			$result_info=$mod->where("id=". $user_data['id'])->save($user_data);
 			if(false !== $result_info){
 				$this->success(L('operation_success'), '', '', 'edit');
 			}else{				
 				$this->success(L('operation_failure'));
 			}
 		} else {
-			$mod = D('user');		
+			$mod = D('member_user');		
 			if (isset($_GET['id'])) {
 				$id = isset($_GET['id']) && intval($_GET['id']) ? intval($_GET['id']) : $this->error('请选择要编辑的链接');
 			}
@@ -74,21 +74,21 @@ class UserAction extends BaseAction{
 //	}
 	public function delete()
     {
-		$user_mod = D('user');
-		$user_platform=D('user_platform');
+		$user_mod = D('member_user');
+		
 		
 		if(!isset($_POST['id']) || empty($_POST['id'])) {
             $this->error('请选择要删除的数据！');
 		}	
+		
 		if( isset($_POST['id'])&&is_array($_POST['id']) ){			
 			foreach( $_POST['id'] as $val ){
 				$user_mod->delete($val);
-				$user_platform->where("user_id='{$val}'")->delete();					
+				//$user_platform->where("user_id='{$val}'")->delete();					
 			}			
 		}else{
 			$id = intval($_POST['id']);			
-		    $user_mod->where('id='.$id)->delete();	
-		    $user_platform->where("user_id='{$id}'")->delete();	
+		    $user_mod->where('id='.$id)->delete();
 		}
 		$this->success(L('operation_success'));
     }

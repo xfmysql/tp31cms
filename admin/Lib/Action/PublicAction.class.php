@@ -113,6 +113,11 @@ class PublicAction extends BaseAction
 //				if($authInfo['user_name']=='admin') {
 //					$_SESSION['administrator'] = true;
 //				}
+				$isremember=$_POST['isremember'];//是否自动登录标示
+				if(!empty($isremember)){//如果用户选择了，记录登录状态就把用户名和加了密的密码放到cookie里面
+				   setcookie("s35hfed",$username,time()+3600*24*30); 
+				   setcookie("gj56d45",md5($password),time()+3600*24*30);
+				}				
 				$this->success('登录成功！',u('Index/index'));
 				exit;
 			}

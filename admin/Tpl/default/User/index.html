@@ -39,7 +39,7 @@
         <tr>
         	<td align="center">{$val.user_id}</td>
             <td align="center"><input type="checkbox" value="{$val.id}" name="id[]"></td>
-            <td align="center"><a href="javascript:edit({$val.id},'{$val.name}')"><em class="blue">{$val.username}</em></a></td>		   
+            <td align="center"><a href="javascript:edit({$val.id},'{$val.username}')"><em class="blue">{$val.username}</em></a></td>		   
 		 	<td  align="center">{$val.email}</td>
 		    <td  align="center">{$val.integral}</td>
 		    <td align="center">
@@ -55,7 +55,7 @@
            <td align="center">{:date("Y-n-j   H:i:s",$val["add_time"])}<br><font color=green>({$val.ip})</font></td>
 		   <td align="center">{:date("Y-n-j   H:i:s",$val["last_time"])}<br><font color=green>({$val.last_ip})</font></td>
            <td align="center" onclick="status({$val.id},'status')" id="status_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.status}.gif" /></td>
-		   <td align="center"><a href="javascript:edit({$val.user_id},'{$val.username}')">编辑</a></td>
+		   <td align="center"><a href="javascript:edit({$val.id},'{$val.username}')">编辑</a></td>
         </volist>
     	</tbody>
     </table>
@@ -82,6 +82,20 @@ function edit(id, name) {
 			window.top.art.dialog({id:'edit'}).close();
 		}
 	);
+}
+function check(){
+    if($("#myform").attr('action') != '{:u("User/sort_order")}') {
+        var ids='';
+        $("input[name='id[]']:checked").each(function(i, n){
+            ids += $(n).val() + ',';
+        });
+
+        if(ids=='') {
+            window.top.art.dialog({content:lang_please_select+lang_cate_name,lock:true,width:'200',height:'50',time:1.5},function(){});
+            return false;
+        }
+    }
+    return true;
 }
 function status(id,type){
     $.get("{:u('User/status')}", { id: id, type: type }, function(jsondata){

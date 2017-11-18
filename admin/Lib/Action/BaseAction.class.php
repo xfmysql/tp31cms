@@ -66,7 +66,26 @@ class BaseAction extends Action {
 	public function checkAuthority()
 	{
 		if ((!isset($_SESSION['admin_info']) || !$_SESSION['admin_info']) && !in_array(ACTION_NAME, array('login','verify'))) {
-			$this->redirect('Public/login');
+			 if(empty($_COOKIE['s35hfed'])||empty($_COOKIE['gj56d45'])){//如果session为空，并且用户没有选择记录登录状
+				$this->redirect('Public/login');
+			  }else{//用户选择了记住登录状态
+				
+				$username=$_COOKIE['s35hfed'];
+				$password=$_COOKIE['gj56d45'];
+				$admin_mod=M('admin');
+				$admin_info=$admin_mod->where("user_name='$username'")->find();
+				if(false === $admin_info) {
+					$this->error('帐号不存在或已禁用！');
+				}
+				else if($admin_info['password'] != $password) {
+					$this->error('密码错误！');
+				}
+
+				$_SESSION['admin_info'] =$admin_info;
+				setcookie("s35hfed",$_SESSION['username'],time()+3600*24*30); 
+				setcookie("gj56d45",$_SESSION['password'],time()+3600*24*30);	
+
+			 }
 		}
 		//如果是超级管理员，则可以执行所有操作，roleid=1
 		if($_SESSION['admin_info']['role_id'] == 1) {
