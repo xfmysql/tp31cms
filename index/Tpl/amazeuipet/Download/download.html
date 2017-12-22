@@ -96,7 +96,7 @@
 <volist name="newlist" id="article" >
 <div class="page_hot_block">
     <dl>
-        <dt><a href="<{:reurl($article['id'],'download')}>"><img src="data/news/<{$article.imgurl}>" alt="<{$article.title}>"></a></dt>
+        <dt><a href="<{:reurl($article['id'],'download')}>"><img src="<{$article.imgurl}>" alt="<{$article.title}>"></a></dt>
         <dd>
             <i><{$article.title}></i>
             <em></em>
@@ -126,7 +126,7 @@
  <li>
     <div class="am-gallery-item am_list_block">
       <a href="<{:reurl($article['id'],'download')}>" class="am_img_bg">
-        <img class="am_img animated" src="img/loading.gif"    data-original="data/news/<{$article.imgurl}>" alt="<{$article.title}>"/></a>
+        <img class="am_img animated" src="img/loading.gif"    data-original="<{$article.imgurl}>" alt="<{$article.title}>"/></a>
 
     </div>
     <a class="am_imglist_user"><span class="am_imglist_user_ico"></span><span class="am_imglist_user_font"><{$article.title}></span></a>
