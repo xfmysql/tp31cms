@@ -17,7 +17,7 @@ $php_url = dirname($_SERVER['PHP_SELF']) . '/';
 ////文件保存目录URL
 //$save_url = $php_url . '../attached/';
 //文件保存目录路径
-$save_path = '../../../../uploads/';
+$save_path = '/uploads/';
 //文件保存目录URL
 $save_url = './uploads/';
 
