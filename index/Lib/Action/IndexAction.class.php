@@ -5,8 +5,7 @@
 */
 class IndexAction extends CommonAction
 { 
-	Public function index(){
-		$this->redirect(U('Login/index'),'',1);
+	Public function index(){		
 
 		$this->assign('set',$this->setting);
 		//ad
