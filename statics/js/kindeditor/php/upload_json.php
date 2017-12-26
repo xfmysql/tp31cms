@@ -19,7 +19,7 @@ $php_url = dirname($_SERVER['PHP_SELF']) . '/';
 //文件保存目录路径
 $save_path = '/uploads/';
 //文件保存目录URL
-$save_url = './uploads/';
+$save_url = '/uploads/';
 
 //定义允许上传的文件扩展名
 $ext_arr = array(
