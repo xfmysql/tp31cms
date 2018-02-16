@@ -19,13 +19,13 @@ class ListAction extends CommonAction
    			<li class="am-pagination-prev">%prePage%</li><li class="am-pagination-next">%nextPage%</li>
    			<li>%linkPage%</li><li class="am-pagination-next">%downPage%</li>
    			<li class="am-pagination-next">%end%</li>');
-
-   			//</span><span>%downPage%</span><span>%prePage%</span> <span class="pages">第</span>%linkPage%<span class="pages">页</span><span class="next">%nextPage%</span><span>%end%</span></ul>
-		$page->setConfig('link',U("Index/List/index",'catsid='.$catsid.'&p='.__PAGE__));//分页变量名是p
+		//$page->setConfig('link',U("Index/List/index",'catsid='.$catsid.'&p='.__PAGE__));//分页变量名是p
 		
+		$page->setConfig('link',"/list-".$catsid."-".__PAGE__.".html");//分页变量名是p
+
    		$show=$page->show();//返回分页信息
 		$articles=M('article')->where("pid in(select id from cms_catalog where id=$catsid or pid=$catsid) and status=1")->
-		order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+		order('addtime desc')->limit($page->firstRow.','.$page->listRows)->select();
 		$this->assign('show',$show);
 		$this->assign('count',$count);
 		$this->assign('list',$articles);
