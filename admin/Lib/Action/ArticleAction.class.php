@@ -17,6 +17,14 @@ class ArticleAction extends BaseAction
 
 		//搜索
 		$where = '1=1';
+		if (isset($_GET['cate_id']) && intval($_GET['cate_id'])) {
+			if(intval($_GET['cate_id'])==-1){
+				$where .= " AND pid=0";	
+			}else if(intval($_GET['cate_id'])>0){
+		    	$where .= " AND pid=".$_GET['cate_id'];
+		    }// if ==0 query all
+		    $this->assign('cate_id', $_GET['cate_id']);
+		}
 		if (isset($_GET['keyword']) && trim($_GET['keyword'])) {
 		    $where .= " AND title LIKE '%".$_GET['keyword']."%'";
 		    $this->assign('keyword', $_GET['keyword']);
@@ -31,14 +39,8 @@ class ArticleAction extends BaseAction
 		    $where .= " AND add_time<='".$time_end."'";
 		    $this->assign('time_end', $_GET['time_end']);
 		}
-		if (isset($_GET['cate_id']) && intval($_GET['cate_id'])) {
-		    $where .= " AND cate_id=".$_GET['cate_id'];
-		    $this->assign('cate_id', $_GET['cate_id']);
-		}
-		if (isset($_GET['cate_id']) && $_GET['cate_id']=='0') {
-		    $where .= " AND cate_id=0";
-		    $this->assign('cate_id', $_GET['cate_id']);
-		}
+		
+		 
 		import("ORG.Util.Page");
 		$count = $article_mod->where($where)->count();
 		$p = new Page($count,20);
@@ -49,7 +51,7 @@ class ArticleAction extends BaseAction
 			$article_list[$k]['key'] = ++$p->firstRow;
 			$article_list[$k]['cate_name'] = $article_cate_mod->field('name')->where('id='.$val['pid'])->find();
 		}
-		$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort desc')->select();
+		$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort asc')->select();
     	$cate_list = array();
     	foreach ($result as $val) {
     	    if ($val['pid']==0) {

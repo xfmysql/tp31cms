@@ -13,7 +13,7 @@
 				<wego:calendar name="time_end" more="true">{$time_end}</wego:calendar>
             	&nbsp;&nbsp;资讯分类：
                 <select name="cate_id">
-            	<option value="0">--请选择分类--</option>
+                <option value="0">--请选择分类--</option>
                 <volist name="cate_list['parent']" id="val">
                   <option value="{$val.id}" <if condition="$cate_id eq $val['id']"> selected="selected" </if>>{$val.name}</option>
                   <notempty name="cate_list['sub'][$val['id']]">
@@ -27,6 +27,7 @@
                     </volist>
                   </notempty>
                 </volist>
+                <option value="-1">--未分类--</option>
               </select>
                 &nbsp;关键字 :
                 <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
@@ -44,17 +45,17 @@
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width=50>ID</th>
+                <th width=50>{:L('lid')}</th>
                 <th width=25><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>               
-                <th >{:L('title')}</th>
-                <th width=150>{:L('pid')}</th>
-                <th width=70>{:L('addtime')}</th>
-                <th width=70>{:L('edittime')}</th>
-                <th width=40>{:L('sort')}</th>
-                <th width="40">{:L('istop')}</th>
-                <th width="40">{:L('ishomepage')}</th>
-                <th width="40">{:L('status')}</th>
-				<th width="80">编辑</th>
+                <th >{:L('lname')}</th>
+                <th width=150>{:L('lcatalog')}</th>
+                <th width=70>{:L('laddtime')}</th>
+                <th width=70>{:L('ledittime')}</th>
+                <th width=40>{:L('lsort')}</th>
+                <th width="40">{:L('listop')}</th>
+                <th width="40">{:L('lishomepage')}</th>
+                <th width="40">{:L('lstatus')}</th>
+				<th width="80">{:L('loper')}</th>
             </tr>
         </thead>
     	<tbody>
