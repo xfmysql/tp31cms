@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title><{$article.title}> | <{$set.site_title}></title>
+  <title><{$article.title}> - <{$set.site_name}></title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
   <link rel="icon" type="image/png" href="assets/i/favicon.png">
@@ -30,6 +30,7 @@
 <div class="am-g am-g-fixed blog-fixed blog-content">
     <div class="am-u-md-8 am-u-sm-12">
       <article class="am-article blog-article-p">
+      <{$bread}>
         <div class="am-article-hd">
           <h1 class="am-article-title blog-text-center"><{$article.title}></h1>
           <p class="am-article-meta blog-text-center">

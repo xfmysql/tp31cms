@@ -126,22 +126,37 @@ return array(
 	'VERIFY_ERROR'=>'验证码错误',
 
 	'ADD'=>'添加',
-
+//通用
 	'lid'=>'ID',
+	'lpid'=>'上级分类',
 	'lname'=>'名称',
 	'lalias'=>'别名',
 	'limage'=>'封面',
 	'lmodel'=>'模型',
-
-	'llanguage'=>'语言',
-'lselectlanguage'=>'--选择语言--',
-
 	'lsort'=>'排序',
 	'lstate'=>'状态',
+	'lstatus'=>'状态',
 	'laddtime'=>'添加时间',
+	'ledittime'=>'编辑时间',
 	'lcatalog'=>'上级分类',
-    'selectcatalog' => '--顶级分类--',
-	'ldescript' => '描述',
+	'listop'=>'是否置顶',
+	'lishomepage'=>'是否首页显示',
 	'loper'=>'操作',
+//详情
+
+'llanguage'=>'语言',
+'lselectlanguage'=>'--选择语言--',
+
+'lselectcatalog'=>'--选择分类--',
+'linfo'=>'简介',
+'licourl'=>'封面图片',
+'lcontent'=>'内容',
+'lclicks'=>'点击',
+'lzan'=>'点赞',
+'lcai'=>'踩踩',
+//分类
+'lisnav'=>'是否显示导航',
+'lisbottom'=>'是否显示底部导航',
+'lisslider'=>'是否显示侧边',
 );
 ?>
