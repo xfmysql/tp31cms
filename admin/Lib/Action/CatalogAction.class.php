@@ -36,7 +36,7 @@ class CatalogAction extends BaseAction
     	}
 
     	$this->assign('article_cate_list',$article_cate_list);
-		$big_menu = array('javascript:window.top.art.dialog({id:\'add\',iframe:\'?m=Catalog&a=add\', title:\''.L('add_cate').'\', width:\'500\', height:\'400\', lock:true}, function(){var d = window.top.art.dialog({id:\'add\'}).data.iframe;var form = d.document.getElementById(\'dosubmit\');form.click();return false;}, function(){window.top.art.dialog({id:\'add\'}).close()});void(0);', L('add_cate'));
+		$big_menu = array('javascript:window.top.art.dialog({id:\'add\',iframe:\'?m=Catalog&a=add\', title:\''.L('add_cate').'\', width:\'700\', height:\'500\', lock:true}, function(){var d = window.top.art.dialog({id:\'add\'}).data.iframe;var form = d.document.getElementById(\'dosubmit\');form.click();return false;}, function(){window.top.art.dialog({id:\'add\'}).close()});void(0);', L('add_cate'));
 		$this->assign('big_menu',$big_menu);	
 
 		$this->display();

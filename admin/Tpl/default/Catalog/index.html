@@ -61,7 +61,7 @@
 function edit(id, name) {
 	var lang_edit = "{$Think.lang.edit}";
 	window.top.art.dialog({id:'edit'}).close();
-	window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'?m=Catalog&a=edit&id='+id,width:'500',height:'420'}, function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;d.document.getElementById('dosubmit').click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
+	window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'?m=Catalog&a=edit&id='+id,width:'800',height:'600'}, function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;d.document.getElementById('dosubmit').click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
 }
 var lang_cate_name = "{$Think.lang.article_cate_name}";
 function check(){

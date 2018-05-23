@@ -8,9 +8,9 @@
       <td><input type="hidden" name="id" class="input-text" value="{$article_cate_info.id}"></td>
     </tr>
     <tr>
-      <th>{:L('pid')} :</th>
+      <th>{:L('lpid')} :</th>
       <td><select name="pid" style="width:150px;">
-      	    <option value="0" <if condition="$article_cate_info.pid eq 0">selected="selected"</if>>{:L('selectcatalog')}</option>
+      	    <option value="0" <if condition="$article_cate_info.pid eq 0">selected="selected"</if>>{:L('lselectcatalog')}</option>
         	<volist name="cate_list['parent']" id="val">
             <option value="{$val.id}" <if condition="$article_cate_info.pid eq $val['id']">selected="selected"</if>>{$val.name}</option>
             	<notempty name="cate_list['sub'][$val['id']]">
@@ -28,11 +28,11 @@
       </td>
     </tr>
     <tr>
-      <th width="100">{:L('name')} :</th>
+      <th width="100">{:L('lname')} :</th>
       <td><input type="text" name="name" id="name" class="input-text" value="{$article_cate_info.name}"></td>
     </tr>
 	<tr> 
-      <th width="100">{:L('icourl')}:</th>
+      <th width="100">{:L('licourl')}:</th>
       	<td>
         	<input type="file" name="icourl" id="icourl" class="input-text" style="width:200px;" />
             <if condition="$article_cate_info['icourl'] neq ''">
@@ -41,75 +41,64 @@
         </td>
     </tr>
 	<tr>
-      <th>{:L('alias')}:</th>
+      <th>{:L('lalias')}:</th>
       <td><input type="text" name="alias" id="alias" class="input-text" value="{$article_cate_info.alias}"></td>
     </tr>
 	<tr>
-      <th>{:L('model')} :</th>
+      <th>{:L('lmodel')} :</th>
       <td>
 		  <input type="radio" name="model" value="1" <if condition="$article_cate_info.model eq c('Model_Content')"> checked</if> >&nbsp;单页&nbsp;&nbsp;&nbsp;
       	  <input type="radio" name="model" value="2" <if condition="$article_cate_info.model eq c('Model_Article')"> checked</if> >&nbsp;文章&nbsp;&nbsp;&nbsp;
       	  <input type="radio" name="model" value="3" <if condition="$article_cate_info.model eq c('Model_Download')"> checked</if> >&nbsp;下载&nbsp;&nbsp;&nbsp; 
 		  <input type="radio" name="model" value="4" <if condition="$article_cate_info.model eq c('Model_Album')"> checked</if> >&nbsp;相册&nbsp;&nbsp;&nbsp;
 </td>
-    </tr>
-     <tr> 
-      <th>{:L('manager')} :</th>
-      <td><select name="managerid" style="width:150px;">
-            <option value="0">--请选择管理员--</option>
-             <volist  id="user" name="manger_list">
-                <option value="{$user.username}" <if condition="$article_cate_info.managerid eq $user['username']">selected="selected"</if>>&nbsp;&nbsp;&nbsp;&nbsp;{$user.username}</option>
-                </volist>
-          </select>
-        </td>
-    </tr>
-
+    </tr>  
     <tr>
-      <th width="100">{:L('sort')} :</th>
+      <th width="100">{:L('lsort')} :</th>
       <td><input type="text" name="sort" id="sort" class="input-text" value="{$article_cate_info.sort}" size="4" onkeyup="value=value.replace(/[^\d]/g,'')"onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"></td>
     </tr>
     <tr>
-      <th>{:L('status')} :</th>
+      <th>{:L('lstatus')} :</th>
       <td><input type="radio" name="status" value="1" <if condition="$article_cate_info.status eq 1"> 	checked</if> >&nbsp;&nbsp;已经审核&nbsp;&nbsp;
       	  <input type="radio" name="status" value="0" <if condition="$article_cate_info.status eq 0"> 	checked</if> >&nbsp;未审核</td>
     </tr>
     
      <tr>
-      <th>{:L('isnav')} :</th>
+      <th>{:L('lisnav')} :</th>
       <td><input type="radio" name="isnav" value="1" <if condition="$article_cate_info.isnav eq 1"> 	checked</if> >&nbsp;&nbsp;显示导航&nbsp;&nbsp;
       	  <input type="radio" name="isnav" value="0" <if condition="$article_cate_info.isnav eq 0"> 	checked</if> >&nbsp;不显示</td>
     </tr>
      <tr>
-      <th>{:L('isbottom')} :</th>
+      <th>{:L('lisbottom')} :</th>
       <td><input type="radio" name="isbottom" value="1" <if condition="$article_cate_info.isbottom eq 1"> 	checked</if> >&nbsp;&nbsp;显示底部&nbsp;&nbsp;
       	  <input type="radio" name="isbottom" value="0" <if condition="$article_cate_info.isbottom eq 0"> 	checked</if> >&nbsp;不显示</td>
     </tr>
 
  <tr>
-      <th>{:L('istop')} :</th>
+      <th>{:L('listop')} :</th>
       <td><input type="radio" name="istop" value="1" <if condition="$article_cate_info.istop eq 1"> 	checked</if> >&nbsp;&nbsp;是否推荐&nbsp;&nbsp;
       	  <input type="radio" name="istop" value="0" <if condition="$article_cate_info.istop eq 0"> 	checked</if> >&nbsp;不推荐</td>
     </tr>
      <tr>
-      <th>{:L('ishomepage')} :</th>
+      <th>{:L('lishomepage')} :</th>
       <td><input type="radio" name="ishomepage" value="1" <if condition="$article_cate_info.ishomepage eq 1">  checked</if> >&nbsp;&nbsp;首页显示&nbsp;&nbsp;
           <input type="radio" name="ishomepage" value="0" <if condition="$article_cate_info.ishomepage eq 0">  checked</if>  >&nbsp;首页不显示</td>
     </tr>
     <tr>
-      <th>{:L('isslider')} :</th>
+      <th>{:L('lisslider')} :</th>
       <td><input type="radio" name="isslider" value="1" <if condition="$article_cate_info.isslider eq 1">  checked</if> >&nbsp;&nbsp;侧栏显示&nbsp;&nbsp;
           <input type="radio" name="isslider" value="0" <if condition="$article_cate_info.isslider eq 0">  checked</if> >&nbsp;侧栏不显示</td>
     </tr>
     <tr>
-      <th width="100">{:L('seotitle')} </th>
+      <th width="100">{:L('lseotitle')} </th>
       <td><input type="text" name="seotitle" id="seotitle" class="input-text" value="{$article_cate_info.seo_title}" size="50"></td>
     </tr>
     <tr>
-      <th width="100">{:L('seokeyword')} </th>
+      <th width="100">{:L('lseokeyword')} </th>
       <td><input type="text" name="seokeyword" id="seokeyword" class="input-text" value="{$article_cate_info.seokeyword}" size="50"></td>
     </tr>
     <tr>
-      <th width="100">{:L('seodescript')} </th>
+      <th width="100">{:L('lseodescript')} </th>
       <td><textarea name="seodescript" cols="47" rows="4">{$article_cate_info.seodescript}</textarea></td>
     </tr>
     

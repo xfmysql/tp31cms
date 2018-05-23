@@ -142,8 +142,10 @@ return array(
 	'listop'=>'是否置顶',
 	'lishomepage'=>'是否首页显示',
 	'loper'=>'操作',
-
 'lartilenum'=>'文章数',
+'lseotitle'=>'seo标题',
+'lseokeyword'=>'seo关键词',
+'lseodescript'=>'seo描述',
 //详情
 'ltitle'=>'标题',
 'llanguage'=>'语言',

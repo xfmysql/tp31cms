@@ -43,17 +43,11 @@
     </ul>
     <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
       <div class="am-form-group">
-        <input type="text" class="am-form-field am-input-sm" placeholder="搜索">
+        <input type="text" class="am-form-field am-input-sm" placeholder="输入关键词">
+         <button  class="flatbtn" id="login-main">搜索</button>
       </div>
     </form>
   </div>
 </nav>
 
 <hr>
-<!-- nav end -->
-
-<div>
-        <if condition="$_SESSION['_USERID'] neq '' "> 欢迎：<{:$_SESSION['_USERNAME']}> <span class="nav-set"> <span class="nav-login"> <a href="<{:U('login/doLogout','')}>" class="flatbtn" id="login-main">退出</a> </span> </span>
-          <else />
-          <a href="<{:U('login/checkreg','')}>" target="_blank">立即注册</a> <span class="nav-set"> <span class="nav-login"> <a href="<{:U('login/index','')}>" class="flatbtn" id="login-main">登录</a> </span> </span> </if>
-      </div>
