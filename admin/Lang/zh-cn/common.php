@@ -142,13 +142,16 @@ return array(
 	'listop'=>'是否置顶',
 	'lishomepage'=>'是否首页显示',
 	'loper'=>'操作',
-//详情
 
+'lartilenum'=>'文章数',
+//详情
+'ltitle'=>'标题',
 'llanguage'=>'语言',
 'lselectlanguage'=>'--选择语言--',
-
 'lselectcatalog'=>'--选择分类--',
 'linfo'=>'简介',
+'lintro'=>'简介',
+'ldescript'=>'描述',
 'licourl'=>'封面图片',
 'lcontent'=>'内容',
 'lclicks'=>'点击',

@@ -92,12 +92,13 @@ class CommonAction extends Action
 
 	//解释一下，栏目表category中的catid为栏目id，catname为栏目名称，asmenu为栏目父级的id，当为顶级栏目时，asmenu为0 。
 	public function now_here($catid,$ext=''){
-	 $cat = M("article_cate");
+	 $cat = M("catalog");
 	 $here = '';
 	 $uplevels = $cat->field("id,name,pid")->where("id=$catid")->find();
-	 if($uplevels['pid'] != 0)
-		$here .= $this->get_up_levels($uplevels['pid']);
-	 $here .= ' -> <a href="'.reurl($catid,'article').'">'.$uplevels['name']."</a>";
+	 if($uplevels['pid'] != 0){
+		$here .= $this->get_up_levels($uplevels['pid'])."->";
+	}
+	 $here .= '  <a href="'.reurl($catid,'articlelist').'">'.$uplevels['name']."</a>";
 	 if($ext != '') $here .= ' -> '.$ext;
 	 return $here;
 	}
@@ -105,7 +106,7 @@ class CommonAction extends Action
 	 $cat = M("catalog");
 	 $here = '';
 	 $uplevels = $cat->field("id,name,pid")->where("id=$id")->find();
-	  $here .= ' -> <a href="'.reurl($id,'article').'">'.$uplevels['name']."</a>";
+	  $here .= ' -> <a href="'.reurl($id,'articlelist').'">'.$uplevels['name']."</a>";
 	 if($uplevels['pid'] != 0){
 	  $here = $this->get_up_levels($uplevels['pid']).$here;
 	 }

@@ -25,14 +25,14 @@ $(function(){
   <div id="div_setting_1" class="contentList pad-10">
     <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
       <tr>
-        <th width="100">{:L('title')} :</th>
+        <th width="100">{:L('ltitle')} :</th>
         <td><input type="text" name="title" id="title" class="input-text" size="60" value="{$article.title}"></td>
       </tr>
 	 
       <tr>
-        <th>{:L('catalog')} :</th>
+        <th>{:L('lcatalog')} :</th>
         <td><select name="pid" id="pid" style="width:200px;">
-        	<option value="0">--请选择分类--</option>
+        	<option value="0">{:L('lselectcatalog')}</option>
             <volist name="cate_list['parent']" id="val">
               <option  <if condition="$article['pid'] eq $val['id']"> selected="selected" </if> value="{$val.id}">{$val.name}</option>
               <notempty name="cate_list['sub'][$val['id']]">
@@ -49,15 +49,15 @@ $(function(){
           </select></td>
       </tr>
        <tr>
-            <th width="100">{:L('alias')}:</th>
+            <th width="100">{:L('lalias')}:</th>
             <td><input type="text" name="alias" id="alias" class="input-text" value="{$article.alias}"  size="30"></td>
           </tr>
           <tr>
-            <th>{:L('intro')} :</th>
+            <th>{:L('lintro')} :</th>
             <td><textarea name="intro" id="intro" style="width:68%;height:50px;">{$article.intro}</textarea></td>
           </tr>
       <tr>
-        <th>{:L('icourl')} :</th>
+        <th>{:L('licourl')} :</th>
         <td>
           <input type="file" name="icourl" id="icourl" class="input-text" style="width:200px;" />
             <if condition="$article['icourl'] neq ''">
@@ -66,13 +66,13 @@ $(function(){
         </td>
       </tr>
  <tr>
-        <th>{:L('content')} :</th>
+        <th>{:L('lcontent')} :</th>
         <td>          
       <tpl:editor id="content" name="content" type="KINDEDITOR" style="width:70%;height:350px;" >{$article.content}</tpl:editor>
     </td>
  </tr>
      <tr>
-          <th>{:L('istop')}:</th>
+          <th>{:L('listop')}:</th>
           <td><input type="radio" name="istop" class="radio_style" value="1" <if condition="$article.istop eq 1"> checked</if>>
               &nbsp;推荐&nbsp;&nbsp;&nbsp;
               <input type="radio" name="istop" class="radio_style" value="0" <if condition="$article.istop eq 0"> checked</if>>
@@ -82,7 +82,7 @@ $(function(){
 
 
       <tr>
-          <th>{:L('ishomepage')}:</th>
+          <th>{:L('lishomepage')}:</th>
           <td><input type="radio" name="ishomepage" class="radio_style" value="1" <if condition="$article.ishomepage eq 1"> checked</if>>
               &nbsp;首页显示&nbsp;&nbsp;&nbsp;
               <input type="radio" name="ishomepage" class="radio_style" value="0" <if condition="$article.ishomepage eq 0"> checked</if>>
@@ -91,7 +91,7 @@ $(function(){
           </tr>
      
       <tr>
-        <th>{:L('status')} :</th>
+        <th>{:L('lstatus')} :</th>
         <td><input type="radio" name="status" class="radio_style" value="1" <if condition="$article.status eq 1"> checked</if>>
           &nbsp;已审核&nbsp;&nbsp;&nbsp;
           <input type="radio" name="status" class="radio_style" value="0" <if condition="$article.status eq 0">  checked</if>>
@@ -99,11 +99,11 @@ $(function(){
           </td>
       </tr>
         <tr>
-            <th>{:L('sort')} :</th>
+            <th>{:L('lsort')} :</th>
             <td><input type="text" name="sort" id="sort" class="input-text" size="8" value="{$article.sort}">
-              &nbsp;&nbsp;&nbsp;{:L('clicks')} :&nbsp;<input type="text" name="clicks" id="clicks" class="input-text" size="8"  value="{$article.clicks}">
-              &nbsp;&nbsp;&nbsp;{:L('zan')} :&nbsp;<input type="text" name="zan" id="zan" class="input-text" size="8"  value="{$article.zan}">
-              &nbsp;&nbsp;&nbsp;{:L('cai')} :&nbsp;<input type="text" name="cai" id="cai" class="input-text" size="8"  value="{$article.cai}">
+              &nbsp;&nbsp;&nbsp;{:L('lclicks')} :&nbsp;<input type="text" name="clicks" id="clicks" class="input-text" size="8"  value="{$article.clicks}">
+              &nbsp;&nbsp;&nbsp;{:L('lzan')} :&nbsp;<input type="text" name="zan" id="zan" class="input-text" size="8"  value="{$article.zan}">
+              &nbsp;&nbsp;&nbsp;{:L('lcai')} :&nbsp;<input type="text" name="cai" id="cai" class="input-text" size="8"  value="{$article.cai}">
             </td>
           </tr>
 
