@@ -79,7 +79,8 @@
     </table>
 
     <div class="btn">
-    	<label for="check_box" style="float:left;">{$Think.lang.select_all}/{$Think.lang.cancel}</label>
+    	<label for="check_box" style="float:left;"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></label>
+        
     	<input type="submit" class="button" name="dosubmit" value="{$Think.lang.delete}" onclick="return confirm('{$Think.lang.sure_delete}')" style="float:left;margin:0 10px 0 10px;"/>
     	
     	<div id="pages">{$page}</div>

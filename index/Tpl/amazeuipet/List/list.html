@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="<{$set.site_description}>">
+  <meta name="keywords" content="<{$set.site_keyword}>">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title><{$catName}> - <{$set.site_name}></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="icon" type="../Public/image/png" href="assets/i/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="../Public/assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="../Public/assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileImage" content="../Public/assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+  <link rel="stylesheet" href="../Public/assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="../Public/assets/css/app.css">
+</head>
+
+<body id="blog">
+<include file="Public:header" />
+
+
+<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed">
+    <div class="am-u-md-8 am-u-sm-12">
+<!--volist name="hotCatalogList" id="catalog" offset='0' length='10'>
+
+  <volist name="catalog['child']" id="article" offset='0' length='20'>
+  <article class="am-g blog-entry-article">
+            <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
+                <img src="data/news/<{$article.imgurl}>" alt="" class="am-u-sm-12">
+            </div>
+            <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
+                <span><a href="<{:reurl($article['id'],'download')}>" class="blog-color">article &nbsp;</a></span>
+                <span> @amazeUI &nbsp;</span>
+                <span><{$article.addtime|date='Y-m-d',###}></span>
+                <h1><a href=">"><{$article.title}></a></h1>
+                <p>这是描述</p>
+                <p><a href="" class="blog-continue">continue reading</a></p>
+            </div>
+        </article>
+   </volist>
+
+</volist-->
+
+
+   <volist name="list" id="article" offset='0' length='12'>
+          <article class="am-g blog-entry-article">
+          <if condition="$article['icourl'] neq null ">
+            <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
+                <a href="<{:reurl($article['id'],'article')}>" class="blog-color"><img src="<{$article.icourl}>" alt="<{$article.title}>" class="am-u-sm-12"></a>
+            </div>
+            </if>
+            <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
+                
+                <h1><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></h1>
+                <p><{$article.intro}></p>
+               <span><a href="<{:reurl($article['id'],'article')}>" class="blog-color">作者</a></span>
+                <span><{$article.addtime||substr=0,10}></span>
+            </div>
+        </article>
+   </volist>
+
+   
+
+        
+        <ul class="am-pagination">
+       <{$show}>   
+  <!--li class="am-pagination-prev"><a href="">&laquo; Prev</a></li>
+  <li class="am-pagination-next"><a href="">Next &raquo;</a></li-->
+</ul>
+
+    </div>
+
+
+
+
+    <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
+        <include file="Public:right" />
+
+    </div>
+</div>
+<!-- content end -->
+
+
+
+
+
+
+<include file="Public:footer" />
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../Public/assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="../Public/assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<script src="../Public/assets/js/amazeui.min.js"></script>
+</body>
+</html>
