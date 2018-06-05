@@ -13,6 +13,9 @@ class DownloadAction extends CommonAction
 		$article = M('download')->where("id=".$id)->find();		
 		if(!empty($article)){
 			M('download')->execute("update __TABLE__  set clicks=clicks+1 where id=$id");
+		}else{
+			header("HTTP/1.1 404 Not Found");
+			exit();
 		}
 		$this->assign('article',$article);
 		$download_relation = D('projectrelation');

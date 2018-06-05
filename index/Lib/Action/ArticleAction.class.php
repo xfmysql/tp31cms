@@ -12,6 +12,9 @@ class ArticleAction extends CommonAction
 		$article=M('Article')->where("id=".$article_id)->find();		
 		if(!empty($article)){
 			M('Article')->execute("update __TABLE__  set clicks=clicks+1 where id=$article_id");
+		}else{
+			header("HTTP/1.1 404 Not Found");
+			exit();
 		}
 		$this->assign('article',$article);//文章		
 		$cate = D('catalog')->where("id=".$article['pid'])->find();
