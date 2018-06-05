@@ -20,6 +20,11 @@
   <meta name="msapplication-TileColor" content="#0e90d2">
   <link rel="stylesheet" href="../Public/assets/css/amazeui.min.css">
   <link rel="stylesheet" href="../Public/assets/css/app.css">
+  <style>
+  .am-viewport{
+    height: 250px;
+  }
+  </style>
 </head>
 
 <body id="blog">
@@ -29,18 +34,17 @@
 <div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-article-margin">
     <div data-am-widget="slider" class="am-slider am-slider-b1" data-am-slider='{&quot;controlNav&quot;:false}' >
     <ul class="am-slides">
-	 <volist name="adList" id="article" offset='0' length='5'>
+	 <volist name="adList" id="adv" offset='0' length='5'>
       <li>
-            <img src="<{$article.img}>">
-            <div class="blog-slider-desc am-slider-desc ">
+            <a href="<{$adv.url}>" class="blog-color"><img style="width:1000px;height:250px;" src="/data/advert/<{$adv.code}>"></a>
+            <!--div class="blog-slider-desc am-slider-desc ">
                 <div class="blog-text-center blog-slider-con">
                     <span><a href="" class="blog-color">Article &nbsp;</a></span>               
-                    <h1 class="blog-h-margin"><a href="<{$article.url}>"><{$article.title}></a></h1>
-                    <p><{$article.title}></p>
-                    <span class="blog-bor"><{$article.add_time}></span>
-                    <br><br><br><br><br><br><br>                
+                    <h1 class="blog-h-margin"><a href="<{$adv.url}>"><{$adv.name}></a></h1>
+                    <p><{$adv.name}></p>
+                    <span class="blog-bor"><{$adv.add_time}></span>                          
                 </div>
-            </div>
+            </div-->
       </li>
 </volist>
 

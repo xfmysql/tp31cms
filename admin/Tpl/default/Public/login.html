@@ -14,7 +14,7 @@
 		<dl>
 			<dd>用户名：<input class="text" type="text" name="username" id="username" /></dd>
 			<dd>密&nbsp;&nbsp;&nbsp;码：<input class="text" type="password" name="password" id="password" /></dd>
-			<dd>自动登：<input type="checkbox" value="2" name="isremember" ></dd>
+			<dd>自动登录：<input type="checkbox" value="2" name="isremember" ></dd>
 			<if condition="$set.check_code eq '1'">
 				<dd>验　证　码：<input id="verify" type="text" name="verify">
 					<img id="verify_img" src="{:U('Public/verify',array('rand'=>time()))}" title="看不清？点击刷新" onclick="javascript:this.src='{:U('Public/verify')}&mt='+Math.random()" />
