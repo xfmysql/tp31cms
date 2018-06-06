@@ -82,7 +82,8 @@ class CommonAction extends Action
 		$commGoodlist=M('article')->limit('6')->where(" status=1 ")->order('approval desc')->select();
 		$this->assign('commGoodlist',$commGoodlist);	
 			
-		
+		$adList=M('ad')->limit('6')->where(" status=1 and type='image' ")->order(' id asc')->select();
+		$this->assign('adList',$adList);	
 	}
 	
 	//空操作
