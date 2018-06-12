@@ -133,6 +133,13 @@ $(function(){
             <if condition="$download['imgurl'] neq ''">
             <br /><img src="{$download.imgurl}" style="width:50px;height:50px;"/>
             </if>
+            <php>if(!empty($download['imgurl'])) { $ricourl=str_replace("thumb_","",$download['imgurl']);
+                echo '<input type="hidden" name="ricourl" id="ricourl" value="'.$ricourl.'" />'.$ricourl;
+              }
+             </php>
+            
+            <a id="copyBtn" name="copyBtn">复制缩略图</a>
+            <a id="copyBtn2" name="copyBtn2">复制原图</a>
         </td>
       </tr>
       
@@ -254,6 +261,32 @@ $(document).ready(function() {
 	});   
   
 });  
+
+var clipboard = new Clipboard('#copyBtn', {  
+        text: function() {  
+            return $("#ricourl").val();  
+        }  
+    });  
+    clipboard.on('success', function(e) {  
+        //alert("复制成功");  
+    });  
+  
+    clipboard.on('error', function(e) {  
+        console.log(e);  
+    });  
+var clipboard = new Clipboard('#copyBtn2', {  
+        text: function() {  
+            return $("#icoimg").attr("src");  
+        }  
+    });  
+    clipboard.on('success', function(e) {  
+        //alert("复制成功");  
+    });  
+  
+    clipboard.on('error', function(e) {  
+        console.log(e);  
+    });  
+    
 </script>  
 </body>
 </html>

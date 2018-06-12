@@ -76,9 +76,12 @@ $project_mod = D('project');
 			if($data['catalogid']==0){
 				$this->error(L('lselectcatalog'));
 			}
-			if ($_FILES['imgurl']['name']!='') {
-			    $upload_list = $this->upload("download");
-			    $data['imgurl'] = $upload_list;
+			if ($_FILES['imgurl']['name']!='') {			   
+
+			     $icourls = $this->uploadByInfo("download");//0=原图，1=缩略图	
+			    if(C('usethumb')){		    
+				    $data['imgurl'] = $icourls[1];
+				}else $data['imgurl'] = $icourls[0];
 			}
 			if(isset($data['ishot1']) && $data['ishot1']=='1'){
 				$data['ishot1']='1';

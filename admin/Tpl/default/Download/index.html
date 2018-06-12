@@ -62,7 +62,10 @@
             <td align="center">
            	 <input type="checkbox" value="{$val.id}" name="id[]">
 			</td>           
-            <td align="left"><a class="blue" href="{:u('Download/edit', array('id'=>$val['id']))}">{$val.title}</a><if condition="$val['url'] neq ''"><br><a href="{$val.url}" target=_blank>{$val.url}</a></if>&nbsp;&nbsp;</td>
+           
+            <td align="left"><a class="blue" target="_blank" ="" href="/index.php?a=index&m=download&id={$val.id}">{$val.title}</a><if condition="$val['url'] neq ''"><br><a href="{$val.url}" target=_blank>{$val.url}</a></if>&nbsp;&nbsp;</td>
+
+
             <td align="center"><b>{$val.catalog.name}</b></td>           
             <td align="center">{$val.project.name}</td>
             <td align="center">{$val.clicks}</td>
