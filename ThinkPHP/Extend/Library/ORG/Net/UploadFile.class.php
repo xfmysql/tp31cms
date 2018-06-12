@@ -22,11 +22,11 @@ class UploadFile {//类定义开始
         'maxSize'           =>  -1,    // 上传文件的最大值
         'supportMulti'      =>  true,    // 是否支持多文件上传
         'allowExts'         =>  array(),    // 允许上传的文件后缀 留空不作后缀检查
-        'allowTypes'        =>  array(),    // 允许上传的文件类型 留空不做检查
-        'thumb'             =>  true,    // 使用对上传图片进行缩略图处理
+        'allowTypes'        =>  array(),    // 允许上传的文件类型 留空不做检查        
         'imageClassPath'    =>  'ORG.Util.Image',    // 图库类包路径
-        'thumbMaxWidth'     =>  '200',// 缩略图最大宽度
-        'thumbMaxHeight'    =>  '200',// 缩略图最大高度
+        'thumb'             =>  false,    // 使用对上传图片进行缩略图处理
+        'thumbMaxWidth'     =>  '',// 缩略图最大宽度
+        'thumbMaxHeight'    =>  '',// 缩略图最大高度
         'thumbPrefix'       =>  'thumb_',// 缩略图前缀
         'thumbSuffix'       =>  '',
         'thumbPath'         =>  '',// 缩略图保存路径
@@ -77,7 +77,7 @@ class UploadFile {//类定义开始
     public function __construct($config=array()) {
         if(is_array($config)) {
             $this->config   =   array_merge($this->config,$config);
-        }
+        }       
     }
 
     /**

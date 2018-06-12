@@ -42,7 +42,10 @@ $array = array(
     'TMPL_ACTION_SUCCESS'   => 'Public:success',
 	'APP_STATUS' => 'debug',
 	'SHOW_PAGE_TRACE' =>false, // 显示页面Trace信息
-
+//thumb
+'thumbwidth' => 250,
+'thumbheight' => 250,
+'usethumb' => true,
 
 );
 return array_merge($config,$array);

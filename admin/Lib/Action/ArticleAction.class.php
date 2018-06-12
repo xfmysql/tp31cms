@@ -77,8 +77,10 @@ class ArticleAction extends BaseAction
 				$this->error('请选择资讯分类');
 			}
 			if ($_FILES['icourl']['name']!='') {
-			    $icourls = $this->uploadByInfo("article");//0=原图，1=缩略图			    
-			    $data['icourl'] = $icourls[1];
+			    $icourls = $this->uploadByInfo("article");//0=原图，1=缩略图	
+			    if(C('usethumb')){		    
+				    $data['icourl'] = $icourls[1];
+				}else $data['icourl'] = $icourls[0];
 			}			
 			$data['edittime']=date('Y-m-d H:i:s',time());
 			$result = $article_mod->save($data);

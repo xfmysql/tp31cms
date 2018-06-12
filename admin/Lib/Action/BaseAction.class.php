@@ -236,7 +236,7 @@ class BaseAction extends Action {
 	//公共上传图片方法
 	public function upload($savePath)
 	{		
-		import("ORG.Net.UploadFile");
+		import("ORG.Net.UploadFile");		
 		$upload = new UploadFile();
 		//设置上传文件大小
 		$upload->maxSize = 32922000;
@@ -264,7 +264,13 @@ class BaseAction extends Action {
 	public function uploadByInfo($savePath)
 	{		
 		import("ORG.Net.UploadFile");
-		$upload = new UploadFile();
+		$uploadconfig = array( 
+	 		'thumb' =>  C('usethumb'),    // 使用对上传图片进行缩略图处理
+	        'thumbMaxWidth'     =>  C('thumbwidth'),// 缩略图最大宽度
+	        'thumbMaxHeight'    =>  C('thumbheight'),// 缩略图最大高度
+		);	
+		
+		$upload = new UploadFile($uploadconfig);
 		//设置上传文件大小
 		$upload->maxSize = 32922000;
 		$upload->allowExts = explode(',', 'jpg,gif,png,jpeg');
