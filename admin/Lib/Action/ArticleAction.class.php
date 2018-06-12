@@ -77,8 +77,8 @@ class ArticleAction extends BaseAction
 				$this->error('请选择资讯分类');
 			}
 			if ($_FILES['icourl']['name']!='') {
-			    $upload_url = $this->upload("article");
-			    $data['icourl'] = $upload_url;
+			    $icourls = $this->uploadByInfo("article");//0=原图，1=缩略图			    
+			    $data['icourl'] = $icourls[1];
 			}			
 			$data['edittime']=date('Y-m-d H:i:s',time());
 			$result = $article_mod->save($data);
@@ -123,7 +123,7 @@ class ArticleAction extends BaseAction
 				$this->error($article_mod->error());
 			}
 			if ($_FILES['icourl']['name']!='') {
-				$upload_url = $this->upload("article");
+				$upload_url = $this->upload("article");//封面
 				$data['icourl'] = $upload_url;
 			}
 			$data['addtime']=date('Y-m-d H:i:s',time());

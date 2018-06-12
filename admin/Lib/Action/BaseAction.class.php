@@ -257,8 +257,40 @@ class BaseAction extends Action {
 			//取得成功上传的文件信息
 			$uploadList = $upload->getUploadFileInfo();
 		}
-		$uploadList='.'.C('config_upload_dir').$savePath.'/'.$uploadList['0']['savename'];		
+		$uploadList='.'.C('config_upload_dir').$savePath.'/'.$uploadList['0']['savename'];	
+		//error_log($uploadList,3,'errors.log');   	
 		return $uploadList;
+	}
+	public function uploadByInfo($savePath)
+	{		
+		import("ORG.Net.UploadFile");
+		$upload = new UploadFile();
+		//设置上传文件大小
+		$upload->maxSize = 32922000;
+		$upload->allowExts = explode(',', 'jpg,gif,png,jpeg');
+		$upload->savePath = ROOT_PATH.C('config_upload_dir').$savePath.'/';
+		$upload->saveRule = uniqid;
+		if(!file_exists(ROOT_PATH.C('config_upload_dir'))){
+			@mkdir(ROOT_PATH.C('config_upload_dir'), 0777); 
+		}
+		
+		if(!file_exists($upload->savePath)){
+			@mkdir($upload->savePath, 0777); 
+		}
+		if (!$upload->upload()) {
+			//捕获上传异常
+			$this->error($upload->getErrorMsg());
+		} else {
+			//取得成功上传的文件信息
+			$uploadList = $upload->getUploadFileInfo();
+		}
+		$imgurllist=array();
+		$realimg='.'.C('config_upload_dir').$savePath.'/'.$uploadList['0']['savename'];	
+		$imgurllist[] = $realimg;
+		$thumbimg = '.'.C('config_upload_dir').$savePath.'/'.$uploadList['0']['thumbname'];	
+		$imgurllist[] = $thumbimg;
+		//error_log($imgurllist[1],3,'errors.log');   	
+		return $imgurllist;
 	}
 	//发送邮件
 	/*address 表示收件人地址

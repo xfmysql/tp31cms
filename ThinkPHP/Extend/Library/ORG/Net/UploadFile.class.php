@@ -23,17 +23,17 @@ class UploadFile {//类定义开始
         'supportMulti'      =>  true,    // 是否支持多文件上传
         'allowExts'         =>  array(),    // 允许上传的文件后缀 留空不作后缀检查
         'allowTypes'        =>  array(),    // 允许上传的文件类型 留空不做检查
-        'thumb'             =>  false,    // 使用对上传图片进行缩略图处理
+        'thumb'             =>  true,    // 使用对上传图片进行缩略图处理
         'imageClassPath'    =>  'ORG.Util.Image',    // 图库类包路径
-        'thumbMaxWidth'     =>  '',// 缩略图最大宽度
-        'thumbMaxHeight'    =>  '',// 缩略图最大高度
+        'thumbMaxWidth'     =>  '200',// 缩略图最大宽度
+        'thumbMaxHeight'    =>  '200',// 缩略图最大高度
         'thumbPrefix'       =>  'thumb_',// 缩略图前缀
         'thumbSuffix'       =>  '',
         'thumbPath'         =>  '',// 缩略图保存路径
         'thumbFile'         =>  '',// 缩略图文件名
         'thumbExt'          =>  '',// 缩略图扩展名        
         'thumbRemoveOrigin' =>  false,// 是否移除原图
-        'thumbType'         =>  1, // 缩略图生成方式 1 按设置大小截取 0 按原图等比例缩略
+        'thumbType'         =>  0, // 缩略图生成方式 1 按设置大小截取 0 按原图等比例缩略
         'zipImages'         =>  false,// 压缩图片文件上传
         'autoSub'           =>  false,// 启用子目录保存文件
         'subType'           =>  'hash',// 子目录创建方式 可以使用hash date custom
@@ -105,27 +105,30 @@ class UploadFile {//类定义开始
         if(!move_uploaded_file($file['tmp_name'], $this->autoCharset($filename,'utf-8','gbk'))) {
             $this->error = '文件上传保存错误！';
             return false;
-        }
-        if($this->thumb && in_array(strtolower($file['extension']),array('gif','jpg','jpeg','bmp','png'))) {
+        }        
+        if($this->thumb && in_array(strtolower($file['extension']),array('gif','jpg','jpeg','bmp','png'))) {            
             $image =  getimagesize($filename);
-            if(false !== $image) {
+            if(false !== $image) {          
                 //是图像文件生成缩略图
+                /*
                 $thumbWidth		=	explode(',',$this->thumbMaxWidth);
                 $thumbHeight	=	explode(',',$this->thumbMaxHeight);
                 $thumbPrefix	=	explode(',',$this->thumbPrefix);
                 $thumbSuffix    =   explode(',',$this->thumbSuffix);
                 $thumbFile		=	explode(',',$this->thumbFile);
+                */
                 $thumbPath      =   $this->thumbPath?$this->thumbPath:dirname($filename).'/';
                 $thumbExt       =   $this->thumbExt ? $this->thumbExt : $file['extension']; //自定义缩略图扩展名
                 // 生成图像缩略图
                 import($this->imageClassPath);
+                /*
                 for($i=0,$len=count($thumbWidth); $i<$len; $i++) {
                     if(!empty($thumbFile[$i])) {
                         $thumbname  =   $thumbFile[$i];
                     }else{
                         $prefix     =   isset($thumbPrefix[$i])?$thumbPrefix[$i]:$thumbPrefix[0];
                         $suffix     =   isset($thumbSuffix[$i])?$thumbSuffix[$i]:$thumbSuffix[0];
-                        $thumbname  =   $prefix.basename($filename,'.'.$file['extension']).$suffix;
+                        $thumbname  =   $prefix.basename($filename,'.'.$file['extension']).$suffix;                        
                     }
                     if(1 == $this->thumbType){
                         Image::thumb2($filename,$thumbPath.$thumbname.'.'.$thumbExt,'',$thumbWidth[$i],$thumbHeight[$i],true);
@@ -134,6 +137,19 @@ class UploadFile {//类定义开始
                     }
                     
                 }
+                 */
+                
+                        $prefix     =   isset($this->thumbPrefix)?$this->thumbPrefix:"";
+                        $suffix     =   isset($this->thumbSuffix)?$this->thumbSuffix:"";
+                        $thumbname  =   $prefix.basename($filename,'.'.$file['extension']).$suffix;                        
+                    
+                    if(1 == $this->thumbType){
+                        Image::thumb2($filename,$thumbPath.$thumbname.'.'.$thumbExt,'',$this->thumbMaxWidth,$this->thumbMaxHeight,true);
+                    }else{
+                        Image::thumb($filename,$thumbPath.$thumbname.'.'.$thumbExt,'',$this->thumbMaxWidth,$this->thumbMaxHeight,true);                        
+                    }
+
+               
                 if($this->thumbRemoveOrigin) {
                     // 生成缩略图之后删除原图
                     unlink($filename);
@@ -189,7 +205,13 @@ class UploadFile {//类定义开始
                 $file['extension']  =   $this->getExt($file['name']);
                 $file['savepath']   =   $savePath;
                 $file['savename']   =   $this->getSaveName($file);
-
+                //get thumname
+                if($this->thumb){
+                    $prefix     =   isset($this->thumbPrefix)?$this->thumbPrefix:"";                    
+                    $suffix     =   isset($this->thumbSuffix)?$this->thumbSuffix:"";
+                    $thumbname  =   $prefix.basename($file['savename'],'.'.$file['extension']).$suffix;  
+                    $file['thumbname']   =   $thumbname.'.'.$file['extension'];         
+                }
                 // 自动检查附件
                 if($this->autoCheck) {
                     if(!$this->check($file))
@@ -201,7 +223,7 @@ class UploadFile {//类定义开始
                 if(function_exists($this->hashType)) {
                     $fun =  $this->hashType;
                     $file['hash']   =  $fun($this->autoCharset($file['savepath'].$file['savename'],'utf-8','gbk'));
-                }
+                }               
                 //上传成功后保存文件信息，供其他地方调用
                 unset($file['tmp_name'],$file['error']);
                 $fileInfo[] = $file;
