@@ -29,6 +29,11 @@ class CommonAction extends Action
 			$set[$val['name']] = stripslashes($val['data']);
 		}
 		$this->setting = $set; 
+
+		if($this->setting["site_status"]==0){
+			header('Location: /welcome.html');
+		    exit;
+		}
 		//全局首页，显示推荐栏目，用户个人中心导航分类展示
 		$catalogList=M('catalog')->where('isnav=1 and status=1 and pid=0')->order('sort asc')->select();
 		foreach ($catalogList as $key=>$value) {
