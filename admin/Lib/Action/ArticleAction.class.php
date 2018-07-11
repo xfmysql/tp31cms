@@ -44,7 +44,7 @@ class ArticleAction extends BaseAction
 		import("ORG.Util.Page");
 		$count = $article_mod->where($where)->count();
 		$p = new Page($count,20);
-		$article_list = $article_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order('addtime DESC,sort desc')->select();
+		$article_list = $article_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order('id DESC')->select();
 
 		$key = 1;
 		foreach($article_list as $k=>$val){
