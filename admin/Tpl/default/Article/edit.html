@@ -48,10 +48,7 @@ $(function(){
             </volist>
           </select></td>
       </tr>
-       <tr>
-            <th width="100">{:L('lalias')}:</th>
-            <td><input type="text" name="alias" id="alias" class="input-text" value="{$article.alias}"  size="30"></td>
-          </tr>
+      
           <tr>
             <th>{:L('lintro')} :</th>
             <td><textarea name="intro" id="intro" style="width:68%;height:50px;">{$article.intro}</textarea></td>
@@ -105,6 +102,10 @@ $(function(){
           &nbsp;未审核
           </td>
       </tr>
+       <tr>
+            <th width="100">{:L('lpubtime')}:</th>
+            <td><tpl:calendar name="pubtime">{$article.pubtime}</tpl:calendar> </td>
+          </tr>
         <tr>
             <th>{:L('lsort')} :</th>
             <td><input type="text" name="sort" id="sort" class="input-text" size="8" value="{$article.sort}">

@@ -40,10 +40,7 @@ $(function(){
                 </volist>
               </select></td>
           </tr>
-           <tr>
-            <th width="100">{:L('lalias')}:</th>
-            <td><input type="text" name="alias" id="alias" class="input-text" size="30"></td>
-          </tr>
+          
           <tr>
             <th>{:L('lintro')} :</th>
             <td><textarea name="intro" id="intro" style="width:68%;height:50px;"></textarea></td>
@@ -82,6 +79,10 @@ $(function(){
               <input type="radio" name="status" class="radio_style" value="0" checked="checked">
               &nbsp;待审核
               </td>
+          </tr>
+           <tr>
+            <th width="100">{:L('lpubtime')}:</th>
+            <td>  <tpl:calendar name="pubtime"></tpl:calendar>  </td>
           </tr>
            <tr>
             <th>{:L('lsort')} :</th>

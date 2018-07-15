@@ -138,6 +138,7 @@ return array(
 	'lstatus'=>'状态',
 	'laddtime'=>'添加时间',
 	'ledittime'=>'编辑时间',
+	'lpubtime'=>'发布时间',
 	'lcatalog'=>'上级分类',
 	'listop'=>'是否置顶',
 	'lishomepage'=>'是否首页显示',

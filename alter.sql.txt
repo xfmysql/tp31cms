@@ -1,1 +1,1 @@
-readme file no conent
+ alter table cms_article add `pubtime` int(10) NULL

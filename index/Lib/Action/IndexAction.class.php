@@ -15,7 +15,7 @@ class IndexAction extends CommonAction
 		
 
 		//文章=ishomepage
-		$articlelist=M('article')->limit(12)->where("  status=1 and ishomepage=1 ")->order('addtime desc')->select();
+		$articlelist=M('article')->limit(12)->where(" pubtime<CURRENT_TIMESTAMP() and  status=1 and ishomepage=1 ")->order('addtime desc')->select();
 		$this->assign('articlelist',$articlelist);	
 
 		//下载=显示ishomepage的下载栏目

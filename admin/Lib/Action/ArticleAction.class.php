@@ -83,6 +83,7 @@ class ArticleAction extends BaseAction
 				}else $data['icourl'] = $icourls[0];
 			}			
 			$data['edittime']=date('Y-m-d H:i:s',time());
+			$data['pubtime'] = strtotime($data['pubtime']);
 			$result = $article_mod->save($data);
 			if(false !== $result){
 				$this->success(L('operation_success'),U('Article/index'));
@@ -104,7 +105,8 @@ class ArticleAction extends BaseAction
 		    	    $cate_list['sub'][$val['pid']][] = $val;
 		    	}
 		    }
-			$article_info = $article_mod->where('id='.$article_id)->find();		
+			$article_info = $article_mod->where('id='.$article_id)->find();	
+			$article_info['pubtime']= date('Y-m-d H:i:s', $article_info['pubtime']);	
 	    	$this->assign('cate_list',$cate_list);
 			$this->assign('article',$article_info);
 			$this->display();
@@ -129,6 +131,7 @@ class ArticleAction extends BaseAction
 				$data['icourl'] = $upload_url;
 			}
 			$data['addtime']=date('Y-m-d H:i:s',time());
+			$data['pubtime'] = strtotime($data['pubtime']);
 			$result = $article_mod->add($data);
 			if($result){//记录文章数量
 				//$cate = M('catalog')->field('id,pid')->where("id=".$data['cate_id'])->find();
