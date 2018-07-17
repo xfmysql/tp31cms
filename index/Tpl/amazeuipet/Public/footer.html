@@ -4,8 +4,8 @@
         <div class="am_footer_link">
             <span>关于<{$set.site_name}></span>
             <ul>
-			<volist name="bottomList" id="catalog" offset='0' length='10'>
-                <li><a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a></li>
+			   <volist name="linktxt" id="link" offset='0' length='5'>
+                 <li><a href="<{$link.url}>" target="_blank"><{$link.name}></a></li>
              
 				</volist>
             </ul>

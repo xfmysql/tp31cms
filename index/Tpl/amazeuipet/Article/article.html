@@ -1,119 +1,142 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title><{$article.title}> - <{$set.site_name}></title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="icon" type="image/png" href="assets/i/favicon.png">
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <link rel="apple-touch-icon-precomposed" href="../Public/assets/i/app-icon72x72@2x.png">
-  <meta name="msapplication-TileImage" content="../Public/assets/i/app-icon72x72@2x.png">
-  <meta name="msapplication-TileColor" content="#0e90d2">
-  <link rel="stylesheet" href="../Public/assets/css/amazeui.min.css">
-  <link rel="stylesheet" href="../Public/assets/css/app.css">
+    <meta charset="UTF-8">
+    <title><{$article.title}> - <{$set.site_name}></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../Public/css/amazeui.min.css">
+    <link rel="stylesheet" href="../Public/css/petshow.css?6">
+    <link rel="stylesheet" href="../Public/css/animate.min.css">
+    <script src="../Public/js/jquery.min.js"></script>
+    <script src="../Public/js/amazeui.min.js"></script>
+    <script src="../Public/js/amazeui.lazyload.min.js"></script>
 </head>
-
-<body id="blog-article-sidebar">
+<body>
 <include file="Public:header" />
 
- 
-<!-- content srart -->
-<div class="am-g am-g-fixed blog-fixed blog-content">
-    <div class="am-u-md-8 am-u-sm-12">
-      <article class="am-article blog-article-p">
-        <div class="am-article-hd"> <p class="">
-        <a href="/" title=""><{$set.site_name}></a>-><{$bread}></p></div>        
-        <div class="am-article-hd">
-          <h1 class="am-article-title blog-text-center"><{$article.title}></h1>
-          <p class="blog-text-center">
-              <span><a href="<{:reurl($article['id'],'article')}>"><{$article.addtime||substr=0,10}></a></span>
-          </p>
-        </div>        
-        <div class="am-article-bd">
-        <{$article.content}>
+<div class="am-g bdfw_nr" style="min-height: 204px;">
+
+<ol class="am-breadcrumb bdfw_link">
+  <li>  <a href="/" title=""><{$set.site_name}></a><{$bread}>
+</ol>
+  <div class="am-u-sm-12">
+    <div class="bdfw_nr_block">
+    <div class="bdfw_nr_block_l">
+  <div class="bdfw_nr_title"><{$article.title}></div>
+
+  <div class="bdfw_nr_brief_address">时间：<{$article.addtime|date='Y-m-d',###}></div>
+    <div class="bdfw_nr_smalltitle">更多信息</div>
+    <div class="bdfw_nr_brief_info_nr">
+        <div class="bdfw_nr_brief_info_nr">
+            <span>点击：</span>
+            <span><{$article.clicks}></span>
         </div>
-      </article>
-        
-        <div class="am-g blog-article-widget blog-article-margin">
-          <div class="am-u-lg-4 am-u-md-5 am-u-sm-7 am-u-sm-centered blog-text-center">
-            <span class="am-icon-tags"> &nbsp;</span><a href="#">标签</a> , <a href="#">TAG</a> , <a href="#">啦啦</a>
-            <hr>
-            <a href=""><span class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
-            <a href=""><span class="am-icon-wechat am-icon-fw blog-icon"></span></a>
-            <a href=""><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
-          </div>
+         <div class="bdfw_nr_brief_info_nr">
+            <span>作者：</span>
+            <span><{$set.site_name}></span>
         </div>
+  
+  </div>
 
-        <hr>
-        <div class="am-g blog-author blog-article-margin">
-          <div class="am-u-sm-3 am-u-md-3 am-u-lg-2">
-            <img src="../Public/assets/i/f15.jpg" alt="" class="blog-author-img am-circle">
-          </div>
-          <div class="am-u-sm-9 am-u-md-9 am-u-lg-10">
-          <h3><span>作者 &nbsp;: &nbsp;</span><span class="blog-color">amazeui</span></h3>
-            <p>作者简介</p>
-          </div>
-        </div>
-        <hr>
-        <ul class="am-pagination blog-article-margin">
-          <li class="am-pagination-prev"><a href="<{:reurl($prearticle['id'],'article')}>" class="">&laquo; 一切的回顾</a></li>
-          <li class="am-pagination-next"><a href="<{:reurl($nextarticle['id'],'article')}>">不远的未来 &raquo;</a></li>
-        </ul>
-        
-        <hr>
 
-        <form class="am-form am-g">
-            <h3 class="blog-comment">评论</h3>
-          <fieldset>
-            <div class="am-form-group am-u-sm-4 blog-clear-left">
-              <input type="text" class="" placeholder="名字">
-            </div>
-            <div class="am-form-group am-u-sm-4">
-              <input type="email" class="" placeholder="邮箱">
-            </div>
+  <div class="bdfw_nr_block_r">
+  <a href="###"><img src="<{$article.imgurl}>" alt=""></a>
+  <div class="bdfw_nr_block_r_info">
+  <span><i class="am-icon-camera"></i> <{$article.title}></span>
+  </div>
+  </div>
 
-            <div class="am-form-group am-u-sm-4 blog-clear-right">
-              <input type="password" class="" placeholder="网站">
-            </div>
-        
-            <div class="am-form-group">
-              <textarea class="" rows="5" placeholder="一字千金"></textarea>
-            </div>
-        
-            <p><button type="submit" class="am-btn am-btn-default">发表评论</button></p>
-          </fieldset>
-        </form>
+  
+  </div>
 
-        <hr>
-    </div>
-
-    <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
-         <include file="Public:right" />
-      
-    </div>
 </div>
-<!-- content end -->
+
+<div class="am_tuya">
+
+
+<div class="am_tuya_content">
+<div class="am_tuya_content_l">
+  <div class="am_albums">
+      <{$article.content}>
+  </div>
+
+  </div>
+<div class="am_tuya_content_r">
+
+<ul class="am_tuya_tag">
+    <li><span class="am_tuya_tag_title">TAG</span></li>
+    <li><a href=""><span>行业</span><span>
+  <volist name="project_list" id="project"><{$project.name}> </volist></span></a></li>
+    <!-- <li><a href=""><span>颜色</span><span>红色</span></a></li>
+    <li><a href=""><span>关键词</span><span>54</span></a></li> -->
+</ul>
+<div class="page_hot">
+            <div class="page_hot_title">最新文章</div>
+            <div class="page_hot_list">
+
+<volist name="newArticleList" id="article" >
+<div class="page_hot_block">
+    <dl>
+        <dt><a href="<{:reurl($article['id'],'article')}>"><img src="<{$article.imgurl}>" alt="<{$article.title}>"></a></dt>
+        <dd>
+            <i><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></i>
+            <em></em>
+            <div class="hot_block_info">
+                <div class="hot_info_l am-icon-heart"><{$article.clicks}></div>
+              
+            </div>
+        </dd>
+    </dl>
+</div>
+</volist>
+
+
+</div>
+          </div>
+</div>
+</div>
+</div>
+<div class="am_tuya_cai">
+<div class="am_tuya_cai_ti">相关文章</div>
+<div class="am-g am-imglist">
+    <ul data-am-widget="gallery" class="am-gallery am-avg-lg-4 am-gallery-default" >
+
+  <volist name="bestArticleList" id="article" >
+
+ <li>
+    <div class="am-gallery-item am_list_block" style="height:200px;    line-height: 200px;">
+      <a href="<{:reurl($article['id'],'article')}>" class="am_img_bg">
+        <img class="am_img animated"  data-original="<{$article.imgurl}>" alt="<{$article.title}>" style="height:200px;    line-height: 200px;"/></a>
+
+    </div>
+    <a class="am_imglist_user"><span class="am_imglist_user_ico"></span><span class="am_imglist_user_font"><{$article.title}></span></a>
+  </li>
+
+</volist>
+
+
+</ul>
+<div class="am_tuya_ckgd"><i class="am-icon-spinner am-icon-spin"></i><a href=""> 查看更多</a></div>
+</div>
+
+
+</div>
 
 
 <include file="Public:footer" />
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="../Public/assets/js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="../Public/assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="../Public/assets/js/amazeui.min.js"></script>
-<!-- <script src="../Public/assets/js/app.js"></script> -->
+<script src="../Public/js/petshow.js"></script>
+<script>
+ $(function(){
+  if ($(window).width() < 600 ) {
+ $('.am_list_item_text').each(
+  function(){
+     if($(this).text().length >= 26){
+        $(this).html($(this).text().substr(0,26)+'...');
+     }});}[]
+
+});
+
+</script>
 </body>
 </html>

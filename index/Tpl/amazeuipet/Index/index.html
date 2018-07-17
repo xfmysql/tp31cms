@@ -31,6 +31,59 @@
 
     </div>
 </div>
+
+
+<!-- //start middle image-->
+<div class="am-g am-imglist">
+    <div class="am-u-sm-12">
+        <div class="ztlb_nr_block">
+    <!--div class="ztlb_nr_block_l">
+      <img src="<{$catalog.icourl}>" alt="<{$catalog.name}>">
+    </div-->
+        <div class="ztlb_nr_block_r">
+        <div class="ztlb_nr_block_r_info">
+            <div class="ztlb_nr_block_r_info_l">
+                <div class="ztlb_nr_block_r_info_num"><{$catalog['clicks']}></div>
+                <div></div>
+            </div>
+            <div class="ztlb_nr_block_r_info_r">
+                <div class="ztlb_nr_block_r_info_num"><{$catalog['downs']}></div>
+                <div></div>
+            </div>
+        </div>
+        <a class="ztlb_nr_block_r_title" href="<{:reurl($catalog['id'],'downloadlist')}>">最新插件</a>
+        <span class="ztlb_nr_block_r_nr">推荐最新的</span>
+
+        </div>
+      </div>
+  </div>
+
+
+    <ul data-am-widget="gallery" class="am-gallery am-avg-lg-6 am-gallery-default">
+
+  <volist name="newDownList" id="article" offset='0' length='20'>
+        <li>
+            <div class="am-gallery-item am_list_block">
+                <a href="<{:reurl($article['id'],'download')}>" class="bdfw_nr_block_r am_img_bg">
+                    <img class="am_img animated" data-original="<{$article.imgurl}>"
+                         alt="<{$article.title}>"/>
+                </a>
+
+                <div class="am_listimg_info"><span class="am-icon-heart"> <{$article.clicks}></span><span
+                        class="am-icon-comments"> n</span><span class="am_imglist_time"> <{$article.addtime|date='Y-m-d',###}></span></div>
+
+            </div>
+            <a class="am_imglist_user"><span class="am_imglist_user_ico"></span><span
+                    class="am_imglist_user_font"><{$article.title}></span></a>
+        </li>
+        </volist>
+        
+    </ul>
+
+</div>
+<!-- //end new list-->
+
+
 <!-- //loop ishot catalog-->
 <volist name="downCatalogList" id="catalog" offset='0' length='10'>
 

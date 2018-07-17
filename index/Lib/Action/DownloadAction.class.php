@@ -44,8 +44,7 @@ class DownloadAction extends CommonAction
 		$project_mod = D('project');
 		$projectlist = $project_mod->where(" id in(select attributeid from cms_projectrelation where articleid=".$article['catalogid'].")")->order('addtime ASC')->select();
 		$this->assign('projectlist',$projectlist);
-			print_r($projectlist);
-
+		
 
 //上一篇下一篇
 		$prearticle=M('download')->where(" catalogid=".$article['catalogid']." and state=1 and id<".$$id)->find();	

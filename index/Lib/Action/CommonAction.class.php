@@ -53,11 +53,11 @@ class CommonAction extends Action
 
 		$article=M('article');
 		$catalog = M('article_cate');
-		//推荐文章
-		$bestArticleList=$article->limit('6')->where(" pubtime<CURRENT_TIMESTAMP()  and status=1 and istop=1")->order('clicks desc')->select();
+		//推荐文章 pubtime<CURRENT_TIMESTAMP()
+		$bestArticleList=$article->limit('6')->where("  status=1 and istop=1")->order('clicks desc')->select();
 			$this->assign('bestArticleList',$bestArticleList);	
 		//最新文章
-		$newArticleList=$article->limit('6')->where(" pubtime<CURRENT_TIMESTAMP()  and status=1 ")->order('addtime desc')->select();	
+		$newArticleList=$article->limit('6')->where("   status=1 ")->order('addtime desc')->select();	
 		$this->assign('newArticleList',$newArticleList);
 		//标签
 	 	$keyword_mod = M('keyword');

@@ -98,7 +98,7 @@
     <dl>
         <dt><a href="<{:reurl($article['id'],'download')}>"><img src="<{$article.imgurl}>" alt="<{$article.title}>"></a></dt>
         <dd>
-            <i><{$article.title}></i>
+            <i><a href="<{:reurl($article['id'],'download')}>"><{$article.title}></a></i>
             <em></em>
             <div class="hot_block_info">
                 <div class="hot_info_l am-icon-heart"><{$article.clicks}></div>
@@ -118,15 +118,14 @@
 <div class="am_tuya_cai">
 <div class="am_tuya_cai_ti">相关模板</div>
 <div class="am-g am-imglist">
-    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-  am-avg-md-3 am-avg-lg-4 am-gallery-default" >
+    <ul data-am-widget="gallery" class="am-gallery am-avg-lg-4 am-gallery-default" >
 
   <volist name="clickslist" id="article" >
 
  <li>
-    <div class="am-gallery-item am_list_block">
+    <div class="am-gallery-item am_list_block" style="height:200px;    line-height: 200px;">
       <a href="<{:reurl($article['id'],'download')}>" class="am_img_bg">
-        <img class="am_img animated"  data-original="<{$article.imgurl}>" alt="<{$article.title}>"/></a>
+        <img class="am_img animated"  data-original="<{$article.imgurl}>" alt="<{$article.title}>" style="height:200px;    line-height: 200px;"/></a>
 
     </div>
     <a class="am_imglist_user"><span class="am_imglist_user_ico"></span><span class="am_imglist_user_font"><{$article.title}></span></a>
