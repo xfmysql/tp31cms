@@ -12,8 +12,8 @@ class ListAction extends CommonAction
 		$this->assign('catName',$cats['name']);
 		$this->assign('set',$this->setting);
 		//数据分页
-		import('ORG.Util.Page');// 导入分页类
-   		$count=M('article')->where(" pubtime<CURRENT_TIMESTAMP() and pid in(select id from cms_catalog where id=$catsid or pid=$catsid) and status=1")->count();//获取数据的总
+		import('ORG.Util.Page');// 导入分页类pubtime<CURRENT_TIMESTAMP() and
+   		$count=M('article')->where("  pid in(select id from cms_catalog where id=$catsid or pid=$catsid) and status=1")->count();//获取数据的总
    		$page=new Page($count,20);
    		$page->setConfig('theme', '<li class="am-pagination-prev">%upPage%</li>
    			<li class="am-pagination-prev">%prePage%</li><li class="am-pagination-next">%nextPage%</li>
@@ -23,8 +23,8 @@ class ListAction extends CommonAction
 		
 		$page->setConfig('link',"/list-".$catsid."-".__PAGE__.".html");//分页变量名是p
 
-   		$show=$page->show();//返回分页信息
-		$articles=M('article')->where("pubtime<CURRENT_TIMESTAMP()  and pid in(select id from cms_catalog where id=$catsid or pid=$catsid) and status=1")->
+   		$show=$page->show();//返回分页信息 pubtime<CURRENT_TIMESTAMP()  and
+		$articles=M('article')->where(" pid in(select id from cms_catalog where id=$catsid or pid=$catsid) and status=1")->
 		order('addtime desc')->limit($page->firstRow.','.$page->listRows)->select();
 		$this->assign('show',$show);
 		$this->assign('count',$count);
