@@ -15,18 +15,20 @@ class SearchAction extends CommonAction
 		}
 		$where['title'] = array('like','%'.$put.'%');
 		$where['info'] = array('like','%'.$put.'%');
+		$where['status'] = 1;
+		
 		
 
-		$count=M('article')->where($where)->count();
+		$count=M('article')->where("(pubtime is null or pubtime<CURRENT_TIMESTAMP()) ")->where($where)->count();
 		import('ORG.Util.Page');
-		$page=new page($count,20);		
+		$page=new page($count,10);		
 		
 		$page->setConfig('theme', '<nav class="navigation pagination" role="navigation"><div class="nav-links"><span class="prev">%upPage%</span><span>%downPage%</span><span>%prePage%</span> <span class="pages">第</span>%linkPage%<span class="pages">页</span><span class="next">%nextPage%</span><span>%end%</span></ul>');
 		//$page->setConfig('link','list-'.$catsid.'-__PAGE__.'.C('URL_HTML_SUFFIX'));
 		$page->setConfig('link','/index.php?m=search&a=index&q='.$put.'&p=__PAGE__.');
 		
    		$show=$page->show();//返回分页信息
-		$article=M('article')->where($where)->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+		$article=M('article')->where("(pubtime is null or pubtime<CURRENT_TIMESTAMP()) ")->where($where)->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
 		
 		$this->assign('put',$put);
 		$this->assign('show',$show);//分页信息

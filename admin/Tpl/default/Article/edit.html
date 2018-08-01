@@ -103,8 +103,13 @@ $(function(){
           </td>
       </tr>
        <tr>
+            <th width="100">{:L('laddtime')}:</th>
+            <td><input type="text" id="addtime" name="addtime" value="{$article.addtime}" /> 用来排序，最新的排前面</td>
+          </tr>
+
+       <tr>
             <th width="100">{:L('lpubtime')}:</th>
-            <td><tpl:calendar name="pubtime">{$article.pubtime}</tpl:calendar> </td>
+            <td><input type="text" id="pubtime" name="pubtime" value="{$article.pubtime}" />  用来控制显示，小于当前时间的显示</td>
           </tr>
         <tr>
             <th>{:L('lsort')} :</th>

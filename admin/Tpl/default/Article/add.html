@@ -82,7 +82,7 @@ $(function(){
           </tr>
            <tr>
             <th width="100">{:L('lpubtime')}:</th>
-            <td>  <tpl:calendar name="pubtime"></tpl:calendar>  </td>
+            <td> <input type="text" id="pubtime" name="pubtime" value="<?php echo date('Y-m-d',strtotime("+1 day")) ?> 14:00:00" /> </td>
           </tr>
            <tr>
             <th>{:L('lsort')} :</th>

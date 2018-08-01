@@ -33,7 +33,7 @@ class IndexAction extends CommonAction
 			
 		}else {
 			//文章=ishomepage
-			$articlelist=M('article')->limit(12)->where(" pubtime<CURRENT_TIMESTAMP() and  status=1 and ishomepage=1 ")->order('addtime desc')->select();
+			$articlelist=M('article')->limit(12)->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and ishomepage=1 ")->order('addtime desc')->select();
 			$this->assign('articlelist',$articlelist);	
 		}
 		//join
