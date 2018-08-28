@@ -103,6 +103,10 @@ class TagLibTpl extends TagLib{
             case 'KINDEDITOR':                
                 $parseStr='<script type="text/javascript" src="__ROOT__/statics/js/kindeditor/kindeditor.js"></script><script type="text/javascript" src="__ROOT__/statics/js/includes/kindeditor/lang/zh_CN.js"></script><script> var editor; KindEditor.ready(function(K) { editor = K.create(\'#'.$id.'\');});</script><textarea id="'.$id.'" style="'.$style.'" name="'.$name.'" >'.$content.'</textarea>';
                 break;
+           case 'UEDITOR':                
+                $parseStr='<script type="text/javascript" src="__ROOT__/statics/js/ueditor/ueditor.config.js"></script>
+                <script type="text/javascript" src="__ROOT__/statics/js/ueditor/ueditor.all.min.js"></script>';
+                break;
             default :
                 $parseStr  =  '<textarea id="'.$id.'" style="'.$style.'" name="'.$name.'" >'.$content.'</textarea>';
         }

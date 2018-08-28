@@ -53,7 +53,9 @@ $(function(){
            <tr>
             <th>{:L('lcontent')} :</th>
             <td>            	
-				<tpl:editor id="content" name="content" type="KINDEDITOR" style="width:70%;height:350px;" ></tpl:editor>
+            <script id="content" style="width:84%;height:350px;" name="content" type="text/plain"></script>  
+				<tpl:editor id="content" name="content" type="UEDITOR" style="width:84%;height:350px;" ></tpl:editor>
+        <script type="text/javascript">var ue= UE.getEditor("content");</script>
 			</td>
           </tr>
             <tr>
@@ -82,7 +84,7 @@ $(function(){
           </tr>
            <tr>
             <th width="100">{:L('lpubtime')}:</th>
-            <td>  <tpl:calendar name="pubtime"></tpl:calendar>  </td>
+            <td> <input type="text" id="pubtime" name="pubtime" value="<?php echo date('Y-m-d',strtotime("+1 day")) ?> 14:00:00" /> </td>
           </tr>
            <tr>
             <th>{:L('lsort')} :</th>

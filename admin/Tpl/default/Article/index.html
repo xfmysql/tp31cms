@@ -47,7 +47,7 @@
             <tr>
                 <th width=50>{:L('lid')}</th>
                 <th width=25><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>               
-                <th >{:L('lname')}</th>
+                <th >{:L('ltitle')}</th>
                 <th width=150>{:L('lcatalog')}</th>
                 <th width=70>{:L('laddtime')}</th>
                 <th width=70>{:L('ledittime')}</th>
@@ -61,14 +61,14 @@
     	<tbody>
         <volist name="article_list" id="val" >
         <tr>       
-		 	<td align="center"><a href="{:u('Article/edit', array('id'=>$val['id']))}">{$val.id}</a></td> 	
+		 	<td align="center"><a target="_blank" href="/index.php?a=index&m=article&id={$val.id}">{$val.id} - 访问</a></td> 	
             <td align="center">
            	 <input type="checkbox" value="{$val.id}" name="id[]">
 			</td>           
-            <td align="left"><a class="blue" target="_blank" ="" href="/index.php?a=index&m=article&id={$val.id}">{$val.title}</a><if condition="$val['url'] neq ''"><br><a href="{$val.url}" target=_blank>{$val.url}</a></if>&nbsp;&nbsp;</td>
+            <td align="left"><a class="blue" target="_blank" ="" href="/article-{$val.id}.html">{$val.title}</a><if condition="$val['url'] neq ''"><br><a href="{$val.url}" target=_blank>{$val.url}</a></if>&nbsp;&nbsp;</td>
             <td align="center"><b>{$val.cate_name.name}</b></td>
-            <td align="center">{$val.addtime}</td>
-             <td align="center">{$val.edittime}</td>
+            <td align="center">{$val.addtime||substr=0,10}</td>
+             <td align="center">{$val.publishtime||substr=0,10}</td>
             <td align="center"><input  type="text" class="input-text-c input-text" value="{$val.sort}" id="sort_{$val.id}" onblur="sort({$val.id},'sort',this.value)" size="4" name="listorders[{$val.id}]"></td>
             <td align="center" onclick="status({$val.id},'istop')" id="istop_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.istop}.gif" /></td>
             <td align="center" onclick="status({$val.id},'ishomepage')" id="ishomepage_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.ishomepage}.gif" /></td>

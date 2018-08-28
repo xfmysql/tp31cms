@@ -129,7 +129,10 @@ class PublicAction extends BaseAction
 	public function logout()
 	{
 		if(isset($_SESSION['admin_info'])) {
-			unset($_SESSION['admin_info']);			
+			unset($_SESSION['admin_info']);		
+			unset($_COOKIE['s35hfed']);		
+			unset($_COOKIE['gj56d45']);	
+
 			$this->success('退出登录成功！',u('Public/login'));
 		}else {
 			$this->error('已经退出登录！');
