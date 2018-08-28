@@ -13,39 +13,41 @@
   <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
       <li class="am-active"><a href="/">首页</a></li>
-    <foreach name="catalogList" item="catalog">
+	  <foreach name="catalogList" item="catalog">
 
-     <if condition="($catalog['childcount'] eq '0')">
-      <if condition="($catalog['channel'] eq C('Model_Download'))">
-      <li><a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a></li>
-      <else />
-      <li><a href="<{:reurl($catalog['id'],'articlelist')}>"><{$catalog.name}></a></li>
-      </if>
-    <else />
-    <li class="am-dropdown" data-am-dropdown>
+	   <if condition="($catalog['childcount'] eq '0')">
+			<if condition="($catalog['channel'] eq C('Model_Download'))">
+			<li><a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a></li>
+			<else />
+			<li><a href="<{:reurl($catalog['id'],'articlelist')}>"><{$catalog.name}></a></li>
+			</if>
+		<else />
+		<li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
           <{$catalog.name}><span class="am-icon-caret-down"></span>
         </a>
         <ul class="am-dropdown-content">
           <volist name="catalog['child']" id="childcatalog" offset='0' length='10'>
-            
-            <if condition="($childcatalog['channel'] eq C('Model_Download'))">
-            <li><a href="<{:reurl($childcatalog['id'],'downloadlist')}>"><{$childcatalog.name}></a></li>
-            <else />
-            <li><a href="<{:reurl($childcatalog['id'],'articlelist')}>"><{$childcatalog.name}></a></li>
-            </if>
+						
+						<if condition="($childcatalog['channel'] eq C('Model_Download'))">
+						<li><a href="<{:reurl($childcatalog['id'],'downloadlist')}>"><{$childcatalog.name}></a></li>
+						<else />
+						<li><a href="<{:reurl($childcatalog['id'],'articlelist')}>"><{$childcatalog.name}></a></li>
+						</if>
          </volist>
         </ul>
       </li>
-  </if>
+	</if>
       </foreach>
   
     </ul>
-    <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
+    <form class="am-topbar-form am-topbar-right am-form-inline" role="search" action="/index.php?a=index&m=search" method="post">
       <div class="am-form-group">
-        <input type="text" class="am-form-field am-input-sm" placeholder="输入关键词">
-         <button  class="flatbtn" id="login-main">搜索</button>
+        <input type="text" size="30" name="q" class="am-form-field am-input-sm" placeholder="请输入关键词" ／>
+        <input class="ips_search_btn" type="submit" value="搜索">
       </div>
     </form>
   </div>
 </nav>
+<hr>
+<!-- nav end -->

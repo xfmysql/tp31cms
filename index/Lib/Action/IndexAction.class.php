@@ -13,6 +13,10 @@ class IndexAction extends CommonAction
 		$adList = $ad_mod->limit('5')->where("  type='image'")->order('ordid ASC')->select();
 		$this->assign('adList',$adList);	
 		
+		//文章=ishomepage
+		$articlelist=M('article')->limit(12)->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and ishomepage=1 ")->order('addtime desc')->select();
+		$this->assign('articlelist',$articlelist);	
+			
 		if(C("DEFAULT_THEME")=='amazeuipet'){
 			//下载=显示ishomepage的下载栏目
 			$downCatalogList=M('catalog')->where('ishomepage=1 and model=3 and status=1')->order('sort asc')->select();
@@ -32,9 +36,7 @@ class IndexAction extends CommonAction
 			$this->assign('newDownList',$newDownList);
 			
 		}else {
-			//文章=ishomepage
-			$articlelist=M('article')->limit(12)->where(" pubtime<CURRENT_TIMESTAMP() and  status=1 and ishomepage=1 ")->order('addtime desc')->select();
-			$this->assign('articlelist',$articlelist);	
+			
 		}
 		//join
 		//$Model = M('article_cate');// join
