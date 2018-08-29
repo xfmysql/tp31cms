@@ -164,5 +164,10 @@ return array(
 'lisnav'=>'是否显示导航',
 'lisbottom'=>'是否显示底部导航',
 'lisslider'=>'是否显示侧边',
+
+
+'ADD_TABINFO' => '添加标签',
+'TABINFO_NAME' => '标签名称',
+
 );
 ?>

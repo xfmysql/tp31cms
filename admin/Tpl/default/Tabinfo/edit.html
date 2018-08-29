@@ -1,0 +1,28 @@
+<include file="Public:header" />
+
+<div class="pad_10">
+<form action="{:u('Tabinfo/edit')}" method="post" name="myform" id="myform" >
+<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+	<tr>
+      <th></th>
+      <td><input type="hidden" name="id" class="input-text" value="{$data_info.id}"></td>
+    </tr>   
+    <tr>
+      <th width="100">{:L('lname')} :</th>
+      <td><input type="text" name="name" id="name" class="input-text" value="{$data_info.name}"></td>
+    </tr>	
+    
+
+</table>
+<input type="submit" name="dosubmit" id="dosubmit" class="dialog" value="edit">
+</form>
+<script type="text/javascript">
+	$(function(){
+		$.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'250',height:'50'}, function(){this.close();$(obj).focus();})}});
+		
+		$("#name").formValidator({onshow:"不能为空",onfocus:"不能为空"}).inputValidator({min:1,onerror:"请填写名称"});
+	})
+</script>
+</div>
+</body>
+</html>

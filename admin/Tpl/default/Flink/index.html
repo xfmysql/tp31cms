@@ -71,7 +71,7 @@
 function edit(flink_id, name) {
 	var lang_edit = "{$Think.lang.edit}";
 	window.top.art.dialog({id:'edit'}).close();
-	window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'?m=Flink&a=edit&id='+flink_id,width:'450',height:'220'}, 
+	window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'?m=Flink&a=edit&id='+flink_id,width:'450',height:'500'}, 
 		function(){
 			var d = window.top.art.dialog({id:'edit'}).data.iframe;
 			d.document.getElementById('dosubmit').click();

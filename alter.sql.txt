@@ -1,1 +1,14 @@
- alter table cms_article add `pubtime` int(10) NULL
+/*来源url*/
+alter table cms_article add sourceurl varchar(500) null
+alter table cms_article add pubtime datetime null
+
+
+CREATE TABLE cms_tabinfo(
+	`id` int(11)  not null AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL,
+	`descript`  mediumtext NULL,
+	`addtime` datetime NOT NULL,
+	 `status` tinyint(1) NOT NULL DEFAULT '1' ,
+	`clicks`  INT  NULL,
+	 PRIMARY KEY (`id`)
+)
