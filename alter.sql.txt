@@ -17,7 +17,7 @@ CREATE TABLE cms_tabinfo(
 CREATE TABLE `cms_tabrelation`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `attributeid` int(11) NOT NULL DEFAULT 0,
-  `addtime` bigint(20) NOT NULL,
+  `addtime` datetime NOT NULL,
   `articleid` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;
@@ -26,7 +26,7 @@ CREATE TABLE `cms_tabrelation`  (
 CREATE TABLE `cms_keywordrelation`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `attributeid` int(11) NOT NULL DEFAULT 0,
-  `addtime` bigint(20) NOT NULL,
+  `addtime` datetime NOT NULL,
   `articleid` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;

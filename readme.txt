@@ -18,3 +18,4 @@ file upload div
 
 
 
+ error_log("搞砸了!",   3,   "/usr/local/errors.log");  //发送到指定的文件中  

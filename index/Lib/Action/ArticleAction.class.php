@@ -28,6 +28,12 @@ class ArticleAction extends CommonAction
 		//面包屑
 		$this->assign('bread',$this->now_here($article['pid'],$article['title']));
 
+		$tabinfo_mod = D('tabinfo');
+		$sql = 'select t.*  from cms_tabinfo t join cms_tabrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
+		$tabinfo_list = $tabinfo_mod->query($sql);
+		$this->assign('tabinfos',$tabinfo_list);
+
+
 		if($cats['channel']==1){//内容
 			$this->display('content');
 		}

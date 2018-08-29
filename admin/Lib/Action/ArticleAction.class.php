@@ -85,19 +85,20 @@ class ArticleAction extends BaseAction
 			$result = $article_mod->save($data);
 			if(false !== $result){
 				if($_POST['tabinfos']!=''){
+					$tabrelation_mod = D("tabrelation");
+					$tabrelation_mod->where("articleid=".$data["id"])->delete();
 					$tabinfo_mod = D("tabinfo");
-					$tabinfo_mod->where("articleid=".$result["id"])->delete();
+
 					$reldata = array();
 					$arr = explode(',',$_POST['tabinfos']);
-					
-					 foreach($arr as $r){		
-						$reldata['attributeid']= $r;						
+					 foreach($arr as $r){
+					 	$tabid = $tabinfo_mod->where("name='".$r."'")->getField("id");	
+						$reldata['attributeid']= $tabid;						
 						$reldata['addtime']= date('Y-m-d H:i:s',time());
-						$reldata['articleid']=$result["id"];
-						$tabinfo_mod->add($reldata);									
+						$reldata['articleid']=$data["id"];
+						$tabrelation_mod->add($reldata);									
 					}
 				}
-
 				$this->success(L('operation_success'),U('Article/index'));
 			}else{
 				$this->error(L('operation_failure'));
@@ -120,6 +121,17 @@ class ArticleAction extends BaseAction
 			$article_info = $article_mod->where('id='.$article_id)->find();				
 	    	$this->assign('cate_list',$cate_list);
 			$this->assign('article',$article_info);
+
+			$tabinfo_mod = D('tabinfo');
+			$sql = 'select t.*  from cms_tabinfo t join cms_tabrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
+		    $tabinfo_list = $tabinfo_mod->query($sql);
+
+		    $tabinfos='';
+		    foreach ($tabinfo_list as  $value) {
+		    	$tabinfos.=$value["name"].",";
+		    }
+			$this->assign('tabinfos',substr($tabinfos, 0, -1));
+		    
 			$this->display();
 		}
 
@@ -137,24 +149,33 @@ class ArticleAction extends BaseAction
 			if(false === $data = $article_mod->create()){
 				$this->error($article_mod->error());
 			}
+
+			if($data['pid']==0){
+				$this->error('请选择资讯分类');
+			}
 			if ($_FILES['icourl']['name']!='') {
 				$upload_url = $this->upload("article");//封面
 				$data['icourl'] = $upload_url;
 			}
 			$data['addtime']=date('Y-m-d H:i:s',time());
 			$data['edittime']=date('Y-m-d H:i:s',time());
-			$result = $article_mod->add($data);
-			if($result){
+			$newid = $article_mod->add($data);
+
+			if($newid>0){
 				if($_POST['tabinfos']!=''){
-					$tabinfo_mod = D("tabinfo");
+					$tabrelation_mod = D("tabrelation");
 					$reldata = array();
 					$arr = explode(',',$_POST['tabinfos']);
-					
-					 foreach($arr as $r){		
-						$reldata['attributeid']= $r;						
+					$tabinfo_mod = D("tabinfo");
+
+					$reldata = array();
+					$arr = explode(',',$_POST['tabinfos']);
+					 foreach($arr as $r){
+					 	$tabid = $tabinfo_mod->where("name='".$r."'")->getField("id");	
+						$reldata['attributeid']= $tabid;						
 						$reldata['addtime']= date('Y-m-d H:i:s',time());
-						$reldata['articleid']=$result["id"];
-						$tabinfo_mod->add($reldata);									
+						$reldata['articleid']=$data["id"];
+						$tabrelation_mod->add($reldata);									
 					}
 				}
 				$this->success('添加成功');

@@ -38,8 +38,14 @@ $(function(){
      <tr>
           <th>标签:</th>
           <td>
-              <input type="text" name="tabinfos" id="tabinfos" class="input-text" size="150" >
-          <div id="tabinfos"><a >findide</a> 选择词 append id 到input</div>
+              <input type="text" name="tabinfos" id="tabinfos" class="input-text" size="150" value="{$tabinfos}">
+          <div id="tabinfos">
+          选择词 append 中文 到input
+ <a class="cktab" data-id="2" data-status="">标签a</a>&nbsp;&nbsp;&nbsp;&nbsp;
+             <a class="cktab" data-id="3" data-status="">标签b</a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="cktab" data-id="4" data-status="">标签c</a>&nbsp;&nbsp;&nbsp;&nbsp;
+          
+          </div>
             </td>
           </tr>
         <tr>
@@ -172,6 +178,35 @@ $(function(){
 </div>
 </form>
 <script type="text/javascript">
+$(function(){
+    //输入框的值改变时触发
+    $("#title").on("input",function(e){        
+        //console.log(e.delegateTarget.value+"=="+$(this).val()); //获取input输入的值
+        loadTabinfoList($(this).val());
+    });
+
+    $(".cktab").click(function(){
+       var oldtabs = $("#tabinfos").val();
+        var tab = $(this).text();        
+        if(oldtabs){
+          $("#tabinfos").val(oldtabs+","+tab);
+        }else{
+           $("#tabinfos").val(tab);
+        }
+    });//end click
+
+    
+});
+
+/**
+ * 根据标题自动匹配tab
+ * @param  {[type]} title [description]
+ * @return {[type]}       [description]
+ */
+function loadTabinfoList(title){
+
+}
+
 function SwapTab(name,cls_show,cls_hide,cnt,cur){
     for(i=1;i<=cnt;i++){
 		if(i==cur){
