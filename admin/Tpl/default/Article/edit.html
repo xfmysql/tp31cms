@@ -28,7 +28,27 @@ $(function(){
         <th width="100">{:L('ltitle')} :</th>
         <td><input type="text" name="title" id="title" class="input-text" size="60" value="{$article.title}"></td>
       </tr>
-	 
+	  <tr>
+          <th>说明:</th>
+          <td>
+             标签和内容关联，类似栏目，多级栏目可以用标签。关键词贯穿内容，自动替换内容的词语成链接。
+            </td>
+          </tr>
+
+     <tr>
+          <th>标签:</th>
+          <td>
+              <input type="text" name="tabinfos" id="tabinfos" class="input-text" size="150" >
+          <div id="tabinfos"><a >findide</a> 选择词 append id 到input</div>
+            </td>
+          </tr>
+        <tr>
+          <th>关键词:</th>
+          <td>
+             <input type="text" name="keywords" id="keywords" class="input-text" size="150">
+             <div id="keywords"></div>
+            </td>
+          </tr>
       <tr>
         <th>{:L('lcatalog')} :</th>
         <td><select name="pid" id="pid" style="width:200px;">

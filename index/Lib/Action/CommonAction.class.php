@@ -59,7 +59,12 @@ class CommonAction extends Action
 		//最新文章
 		$newArticleList=$article->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and    status=1 ")->order('addtime desc')->select();	
 		$this->assign('newArticleList',$newArticleList);
+		
 		//标签
+	 	$tabinfo_mod = M('tabinfo');
+	    $tabinfolist = $tabinfo_mod->order('id desc')->select();    
+		$this->assign('tabinfolist',$tabinfolist);
+		//关键词
 	 	$keyword_mod = M('keyword');
 	    $KeywordList = $keyword_mod->order('id desc')->select();    
 		$this->assign('KeywordList',$KeywordList);

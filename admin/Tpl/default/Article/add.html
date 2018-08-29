@@ -18,9 +18,30 @@ $(function(){
         <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
           <tr>
             <th width="100">{:L('ltitle')}:</th>
-            <td><input type="text" name="title" id="title" class="input-text" size="60"></td>
+            <td><input type="text" name="title" id="title" class="input-text" size="60"> 根据标题自动匹配词</td>
           </tr>
-		 
+      <tr>
+          <th>说明:</th>
+          <td>
+             标签和内容关联，类似栏目，多级栏目可以用标签。关键词贯穿内容，自动替换内容的词语成链接。
+            </td>
+          </tr>
+
+		 <tr>
+          <th>标签:</th>
+          <td>
+              <input type="text" name="tabinfos" id="tabinfos" class="input-text" size="150" >
+          <div id="tabinfos"><a >findide</a> 选择词 append id 到input</div>
+            </td>
+          </tr>
+        <tr>
+          <th>关键词:</th>
+          <td>
+             <input type="text" name="keywords" id="keywords" class="input-text" size="150">
+             <div id="keywords"></div>
+            </td>
+          </tr>
+
           <tr>
             <th>{:L('lcatalog')}:</th>
             <td><select name="pid" id="pid" style="width:200px;">
@@ -82,6 +103,8 @@ $(function(){
               &nbsp;待审核
               </td>
           </tr>
+
+          
            <tr>
             <th width="100">{:L('lpubtime')}:</th>
             <td> <input type="text" id="pubtime" name="pubtime" value="<?php echo date('Y-m-d',strtotime("+1 day")) ?> 14:00:00" /> </td>

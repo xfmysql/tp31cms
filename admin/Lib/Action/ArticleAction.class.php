@@ -84,6 +84,20 @@ class ArticleAction extends BaseAction
 			}			
 			$result = $article_mod->save($data);
 			if(false !== $result){
+				if($_POST['tabinfos']!=''){
+					$tabinfo_mod = D("tabinfo");
+					$tabinfo_mod->where("articleid=".$result["id"])->delete();
+					$reldata = array();
+					$arr = explode(',',$_POST['tabinfos']);
+					
+					 foreach($arr as $r){		
+						$reldata['attributeid']= $r;						
+						$reldata['addtime']= date('Y-m-d H:i:s',time());
+						$reldata['articleid']=$result["id"];
+						$tabinfo_mod->add($reldata);									
+					}
+				}
+
 				$this->success(L('operation_success'),U('Article/index'));
 			}else{
 				$this->error(L('operation_failure'));
@@ -129,13 +143,20 @@ class ArticleAction extends BaseAction
 			}
 			$data['addtime']=date('Y-m-d H:i:s',time());
 			$data['edittime']=date('Y-m-d H:i:s',time());
-			//$data['pubtime'] = strtotime($data['pubtime']);
 			$result = $article_mod->add($data);
-			if($result){//记录文章数量
-				//$cate = M('catalog')->field('id,pid')->where("id=".$data['cate_id'])->find();
-				///if( $cate['pid']!=0 ){
-				//	M('catalog')->where("id=".$cate['id'])->setInc('article_nums');
-				//}
+			if($result){
+				if($_POST['tabinfos']!=''){
+					$tabinfo_mod = D("tabinfo");
+					$reldata = array();
+					$arr = explode(',',$_POST['tabinfos']);
+					
+					 foreach($arr as $r){		
+						$reldata['attributeid']= $r;						
+						$reldata['addtime']= date('Y-m-d H:i:s',time());
+						$reldata['articleid']=$result["id"];
+						$tabinfo_mod->add($reldata);									
+					}
+				}
 				$this->success('添加成功');
 			}else{
 				$this->error('添加失败');

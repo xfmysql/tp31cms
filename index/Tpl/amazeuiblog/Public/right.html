@@ -21,8 +21,8 @@
         <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
             <h2 class="blog-title"><span>热门标签</span></h2>
             <div class="am-u-sm-12 blog-clear-padding">
-               <volist name="KeywordList" id="row" offset='0' length='6'>
-                <a class="blog-tag" href＝“” ><{$row.name}></a>
+               <volist name="tabinfolist" id="vo" offset='0' length='6'>
+                <a class="blog-tag" href="<{:reurl($vo['id'],'tabinfo')}>" ><{$vo.name}></a>
                </volist>
             </ul>
 
