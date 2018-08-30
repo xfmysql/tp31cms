@@ -45,7 +45,7 @@ $array = array(
 //thumb
 'thumbwidth' => 250,
 'thumbheight' => 250,
-'usethumb' => true,
+'usethumb' => true,//使用缩略图
 
 );
 return array_merge($config,$array);

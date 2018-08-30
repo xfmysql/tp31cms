@@ -232,57 +232,77 @@ class BaseAction extends Action {
 			$res[$key]['user']=$this->user_mode->where('id='.$val['uid'])->find();
 		}
 		return $res;
-	}	
-	//公共上传图片方法
+	}
+	/**
+	 * 上传静态资源，图片什么的
+	 * @return [type] [description]
+	 */
+	public function uploadStatic()
+    {
+    	$t = time();
+        $d = explode('-', date("Y-y-m-d-H-i-s"));
+        $format = "{yyyy}-{mm}-{dd}";
+        $format = str_replace("{yyyy}", $d[0], $format);
+        $format = str_replace("{yy}", $d[1], $format);
+        $format = str_replace("{mm}", $d[2], $format);
+        $format = str_replace("{dd}", $d[3], $format);
+
+    	import("ORG.Net.UploadFile");
+        $upload = new UploadFile();
+        $upload->savePath = ROOT_PATH.'/data/static/'.$format.'/';
+        //设置上传文件规则
+        $upload->saveRule = uniqid;
+        if (!$upload->upload()) {
+            //捕获上传异常
+            $this->error($upload->getErrorMsg());
+        } else {
+            //取得成功上传的文件信息
+            $uploadList = $upload->getUploadFileInfo();
+        }
+        return '/data/static/'.$format.'/'.$uploadList['0']['savename'];	
+    }	
+	
+    /**
+     * 公共上传图片方法，返回原图完整url
+     * @param  [type] $savePath [description]
+     * @return [type]           [description]
+     */
 	public function upload($savePath)
 	{		
-		import("ORG.Net.UploadFile");		
-		$upload = new UploadFile();
-		//设置上传文件大小
-		$upload->maxSize = 32922000;
-		$upload->allowExts = explode(',', 'jpg,gif,png,jpeg');
-		$upload->savePath = ROOT_PATH.C('config_upload_dir').$savePath.'/';
-		$upload->saveRule = uniqid;
-		if(!file_exists(ROOT_PATH.C('config_upload_dir'))){
-			@mkdir(ROOT_PATH.C('config_upload_dir'), 0777); 
-		}
-		
-		if(!file_exists($upload->savePath)){
-			@mkdir($upload->savePath, 0777); 
-		}
-		if (!$upload->upload()) {
-			//捕获上传异常
-			$this->error($upload->getErrorMsg());
-		} else {
-			//取得成功上传的文件信息
-			$uploadList = $upload->getUploadFileInfo();
-		}
-		$uploadList='.'.C('config_upload_dir').$savePath.'/'.$uploadList['0']['savename'];	
-		//error_log($uploadList,3,'errors.log');   	
-		return $uploadList;
-	}
-	public function uploadByInfo($savePath)
-	{		
+		$t = time();
+        $d = explode('-', date("Y-y-m-d-H-i-s"));
+        $today = "{yyyy}-{mm}-{dd}";
+        $today = str_replace("{yyyy}", $d[0], $today);
+        $today = str_replace("{yy}", $d[1], $today);
+        $today = str_replace("{mm}", $d[2], $today);
+        $today = str_replace("{dd}", $d[3], $today);
+
 		import("ORG.Net.UploadFile");
 		$uploadconfig = array( 
 	 		'thumb' =>  C('usethumb'),    // 使用对上传图片进行缩略图处理
 	        'thumbMaxWidth'     =>  C('thumbwidth'),// 缩略图最大宽度
 	        'thumbMaxHeight'    =>  C('thumbheight'),// 缩略图最大高度
 		);	
-		
+		$imagesdir = ROOT_PATH.C('config_upload_dir').'images/';
 		$upload = new UploadFile($uploadconfig);
 		//设置上传文件大小
 		$upload->maxSize = 32922000;
 		$upload->allowExts = explode(',', 'jpg,gif,png,jpeg');
-		$upload->savePath = ROOT_PATH.C('config_upload_dir').$savePath.'/';
+		$upload->savePath = $imagesdir.$today.'/';
 		$upload->saveRule = uniqid;
 		if(!file_exists(ROOT_PATH.C('config_upload_dir'))){
 			@mkdir(ROOT_PATH.C('config_upload_dir'), 0777); 
 		}
-		
+		if(!file_exists($imagesdir)){
+			@mkdir($imagesdir, 0777); 
+		}
+		if(!file_exists($imagesdir.$today)){
+			@mkdir($imagesdir.$today, 0777); 
+		}
 		if(!file_exists($upload->savePath)){
 			@mkdir($upload->savePath, 0777); 
 		}
+		
 		if (!$upload->upload()) {
 			//捕获上传异常
 			$this->error($upload->getErrorMsg());
@@ -291,9 +311,68 @@ class BaseAction extends Action {
 			$uploadList = $upload->getUploadFileInfo();
 		}
 		$imgurllist=array();
-		$realimg='.'.C('config_upload_dir').$savePath.'/'.$uploadList['0']['savename'];	
+		$realimg='.'.C('config_upload_dir').'images/'.$today.'/'.$uploadList['0']['savename'];	
 		$imgurllist[] = $realimg;
-		$thumbimg = '.'.C('config_upload_dir').$savePath.'/'.$uploadList['0']['thumbname'];	
+		$thumbimg = '.'.C('config_upload_dir').'images/'.$today.'/'.$uploadList['0']['thumbname'];	
+		$imgurllist[] = $thumbimg;
+		return $imgurllist;
+	}
+	/**
+	 * 返回图片路径数组，包括缩略图和原图
+	 * @param  [type] $savePath [description]
+	 * @return [type]           [description]
+	 */
+	public function uploadByInfo($savePath)
+	{		
+		$t = time();
+        $d = explode('-', date("Y-y-m-d-H-i-s"));
+        $today = "{yyyy}-{mm}-{dd}";
+        $today = str_replace("{yyyy}", $d[0], $today);
+        $today = str_replace("{yy}", $d[1], $today);
+        $today = str_replace("{mm}", $d[2], $today);
+        $today = str_replace("{dd}", $d[3], $today);
+
+		$thumb = $today."/thumb";//带缩略图的图片存放
+		import("ORG.Net.UploadFile");
+		$uploadconfig = array( 
+	 		'thumb' =>  C('usethumb'),    // 使用对上传图片进行缩略图处理
+	        'thumbMaxWidth'     =>  C('thumbwidth'),// 缩略图最大宽度
+	        'thumbMaxHeight'    =>  C('thumbheight'),// 缩略图最大高度
+		);	
+		$imagesdir = ROOT_PATH.C('config_upload_dir').'images/';
+		$upload = new UploadFile($uploadconfig);
+		//设置上传文件大小
+		$upload->maxSize = 32922000;
+		$upload->allowExts = explode(',', 'jpg,gif,png,jpeg');
+		$upload->savePath = $imagesdir.$thumb.'/';
+		$upload->saveRule = uniqid;
+		if(!file_exists(ROOT_PATH.C('config_upload_dir'))){
+			@mkdir(ROOT_PATH.C('config_upload_dir'), 0777); 
+		}
+		if(!file_exists($imagesdir)){
+			@mkdir($imagesdir, 0777); 
+		}
+		if(!file_exists($imagesdir.$today)){
+			@mkdir($imagesdir.$today, 0777); 
+		}
+		if(!file_exists($imagesdir.$thumb)){
+			@mkdir($imagesdir.$thumb, 0777); 
+		}
+		if(!file_exists($upload->savePath)){
+			@mkdir($upload->savePath, 0777); 
+		}
+		
+		if (!$upload->upload()) {
+			//捕获上传异常
+			$this->error($upload->getErrorMsg());
+		} else {
+			//取得成功上传的文件信息
+			$uploadList = $upload->getUploadFileInfo();
+		}
+		$imgurllist=array();
+		$realimg='.'.C('config_upload_dir').'images/'.$thumb.'/'.$uploadList['0']['savename'];	
+		$imgurllist[] = $realimg;
+		$thumbimg = '.'.C('config_upload_dir').'images/'.$thumb.'/'.$uploadList['0']['thumbname'];	
 		$imgurllist[] = $thumbimg;
 		//error_log($imgurllist[1],3,'errors.log');   	
 		return $imgurllist;

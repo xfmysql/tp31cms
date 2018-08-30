@@ -60,11 +60,12 @@ class ArticleAction extends BaseAction
     	        $cate_list['sub'][$val['pid']][] = $val;
     	    }
     	}
+
 		//网站信息/应用资讯
 		$page = $p->show();
 		$this->assign('page',$page);
     	$this->assign('cate_list', $cate_list);
-		$this->assign('article_list',$article_list);
+		$this->assign('article_list',$article_list);		
 		$this->display();
 	}
 
@@ -77,7 +78,7 @@ class ArticleAction extends BaseAction
 				$this->error('请选择资讯分类');
 			}
 			if ($_FILES['icourl']['name']!='') {
-			    $icourls = $this->uploadByInfo("article");//0=原图，1=缩略图	
+			    $icourls = $this->uploadByInfo("");//[0]=原图，[1]=缩略图	
 			    if(C('usethumb')){		    
 				    $data['icourl'] = $icourls[1];
 				}else $data['icourl'] = $icourls[0];
@@ -91,6 +92,7 @@ class ArticleAction extends BaseAction
 
 					$reldata = array();
 					$arr = explode(',',$_POST['tabinfos']);
+					$arr = array_unique($arr);
 					 foreach($arr as $r){
 					 	$tabid = $tabinfo_mod->where("name='".$r."'")->getField("id");	
 						$reldata['attributeid']= $tabid;						
@@ -98,6 +100,28 @@ class ArticleAction extends BaseAction
 						$reldata['articleid']=$data["id"];
 						$tabrelation_mod->add($reldata);									
 					}
+				}else{
+					$tabrelation_mod = D("tabrelation");
+					$tabrelation_mod->where("articleid=".$data["id"])->delete();
+				}
+				if($_POST['keywords']!=''){
+					$keywordrelation_mod = D("keywordrelation");
+					$keywordrelation_mod->where("articleid=".$data["id"])->delete();
+					$keyword_mod = D("keyword");
+
+					$reldata = array();
+					$arr = explode(',',$_POST['keywords']);
+					$arr = array_unique($arr);
+					 foreach($arr as $r){
+					 	$keyid = $keyword_mod->where("name='".$r."'")->getField("id");	
+						$reldata['attributeid']= $keyid;						
+						$reldata['addtime']= date('Y-m-d H:i:s',time());
+						$reldata['articleid']=$data["id"];
+						$keywordrelation_mod->add($reldata);									
+					}
+				}else{
+					$keywordrelation_mod = D("keywordrelation");
+					$keywordrelation_mod->where("articleid=".$data["id"])->delete();
 				}
 				$this->success(L('operation_success'),U('Article/index'));
 			}else{
@@ -131,7 +155,25 @@ class ArticleAction extends BaseAction
 		    	$tabinfos.=$value["name"].",";
 		    }
 			$this->assign('tabinfos',substr($tabinfos, 0, -1));
-		    
+		   
+			$sql = 'select *  from cms_tabinfo  order by id desc limit 20 ';
+	    	$tabinfo_list = $tabinfo_mod->query($sql);
+			$this->assign('tabinfo_list',$tabinfo_list);
+			//关键词
+			$keyword_mod = D('keyword');
+			$sql = 'select t.*  from cms_keyword t join cms_keywordrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
+		    $keyword_list = $keyword_mod->query($sql);
+
+		    $keyword='';
+		    foreach ($keyword_list as  $value) {
+		    	$keyword.=$value["name"].",";
+		    }
+			$this->assign('keywords',substr($keyword, 0, -1));
+			
+			$sql = 'select *  from cms_keyword  order by id desc limit 20 ';
+	    	$keyword_list = $keyword_mod->query($sql);
+			$this->assign('keyword_list',$keyword_list);
+
 			$this->display();
 		}
 
@@ -163,19 +205,31 @@ class ArticleAction extends BaseAction
 
 			if($newid>0){
 				if($_POST['tabinfos']!=''){
-					$tabrelation_mod = D("tabrelation");
+					$tabinfo_mod = D("tabinfo");		
+					$tabrelation_mod = D("tabrelation");					
 					$reldata = array();
 					$arr = explode(',',$_POST['tabinfos']);
-					$tabinfo_mod = D("tabinfo");
-
-					$reldata = array();
-					$arr = explode(',',$_POST['tabinfos']);
+					$arr = array_unique($arr);
 					 foreach($arr as $r){
 					 	$tabid = $tabinfo_mod->where("name='".$r."'")->getField("id");	
 						$reldata['attributeid']= $tabid;						
 						$reldata['addtime']= date('Y-m-d H:i:s',time());
 						$reldata['articleid']=$data["id"];
 						$tabrelation_mod->add($reldata);									
+					}
+					if($_POST['keywords']!=''){
+						$keywords_mod = D("keyword");
+						$keywordrelation_mod = D("keywordrelation");
+						$reldata = array();
+						$arr = explode(',',$_POST['keywords']);
+						$arr = array_unique($arr);
+						 foreach($arr as $r){
+						 	$keyid = $keywords_mod->where("name='".$r."'")->getField("id");	
+							$reldata['attributeid']= $keyid;						
+							$reldata['addtime']= date('Y-m-d H:i:s',time());
+							$reldata['articleid']=$data["id"];
+							$keywordrelation_mod->add($reldata);									
+						}
 					}
 				}
 				$this->success('添加成功');
@@ -194,6 +248,16 @@ class ArticleAction extends BaseAction
 	    	    }
 	    	}
 	    	$this->assign('cate_list',$cate_list);
+	    	$tabinfo_mod = D('tabinfo');
+			$sql = 'select *  from cms_tabinfo  order by id desc limit 20 ';
+	    	$tabinfo_list = $tabinfo_mod->query($sql);
+			$this->assign('tabinfo_list',$tabinfo_list);
+
+			$keyword_mod = D('keyword');
+			$sql = 'select *  from cms_keyword  order by id desc limit 20 ';
+	    	$keyword_list = $keyword_mod->query($sql);
+			$this->assign('keyword_list',$keyword_list);
+
 	    	$this->display();
 		}
 	}

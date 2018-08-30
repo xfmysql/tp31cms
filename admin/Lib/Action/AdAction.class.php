@@ -131,7 +131,7 @@ class AdAction extends BaseAction
 	                break;
 	            case 'image':
 	                if ($_FILES['image']['name']!='') {
-		                $data['code'] = $this->_upload($adboard_info);
+		                $data['code'] = $this->uploadStatic();//$this->_upload($adboard_info);
 		            }
 	                break;
 	            case 'code':

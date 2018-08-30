@@ -19,24 +19,15 @@ $(function(){
           <tr>
             <th width="100">{:L('ltitle')}:</th>
             <td><input type="text" name="title" id="title" class="input-text" size="60"> 根据标题自动匹配词</td>
-          </tr>
-      <tr>
-          <th>说明:</th>
-          <td>
-             标签和内容关联，类似栏目，多级栏目可以用标签。关键词贯穿内容，自动替换内容的词语成链接。
-            </td>
-          </tr>
-
-		 <tr>
+          </tr>  
+		  <tr>
           <th>标签:</th>
           <td>
               <input type="text" name="tabinfos" id="tabinfos" class="input-text" size="150" >
           <div id="tabinfos">
-          选择词 append 中文 到input
- <a class="cktab" data-id="2" data-status="">标签a</a>&nbsp;&nbsp;&nbsp;&nbsp;
-             <a class="cktab" data-id="3" data-status="">标签b</a>&nbsp;&nbsp;&nbsp;&nbsp;
-              <a class="cktab" data-id="4" data-status="">标签c</a>&nbsp;&nbsp;&nbsp;&nbsp;
-          
+           <volist name="tabinfo_list" id="vo">
+                <a class="cktab" data-status="">{$vo.name}</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+             </volist>       
           </div>
             </td>
           </tr>
@@ -44,7 +35,11 @@ $(function(){
           <th>关键词:</th>
           <td>
              <input type="text" name="keywords" id="keywords" class="input-text" size="150">
-             <div id="keywords"></div>
+             <div id="keywords">
+              <volist name="keyword_list" id="vo">
+                <a class="ckkey">{$vo.name}</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+             </volist>   
+             </div>    
             </td>
           </tr>
 
@@ -123,7 +118,12 @@ $(function(){
               &nbsp;&nbsp;&nbsp;{:L('lcai')} :&nbsp;<input type="text" name="cai" id="cai" class="input-text" size="8" value="0">
             </td>
           </tr>
-          
+           <tr>
+          <th>说明:</th>
+          <td>
+             标签和内容关联，类似栏目，多级栏目可以用标签。关键词贯穿内容，自动替换内容的词语成链接。
+            </td>
+          </tr>
         </table>
       </div>
       
@@ -167,6 +167,15 @@ $(function(){
         }
     });//end click
 
+  $(".ckkey").click(function(){
+       var oldtabs = $("#keywords").val();
+        var tab = $(this).text();        
+        if(oldtabs){
+          $("#keywords").val(oldtabs+","+tab);
+        }else{
+           $("#keywords").val(tab);
+        }
+    });//end click
      
 });
 

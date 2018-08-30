@@ -73,7 +73,7 @@
       <th>{:L('ad_image')} :</th>
       <td>	  
 		<if condition="$ad_info.type eq 'image'">
-			<if condition="$ad_info.code neq ''"><img src="__ROOT__/data/advert/{$ad_info.code}" width="200" height="100" /><br /><br /></if>		
+			<if condition="$ad_info.code neq ''"><img src="__ROOT__{$ad_info.code}" width="200" height="100" /><br /><br /></if>		
 		</if>
       	<input name="image" id="image" type="file" />
       </td>

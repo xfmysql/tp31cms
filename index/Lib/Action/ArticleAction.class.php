@@ -34,6 +34,11 @@ class ArticleAction extends CommonAction
 		$this->assign('tabinfos',$tabinfo_list);
 
 
+		$keyword_mod = D('keyword');
+		$sql = 'select t.*  from cms_keyword t join cms_keywordrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
+		$keyword_list = $keyword_mod->query($sql);
+		$this->assign('keywords',$tabinfo_list);
+
 		if($cats['channel']==1){//内容
 			$this->display('content');
 		}

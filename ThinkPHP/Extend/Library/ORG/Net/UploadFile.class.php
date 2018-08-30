@@ -376,7 +376,24 @@ class UploadFile {//类定义开始
         }else {
             if(function_exists($rule)) {
                 //使用函数生成一个唯一文件标识号
-                $saveName = $rule().".".$filename['extension'];
+                //$saveName = $rule().".".$filename['extension'];
+                //用时间作文件名
+                $t = time();
+                $d = explode('-', date("Y-y-m-d-H-i-s"));
+                $today = "{yyyy}{mm}{dd}{hh}{ii}{ss}-{rand:6}";
+                $today = str_replace("{yyyy}", $d[0], $today);
+                $today = str_replace("{yy}", $d[1], $today);
+                $today = str_replace("{mm}", $d[2], $today);
+                $today = str_replace("{dd}", $d[3], $today);
+                $today = str_replace("{hh}", $d[4], $today);
+                $today = str_replace("{ii}", $d[5], $today);
+                $today = str_replace("{ss}", $d[6], $today);
+                //替换随机字符串
+                $randNum = rand(1, 10000000000) . rand(1, 10000000000);
+                if (preg_match("/\{rand\:([\d]*)\}/i", $today, $matches)) {
+                    $today = preg_replace("/\{rand\:[\d]*\}/i", substr($randNum, 0, $matches[1]), $today);
+                }
+                $saveName=$today.".".$filename['extension'];
             }else {
                 //使用给定的文件名作为标识号
                 $saveName = $rule.".".$filename['extension'];

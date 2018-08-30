@@ -241,6 +241,12 @@ function getCatalog($cid = 0)
 			case "search":
 			  return U("Index/Search/index",0);
 			  break;
+			case "tabinfo":
+			  return U("Index/Tabinfo/index",0);
+			  break;
+			case "keyword":
+			  return U("Index/Keyword/index",array('id'=>$id));
+			  break;
 			default:
 		  		return $set["site_domain"];
 		}
