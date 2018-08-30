@@ -9,11 +9,11 @@ class TabinfoAction extends CommonAction
 		$tabid=I('id','','intval');
 		$this->assign('d',$catsid);
 		$tabinfo=M('tabinfo')->find($tabid);
-		$this->assign('name',$tabinfo['name']);
+		$this->assign('tabinfo',$tabinfo);
 		$this->assign('set',$this->setting);
 		//数据分页
 		import('ORG.Util.Page');// 导入分页类
-		$sql="(pubtime is null or pubtime<CURRENT_TIMESTAMP() ) and pid in(select id from cms_catalog where id=$catsid or pid=$catsid) and status=1";
+		$sql="(pubtime is null or pubtime<CURRENT_TIMESTAMP() ) and id in(select articleid from cms_tabrelation where attributeid=$tabid) and status=1";
    		$count=M('article')->where($sql)->count();//获取数据的总
    		$page=new Page($count,20);
    		$page->setConfig('theme', '<li class="am-pagination-prev">%upPage%</li>

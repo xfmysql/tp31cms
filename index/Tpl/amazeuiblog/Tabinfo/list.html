@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="<{$set.site_description}>">
-  <meta name="keywords" content="<{$set.site_keyword}>">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title><{$catName}> - <{$set.site_name}></title>
+  <title><{$tabinfo.name}> - <{$set.site_name}></title>  
+  <meta name="keywords" content="<{$tabinfo.name}>,<{$set.site_name}>">
+  <meta name="description" content="<{$tabinfo.descript}>">  
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
   <link rel="icon" type="../Public/image/png" href="assets/i/favicon.png">
@@ -49,6 +49,12 @@
 
 </volist-->
 
+<div class="am-u-lg-12">
+    <span class="blog-tag"> <{$tabinfo.name}></span>    
+  </div>
+  
+<{$tabinfo.descript}>
+ <hr/>
 
    <volist name="list" id="article" offset='0' length='12'>
           <article class="am-g blog-entry-article">
