@@ -28,13 +28,18 @@ class ListAction extends CommonAction
 		order('addtime desc')->limit($page->firstRow.','.$page->listRows)->select();
 		$this->assign('show',$show);
 		$this->assign('count',$count);
-		$this->assign('list',$articles);
+		$this->assign('list',$articles);	
 		
-		
+		$article_mod = D('article');
+		//推荐文章 
+		$bestArticleList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1 and pid=".$catsid)->order('clicks desc')->select();
+		$this->assign('bestArticleList',$bestArticleList);	
+		//最新文章
+		$newArticleList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$catsid)->order('addtime desc')->select();	
+		$this->assign('newArticleList',$newArticleList);
 
 		//面包屑
 		$this->assign('bread',$this->now_here($catsid));
-
 		
 		$this->display('list');
 		

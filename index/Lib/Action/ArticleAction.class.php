@@ -39,23 +39,19 @@ class ArticleAction extends CommonAction
 		$keyword_list = $keyword_mod->query($sql);
 		$this->assign('keywords',$tabinfo_list);
 
-		if($cats['channel']==1){//内容
-			$this->display('content');
-		}
-		else if($cats['channel']==2){//图集
-			preg_match_all("/<img(.*)src=\"([^\"]+)\"[^>]+>/isU",$article['content'],$matches);
-            $img = $matches[2];
-    		$this->assign('imgs',$img);
-    		//dump($img);
-			$this->display('image');
-		}
-		else if($cats['channel']==3){//下载
-			$this->display('download');
-		}
-		else if($cats['channel']==4){//产品
-			$this->display('product');
-		}
-		else $this->display('article');//新闻
+
+		$article_mod = D('article');
+		//推荐文章 
+		$bestArticleList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1 and pid=".$article['pid'])->order('clicks desc')->select();
+		$this->assign('bestArticleList',$bestArticleList);	
+		//最新文章
+		$newArticleList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$article['pid'])->order('addtime desc')->select();	
+		$this->assign('newArticleList',$newArticleList);
+		//相关阅读
+		$sameList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$article['pid'])->order('addtime desc')->select();	
+		$this->assign('sameList',$sameList);
+
+		$this->display('article');
 	}
 
 	public function addComment(){

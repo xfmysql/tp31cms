@@ -53,13 +53,7 @@ class CommonAction extends Action
 
 		$article=M('article');
 		$catalog = M('article_cate');
-		//推荐文章 
-		$bestArticleList=$article->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1")->order('clicks desc')->select();
-			$this->assign('bestArticleList',$bestArticleList);	
-		//最新文章
-		$newArticleList=$article->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and    status=1 ")->order('addtime desc')->select();	
-		$this->assign('newArticleList',$newArticleList);
-		
+				
 		//标签
 	 	$tabinfo_mod = M('tabinfo');
 	    $tabinfolist = $tabinfo_mod->order('id desc')->select();    
@@ -68,17 +62,6 @@ class CommonAction extends Action
 	 	$keyword_mod = M('keyword');
 	    $KeywordList = $keyword_mod->order('id desc')->select();    
 		$this->assign('KeywordList',$KeywordList);
-
-		//linkList
-		$linkTxt=M('flink');
-		$linkTxtList=$linkTxt->where("status=1")->select();
-		//$linkImgList=$linkTxt->where("status=1 and img<>''")->select();
-		$this->assign('linktxt',$linkTxtList);		
-		//$this->assign('linkimg',$linkImgList);	
-			
-
-
-
 
 		//banner跳动的总数
 		$allCount = M('download')->where(" state=1")->count();

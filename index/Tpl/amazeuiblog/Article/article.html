@@ -41,8 +41,11 @@
 
         <div class="am-article-bd">
         <{$article.intro}><br/>
-        <hr/>
-         <div class="am-g blog-article-widget">
+        <hr/>         
+        <{$article.content}>
+        </div>
+      </article>  
+      <div class="am-g blog-article-widget">
           <div class="am-u-lg-12">
             <span class="blog-tag">标&nbsp;&nbsp;&nbsp;&nbsp;签</span>
             <volist name="tabinfos" id="vo" offset='0' length='6'>
@@ -61,25 +64,33 @@
             <a href=""><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
           </div-->
         </div>
-        <{$article.content}>
-        </div>
-      </article>  
+
         <hr>
-        <div class="am-g blog-author ">
+        <!--div class="am-g blog-author ">
           <div class="am-u-sm-3 am-u-md-3 am-u-lg-2">
             <img src="../Public/assets/i/f15.jpg" alt="" class="blog-author-img am-circle">
           </div>
           <div class="am-u-sm-9 am-u-md-9 am-u-lg-10">
-          <h3><span>作者 &nbsp;: &nbsp;</span><span class="blog-color">amazeui</span></h3>
+          <h3><span>作者 &nbsp;: &nbsp;</span><span class="blog-color">作者</span></h3>
             <p>作者简介</p>
           </div>
         </div>
-        <hr>
+        <hr-->
         <ul class="am-pagination ">
-          <li class="am-pagination-prev"><a href="<{:reurl($prearticle['id'],'article')}>" class="">&laquo; 一切的回顾</a></li>
-          <li class="am-pagination-next"><a href="<{:reurl($nextarticle['id'],'article')}>">不远的未来 &raquo;</a></li>
+          <li class="am-pagination-prev"><a href="<{:reurl($prearticle['id'],'article')}>" class="">&laquo; <{$prearticle['title']}></a></li>
+          <li class="am-pagination-next"><a href="<{:reurl($nextarticle['id'],'article')}>"><{$nextarticle['title']}> &raquo;</a></li>
         </ul>
         
+
+      <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>相关阅读</span></h2>
+            <ul class="am-list">
+              <volist name="sameList" id="article" offset='0' length='6'>
+                <li><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></li>
+               </volist>
+            </ul>
+        </div>
+
         <hr>
 
         <form class="am-form am-g">

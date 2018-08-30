@@ -54,6 +54,20 @@ class IndexAction extends CommonAction
 		//}
 		//$this->assign('articleCatalogList',$articleCatalogList);
 		
+		$article = D('article');
+		//推荐文章 
+		$bestArticleList=$article->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1")->order('clicks desc')->select();
+			$this->assign('bestArticleList',$bestArticleList);	
+		//最新文章
+		$newArticleList=$article->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and    status=1 ")->order('addtime desc')->select();	
+		$this->assign('newArticleList',$newArticleList);
+
+		//只要主页友情链接
+		$linkTxt=M('flink');
+		$linkTxtList=$linkTxt->where("status=1")->select();
+		//$linkImgList=$linkTxt->where("status=1 and img<>''")->select();
+		$this->assign('linktxt',$linkTxtList);		
+		//$this->assign('linkimg',$linkImgList);	
 		//显示模板	
 		$this->display('index');
 		
