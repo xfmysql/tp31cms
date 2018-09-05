@@ -1,0 +1,19 @@
+# 将 RewriteEngine 模式打开 
+RewriteEngine On 
+Options -Indexes
+ErrorDocument 404 /err/404.php
+#通过.htaccess放盗链
+RewriteBase /  
+RewriteCond %{HTTP_REFERER} !^$  
+RewriteCond %{HTTP_REFERER} !^http://(www.)?aqee.net/.*$ [NC]  
+RewriteRule .(gif|jpg|swf|flv|png)$ /feed/ [R=302,L]  
+
+
+
+# Rewrite 系统规则请勿修改 
+RewriteRule ^list-([0-9]+)\.html$ index.php?m=list&a=index&catsid=$1 last; 
+RewriteRule ^list-([0-9]+)-([0-9]+).html$  index.php?m=list&a=index&catsid=$1&p=$2 last; 
+RewriteRule  ^article-([0-9]+)-1.html$  index.php?m=article&a=index&id=$1 last;
+RewriteRule  ^article-([0-9]+).html$  index.php?m=article&a=index&id=$1 last;
+RewriteRule  ^search.html$  index.php?m=search&a=index last; 
+RewriteRule ^search-([0-9]+)-([0-9]+).html$  index.php?m=search&a=index&catsid=$1&p=$2 last; 
