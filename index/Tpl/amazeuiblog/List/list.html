@@ -29,28 +29,16 @@
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed">
     <div class="am-u-md-8 am-u-sm-12">
-<!--volist name="hotCatalogList" id="catalog" offset='0' length='10'>
 
-  <volist name="catalog['child']" id="article" offset='0' length='20'>
-  <article class="am-g blog-entry-article">
-            <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="data/news/<{$article.imgurl}>" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="<{:reurl($article['id'],'download')}>" class="blog-color">article &nbsp;</a></span>
-                <span> @amazeUI &nbsp;</span>
-                <span><{$article.addtime|date='Y-m-d',###}></span>
-                <h1><a href=">"><{$article.title}></a></h1>
-                <p>这是描述</p>
-                <p><a href="" class="blog-continue">continue reading</a></p>
-            </div>
-        </article>
-   </volist>
-
-</volist-->
+ <div class="am-article-hd">
+    <h1 class="am-article-title blog-text-center"><{$catName}></h1>
+    <p class="blog-text-center">
+        <span>数量：<{$count}> </span>
+    </p>
+  </div>  
 
 
-   <volist name="list" id="article" offset='0' length='12'>
+   <volist name="list" id="article" offset='0' length='16'>
           <article class="am-g blog-entry-article">
           <if condition="$article['icourl'] neq null ">
             <div class="m-u-md-12 am-u-sm-12 blog-entry-img">
