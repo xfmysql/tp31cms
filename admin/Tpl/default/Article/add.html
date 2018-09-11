@@ -18,12 +18,12 @@ $(function(){
         <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
           <tr>
             <th width="100">{:L('ltitle')}:</th>
-            <td><input type="text" name="title" id="title" class="input-text" size="60"> 根据标题自动匹配词</td>
+            <td><input type="text" name="title" id="title" class="input-text" size="100"> 根据标题自动匹配词</td>
           </tr>  
 		  <tr>
           <th>标签:</th>
           <td>
-              <input type="text" name="tabinfos" id="tabinfos" class="input-text" size="150" >
+              <input type="text" name="tabinfos" id="tabinfos" class="input-text" size="100" >
           <div id="tabinfos">
            <volist name="tabinfo_list" id="vo">
                 <a class="cktab" data-status="">{$vo.name}</a>&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -34,7 +34,7 @@ $(function(){
         <tr>
           <th>关键词:</th>
           <td>
-             <input type="text" name="keywords" id="keywords" class="input-text" size="150">
+             <input type="text" name="keywords" id="keywords" class="input-text" size="100">
              <div id="keywords">
               <volist name="keyword_list" id="vo">
                 <a class="ckkey">{$vo.name}</a>&nbsp;&nbsp;&nbsp;&nbsp; 

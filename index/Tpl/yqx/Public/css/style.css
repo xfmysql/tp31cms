@@ -1050,7 +1050,7 @@ textarea::-webkit-scrollbar-thumb {
 	color: #3399CC;
 }
 .sidebar .recommend ul li a {
-	padding-right: 90px;
+	padding-right: 50px; 
 }
 .sidebar .recommend ul li .thumb {
 	position: absolute;
@@ -1107,8 +1107,8 @@ textarea::-webkit-scrollbar-thumb {
 	clear: both;
 	color: #AAA;
 	position: relative;
-	margin-left: 215px;
-	margin-right: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
 	padding: 20px 0 30px 20px;
 	border-top: 2px solid #eee;
 	font-size: 12px;
@@ -1143,4 +1143,14 @@ textarea::-webkit-scrollbar-thumb {
 }
 .gotop:hover {
 	background: url(../images/backtop.png) no-repeat 0 -52px;
+}
+
+.contenttree{
+	position: fixed;
+	top: 200px;
+	bottom: 0;
+	width: 190px;
+	background-color: #f6f6f6;
+	z-index: 99;
+	display: block;
 }

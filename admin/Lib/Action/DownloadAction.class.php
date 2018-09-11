@@ -78,7 +78,7 @@ $project_mod = D('project');
 			}
 			if ($_FILES['imgurl']['name']!='') {			   
 
-			     $icourls = $this->uploadByInfo("download");//0=原图，1=缩略图	
+			     $icourls = $this->uploadByInfo("");//0=原图，1=缩略图	
 			    if(C('usethumb')){		    
 				    $data['imgurl'] = $icourls[1];
 				}else $data['imgurl'] = $icourls[0];
@@ -181,7 +181,7 @@ $project_mod = D('project');
 				$this->error($download_mod->error());
 			}
 			if ($_FILES['imgurl']['name']!='') {
-				$upload_list =  $this->upload("download");
+				$upload_list =  $this->uploadByInfo("");
 				$data['imgurl'] = $upload_list;
 			}
 			$data['addtime']=time();

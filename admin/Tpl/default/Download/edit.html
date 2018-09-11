@@ -18,8 +18,7 @@ $(function(){
 			var v = $this.find('.sitename').val()+','+$this.find('.durl').val()+','+$this.find('.sort').val();			
 			$this.find('.durl').val(v);
 		});
-
-		editor.sync(); 
+ 
 		$("#myform").submit();
 	});
 })
@@ -145,8 +144,11 @@ $(function(){
       
       <tr>
         <th>{:L('ldescript')}</th>
-        <td>        	
-			<tpl:editor id="detail" name="detail" type="KINDEDITOR" style="width:70%;height:350px;" >{$download.detail}</tpl:editor>
+        <td>        
+       <script id="detail" style="width:70%;height:350px;" name="detail" type="text/plain">{$download.detail}</script>          
+      <tpl:editor id="edtcontent" name="edtcontent" type="UEDITOR" style="width:70%;height:350px;" ></tpl:editor>
+       <script type="text/javascript">var ue= UE.getEditor("detail");</script>
+
 		</td>
       </tr>
      
