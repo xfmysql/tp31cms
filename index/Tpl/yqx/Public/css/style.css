@@ -510,6 +510,12 @@ body, input, button, textarea, select {
 	background: #DDD;
 	border-radius: 5px;
 }
+.quotes li span, .quotes li a {
+	padding: 6px 12px;
+	margin: 0 3px;
+	background: #DDD;
+	border-radius: 5px;
+}
 .quotes a {
 	color: #666;
 	text-decoration: none;
@@ -520,6 +526,17 @@ body, input, button, textarea, select {
 	background: #3399CC;
 	opacity: 0.8;
 }
+.quotes li a {
+	color: #666;
+	text-decoration: none;
+}
+.quotes li a:hover {
+	opacity: 1;
+	color: #FFFFFF;
+	background: #3399CC;
+	opacity: 0.8;
+}
+
 .quotes .disabled {
 	cursor: not-allowed;
 }
@@ -621,7 +638,7 @@ body, input, button, textarea, select {
 	border-bottom-color: rgba(51,153,204,0.90);
 }
 .content .news_tags {
-	text-align: center;
+	text-align: left;
 	margin-bottom: 20px;
 }
 /*文章上一篇下一篇样式开始*/

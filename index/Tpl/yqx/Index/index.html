@@ -76,10 +76,10 @@ window.onload = function() {
             <div class="news-info col-xs-7 col-sm-7 col-md-8">
               <dl>
                 <dt> <a href="<{:reurl($article['id'],'article')}>" target="_blank" ><{$article.title}></a> </dt>
-                <dd><span class="name"><a href="" title="由 个人技术博客 发布" rel="author">个人技术博客</a></span> <span class="identity"></span> <span class="time"> <{$article.addtime||substr=0,10}> </span></dd>
+                <dd><span class="name"><a title="远程 发布" rel="author">原创</a></span> <span class="identity"></span> <span class="time"> <{$article.addtime||substr=0,10}> </span></dd>
                 <dd class="text"><{$article.intro}></dd>
               </dl>
-              <div class="news_bot col-sm-7 col-md-8"> <span class="tags visible-lg visible-md"> <a href="">本站</a> <a href="">个人技术博客</a> </span> <span class="look"> 共 <strong>2126</strong> 人围观，发现 <strong> 12 </strong> 个不明物体 </span> </div>
+              <div class="news_bot col-sm-7 col-md-8"> <span class="tags visible-lg visible-md"> <a>标签</a> </span> <span class="look"> 共 <strong><{$article.clicks}></strong> 人围观 </span> </div>
             </div>
           </div>
         </volist>
@@ -91,6 +91,10 @@ window.onload = function() {
         <!--div class="quotes" style="margin-top:15px"><span class="disabled">首页</span><span class="disabled">上一页</span><span class="current">1</span><a href="">2</a><a href="">下一页</a><a href="">尾页</a>
         </div-->
       </div>
+
+
+
+
     </div>
   </div>
   <!--/内容-->

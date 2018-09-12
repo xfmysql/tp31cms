@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>欢迎来到个人技术博客 - 个人技术博客</title>
+<title><{$article.title}> - <{$set.site_name}></title>
 <link href="../Public/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <link href="../Public/css/style.css" type="text/css" rel="stylesheet">
 <link href="../Public/css/nprogress.css" type="text/css" rel="stylesheet">
@@ -15,8 +15,8 @@
 <![endif]-->
 <link rel="apple-touch-icon-precomposed" href="../Public/images/icon/icon.png">
 <link rel="shortcut icon" href="../Public/images/icon/favicon.ico">
-<meta name="Keywords" content="" />
-<meta name="description" content="" />
+<meta name="Keywords" content="<{$keywords}>" />
+<meta name="description" content="<{$article.intro}>" />
 <script type="text/javascript">
 //判断浏览器是否支持HTML5
 window.onload = function() {
@@ -37,101 +37,52 @@ window.onload = function() {
 </div>
   <!--/超小屏幕可见-->
   <div class="content-wrap"><!--内容-->
-    <div class="content" style="margin-left:190px;">
+    <div class="content" style="margin-left:190px;">     
+
       <header class="news_header">
-        <h2>欢迎来到个人技术博客</h2>
+        <ul><li><a href="/" title=""><{$set.site_name}></a>-><{$bread}></li></ul>
+        <h2><{$article.title}></h2>
         <ul>
-          <li>admin 发布于 2015-06-29</li>
+          <li>发布于<{$article.addtime||substr=0,10}></li>
           <li>栏目：<a href="" title="" target="_blank">网站前端</a></li>
           <li>来源：<a href="" title="" target="_blank">互联网</a></li>
-          <li>共 <strong>2345</strong> 人围观 </li>
-          <li><strong>123</strong> 个不明物体</li>
+          <li>共 <strong><{$article.clicks}></strong> 人围观 </li>
         </ul>
       </header>
       <article class="news_content">
-        <p>欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。</p>
-        <p><img src="images/img2.jpg" alt="" title="" /></p>
-        <p>欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。</p>
-        <p>欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。</p>
-        <p><img src="images/img3.jpg" alt="" title="" /></p>
-        <p>欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。</p>
-        <p>欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。</p>
-        <p><img src="images/img1.jpg" alt="" title="" /></p>
-        <p>欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术，还有CMS内容管理系统，包括但不限于这些还有CMS内容管理系统，包括但不限于这些。</p>
+        <{$article.intro}><br/><br/>       
+        <{$article.content}>
       </article>
-      <div class="reprint">转载请说明出处：<a href="" title="" target="_blank">个人技术博客</a> » <a href="" title="" target="_blank">欢迎来到个人技术博客</a></div>
-      <div class="zambia"><a href="javascript:;" name="zambia" rel=""><span class="glyphicon glyphicon-thumbs-up"></span> 赞（0）</a></div>
-      <div class="tags news_tags">标签： <span data-toggle="tooltip" data-placement="bottom" title="查看关于 本站 的文章"><a href="">本站</a></span> <span data-toggle="tooltip" data-placement="bottom" title="查看关于 技术博客 的文章"><a href="">技术博客</a></span> </div>
+      <div class="reprint">转载请说明出处：<a href="http://<{$set.site_domain}>" title="<{$set.site_name}>" target="_blank"><{$set.site_name}></a> » <a href="" title="" target="_blank"><{$article.title}></a></div>
+
+
+      <div class="tags news_tags">标签： 
+      <volist name="tabinfos" id="vo" offset='0' length='6'>
+          <span data-toggle="tooltip" data-placement="bottom" title="查看关于 <{$vo.name}> 的文章">
+          <a href="<{:reurl($vo['id'],'tabinfo')}>"><{$vo.name}></a></span>
+      </volist>   
+    </div>
+      <div class="tags news_tags">关键词： 
+      <volist name="keywords" id="vo" offset='0' length='6'>
+          <span data-toggle="tooltip" data-placement="bottom" title="查看关于 <{$vo.name}> 的文章">
+          <a href="<{:reurl($vo['id'],'tabinfo')}>"><{$vo.name}></a></span>
+      </volist>  
+       </div>
+
       <nav class="page-nav"> <span class="page-nav-prev">上一篇<br />
-        <a href="" rel="prev">欢迎来到个人技术博客</a></span> <span class="page-nav-next">下一篇<br />
-        <a href="" rel="next">欢迎来到个人技术博客</a></span> </nav>
+        <a href="<{:reurl($prearticle['id'],'article')}>" rel="prev"> <{$prearticle['title']}></a></span> <span class="page-nav-next">下一篇<br />
+        <a href="<{:reurl($nextarticle['id'],'article')}>" rel="next"><{$nextarticle['title']}></a></span> </nav>
       <div class="content-block related-content visible-lg visible-md">
         <h2 class="title"><strong>相关推荐</strong></h2>
         <ul>
-          <li><a target="_blank" href=""><img src="../Public/images/logo.jpg" alt="">
-            <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+         <volist name="sameList" id="article" offset='0' length='6'>            
+            <li><a target="_blank" href="<{:reurl($article['id'],'article')}>"><img src="../Public/images/logo.jpg" alt="<{$article.title}>">
+            <h3> <{$article.title}> </h3>
             </a></li>
-          <li><a target="_blank" href=""><img src="../Public/images/img1.jpg" alt="">
-            <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="../Public/images/img3.jpg" alt="">
-            <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="../Public/images/img2.jpg" alt="">
-            <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="../Public/images/img2.jpg" alt="">
-            <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="../Public/images/img3.jpg" alt="">
-            <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="../Public/images/img1.jpg" alt="">
-            <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="../Public/images/logo.jpg" alt="">
-            <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
+           </volist>
         </ul>
       </div>
-      <div class="content-block comment">
-        <h2 class="title"><strong>评论</strong></h2>
-        <form action="comment.php" method="post" class="form-inline" id="comment-form">
-          <div class="comment-title">
-            <div class="form-group">
-              <label for="commentName">昵称：</label>
-              <input type="text" name="commentName" class="form-control" id="commentName" placeholder="技术博客">
-            </div>
-            <div class="form-group">
-              <label for="commentEmail">邮箱：</label>
-              <input type="email" name="commentEmail" class="form-control" id="commentEmail" placeholder="admin@xxxx.com">
-            </div>
-          </div>
-          <div class="comment-form">
-            <textarea placeholder="你的评论可以一针见血" name="commentContent"></textarea>
-            <div class="comment-form-footer">
-              <div class="comment-form-text">请先 <a href="javascript:;">登录</a> 或 <a href="javascript:;">注册</a>，也可匿名评论 </div>
-              <div class="comment-form-btn">
-                <button type="submit" class="btn btn-default btn-comment">提交评论</button>
-              </div>
-            </div>
-          </div>
-        </form>
-        <div class="comment-content">
-          <ul>
-            <li><span class="face"><img src="../Public/images/icon/icon.png" alt=""></span> <span class="text"><strong>技术博客站长</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span></li>
-            <li><span class="face"><img src="../Public/images/icon/icon.png" alt=""></span> <span class="text"><strong>技术博客编辑</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 ...</span></li>
-            <li><span class="face"><img src="../Public/images/icon/icon.png" alt=""></span> <span class="text"><strong>令狐冲</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span></li>
-            <li><span class="face"><img src="../Public/images/icon/icon.png" alt=""></span> <span class="text"><strong>任盈盈</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span></li>
-            <li><span class="face"><img src="../Public/images/icon/icon.png" alt=""></span> <span class="text"><strong>技术博客站长</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 ...</span></li>
-          </ul>
-        </div>
-      </div>
+      
     </div>
   </div>
   <!--/内容-->
