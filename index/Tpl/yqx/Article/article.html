@@ -44,8 +44,6 @@ window.onload = function() {
         <h2><{$article.title}></h2>
         <ul>
           <li>发布于<{$article.addtime||substr=0,10}></li>
-          <li>栏目：<a href="" title="" target="_blank">网站前端</a></li>
-          <li>来源：<a href="" title="" target="_blank">互联网</a></li>
           <li>共 <strong><{$article.clicks}></strong> 人围观 </li>
         </ul>
       </header>
@@ -53,7 +51,7 @@ window.onload = function() {
         <{$article.intro}><br/><br/>       
         <{$article.content}>
       </article>
-      <div class="reprint">转载请说明出处：<a href="http://<{$set.site_domain}>" title="<{$set.site_name}>" target="_blank"><{$set.site_name}></a> » <a href="" title="" target="_blank"><{$article.title}></a></div>
+      <div class="reprint">转载请说明出处：<a href="<{$set.site_domain}>" title="<{$set.site_name}>" target="_blank"><{$set.site_name}></a> » <a href="" title="" target="_blank"><{$article.title}></a></div>
 
 
       <div class="tags news_tags">标签： 

@@ -23,7 +23,11 @@ class SearchAction extends CommonAction
 		import('ORG.Util.Page');
 		$page=new page($count,10);		
 		
-		$page->setConfig('theme', '<nav class="navigation pagination" role="navigation"><div class="nav-links"><span class="prev">%upPage%</span><span>%downPage%</span><span>%prePage%</span> <span class="pages">第</span>%linkPage%<span class="pages">页</span><span class="next">%nextPage%</span><span>%end%</span></ul>');
+		$page->setConfig('theme', '<li class="am-pagination-prev">%upPage%</li>
+   			<li class="am-pagination-prev">%prePage%</li><li class="am-pagination-next">%nextPage%</li>
+   			<li>%linkPage%</li><li class="am-pagination-next">%downPage%</li>
+   			<li class="am-pagination-next">%end%</li>');
+
 		//$page->setConfig('link','list-'.$catsid.'-__PAGE__.'.C('URL_HTML_SUFFIX'));
 		$page->setConfig('link','/index.php?m=search&a=index&q='.$put.'&p=__PAGE__.');
 		
