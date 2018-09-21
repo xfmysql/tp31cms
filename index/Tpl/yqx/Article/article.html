@@ -74,8 +74,8 @@ window.onload = function() {
         <h2 class="title"><strong>相关推荐</strong></h2>
         <ul>
          <volist name="sameList" id="article" offset='0' length='6'>            
-            <li><a target="_blank" href="<{:reurl($article['id'],'article')}>"><img src="../Public/images/logo.jpg" alt="<{$article.title}>">
-            <h3> <{$article.title}> </h3>
+            <li><a target="_blank" href="<{:reurl($article['id'],'article')}>"><img src="../Public/images/noimg.jpg" alt="<{$article.title}>">
+            <h3 style="display:block;"> <{$article.title}> </h3>
             </a></li>
            </volist>
         </ul>
@@ -138,14 +138,7 @@ $(function(){
 		$(this).find("h3").hide();
 	});
 });
-	//相关推荐
-$(function(){
-	$(".related-content ul li").hover(function(){
-		$(this).find("h3").show();
-	},function(){
-		$(this).find("h3").hide();
-	});
-});
+
 //页面元素智能定位
 $.fn.smartFloat = function() { 
 	var position = function(element) { 

@@ -41,6 +41,7 @@ if (!count($files)) {
     ));
 }
 
+$files=array_sort($files,'mtime','desc');
 /* 获取指定范围的列表 */
 $len = count($files);
 for ($i = min($end, $len) - 1, $list = array(); $i < $len && $i >= 0 && $i >= $start; $i--){
@@ -89,4 +90,23 @@ function getfiles($path, $allowFiles, &$files = array())
         }
     }
     return $files;
+}
+function array_sort($array,$row,$type){
+    $array_temp = array();
+    $arr=array();
+    foreach($array as $v){
+        $array_temp[$v[$row]] = $v;
+    }
+    if($type == 'asc'){
+        ksort($array_temp);
+    }elseif($type='desc'){
+        krsort($array_temp);
+    }else{
+    }
+    $i=0;
+    foreach ($array_temp as $vd){
+        $arr[$i]=$vd;
+        $i++;
+    }
+    return $arr;
 }
