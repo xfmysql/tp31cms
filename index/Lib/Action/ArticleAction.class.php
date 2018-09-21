@@ -37,7 +37,7 @@ class ArticleAction extends CommonAction
 		$keyword_mod = D('keyword');
 		$sql = 'select t.*  from cms_keyword t join cms_keywordrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
 		$keyword_list = $keyword_mod->query($sql);
-		$this->assign('keywords',$tabinfo_list);
+		$this->assign('keywords',$keyword_list);
 
 
 		$article_mod = D('article');
