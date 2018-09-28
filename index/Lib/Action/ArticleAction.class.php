@@ -38,7 +38,10 @@ class ArticleAction extends CommonAction
 		$sql = 'select t.*  from cms_keyword t join cms_keywordrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
 		$keyword_list = $keyword_mod->query($sql);
 		$this->assign('keywords',$keyword_list);
-
+		foreach ($keyword_list as $key => $value) {
+			$seokeywords.=$value["name"].",";
+		}
+		$this->assign('seokeywords',$seokeywords);
 
 		$article_mod = D('article');
 		//推荐文章 

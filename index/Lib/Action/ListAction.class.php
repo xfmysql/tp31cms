@@ -26,6 +26,7 @@ class ListAction extends CommonAction
 
    		$show=$page->show();//返回分页信息
 		$articles=M('article')->where($sql)->order('addtime desc')->limit($page->firstRow.','.$page->listRows)->select();
+		$this->assign('catalog',$cats);
 		$this->assign('show',$show);
 		$this->assign('count',$count);
 		$this->assign('list',$articles);	
