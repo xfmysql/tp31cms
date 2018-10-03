@@ -36,8 +36,7 @@ class DownlistAction extends CommonAction
    		$page=new Page($count,20);
 		if($count>20){
 			$page->setConfig('theme', '<span class="prev">%upPage%</span><span>%downPage%</span><span>%prePage%</span> <span class="pages">第</span>%linkPage%<span class="pages">页</span><span class="next">%nextPage%</span><span>%end%</span>');
-			//'downlist-'.$catsid.'-__PAGE__.'.C('URL_HTML_SUFFIX'));
-			$page->setConfig('link',U("Index/Downlist/index",array('catsid'=>$catsid)));
+			$page->setConfig('link',"/downlist-".$catsid."-".__PAGE__.".html");//分页变量名是p
 			$show=$page->show();//返回分页信息
 			$this->assign('show',$show);
 		}

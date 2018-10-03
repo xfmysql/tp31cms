@@ -48,14 +48,6 @@ if($(window).width() < 700 ){
 $(window).resize(function(){
 $('.am_img_bg').height($('.am_img_bg').width());
 });
-//@首页 用户名截取
-$('.am_imglist_user_font').each(
-  function(){
-     if($(this).text().length >= 13){
-        $(this).html($(this).text().substr(0,13));
-     }
-  }
-  );
 
 //@懒加载
   $("img.am_img").lazyload();
