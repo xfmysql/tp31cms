@@ -156,7 +156,7 @@ class ArticleAction extends BaseAction
 		    }
 			$this->assign('tabinfos',substr($tabinfos, 0, -1));
 		   
-			$sql = 'select *  from cms_tabinfo  order by id desc limit 20 ';
+			$sql = 'select *  from cms_tabinfo  order by id desc limit 50 ';
 	    	$tabinfo_list = $tabinfo_mod->query($sql);
 			$this->assign('tabinfo_list',$tabinfo_list);
 			//关键词
@@ -170,7 +170,7 @@ class ArticleAction extends BaseAction
 		    }
 			$this->assign('keywords',substr($keyword, 0, -1));
 			
-			$sql = 'select *  from cms_keyword  order by id desc limit 20 ';
+			$sql = 'select *  from cms_keyword  order by id desc limit 50 ';
 	    	$keyword_list = $keyword_mod->query($sql);
 			$this->assign('keyword_list',$keyword_list);
 
@@ -249,12 +249,12 @@ class ArticleAction extends BaseAction
 	    	}
 	    	$this->assign('cate_list',$cate_list);
 	    	$tabinfo_mod = D('tabinfo');
-			$sql = 'select *  from cms_tabinfo  order by id desc limit 20 ';
+			$sql = 'select *  from cms_tabinfo  order by id desc limit 50 ';
 	    	$tabinfo_list = $tabinfo_mod->query($sql);
 			$this->assign('tabinfo_list',$tabinfo_list);
 
 			$keyword_mod = D('keyword');
-			$sql = 'select *  from cms_keyword  order by id desc limit 20 ';
+			$sql = 'select *  from cms_keyword  order by id desc limit 50 ';
 	    	$keyword_list = $keyword_mod->query($sql);
 			$this->assign('keyword_list',$keyword_list);
 

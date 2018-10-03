@@ -32,7 +32,7 @@ class IndexAction extends CommonAction
 			}
 			$this->assign('downCatalogList',$downCatalogList);
 			
-			$newDownList=M('download')->limit('12')->where('state=1')->order('addtime desc')->select();
+			$newDownList=M('download')->limit('12')->where('state=1 and imgurl is not null')->order('addtime desc')->select();
 			$this->assign('newDownList',$newDownList);
 			
 		}else {

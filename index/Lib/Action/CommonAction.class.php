@@ -56,11 +56,11 @@ class CommonAction extends Action
 				
 		//标签
 	 	$tabinfo_mod = M('tabinfo');
-	    $tabinfolist = $tabinfo_mod->order('id desc')->select();    
+	    $tabinfolist = $tabinfo_mod->limit('50')->order('id desc')->select();    
 		$this->assign('tabinfolist',$tabinfolist);
 		//关键词
 	 	$keyword_mod = M('keyword');
-	    $KeywordList = $keyword_mod->order('id desc')->select();    
+	    $KeywordList = $keyword_mod->limit('6')->order('id desc')->select();    
 		$this->assign('KeywordList',$KeywordList);
 
 		//banner跳动的总数

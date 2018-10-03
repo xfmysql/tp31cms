@@ -42,7 +42,7 @@ $project_mod = D('project');
 		import("ORG.Util.Page");
 		$count = $download_mod->where($where)->count();
 		$p = new Page($count,20);
-		$download_list = $download_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order('addtime DESC')->select();
+		$download_list = $download_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order('id DESC')->select();
 
 		$key = 1;
 		foreach($download_list as $k=>$val){
@@ -117,21 +117,28 @@ $project_mod = D('project');
 							$result = $download_url_mod->add($urldata);						
 						  }
 				   }
-				   $download_relation = D('projectrelation');
-				   $download_relation->where('articleid='.$data["id"])->delete(); 
-				   foreach($_POST as $key=>$val) {
-					
-					if(strpos($key,"project_") === 0){
-						//echo $key.'=='.$val;
-						$relation['attributeid']= $val;						
-						$relation['articleid']= $data['id'];
-						$relation['addtime']= time();
-						$insertCount = $download_relation->add($relation);									
-					
+				   if($_POST['tabinfos']!=''){
+						$tabrelation_mod = D("tabrelation");
+						$tabrelation_mod->where("downid=".$data["id"])->delete();
+						$tabinfo_mod = D("tabinfo");
+
+						$reldata = array();
+						$arr = explode(',',$_POST['tabinfos']);
+						$arr = array_unique($arr);
+						 foreach($arr as $r){
+						 	$tabid = $tabinfo_mod->where("name='".$r."'")->getField("id");	
+							$reldata['attributeid']= $tabid;						
+							$reldata['addtime']= date('Y-m-d H:i:s',time());
+							$reldata['downid']=$data["id"];
+							$tabrelation_mod->add($reldata);									
+						}
+					}else{
+						$tabrelation_mod = D("tabrelation");
+						$tabrelation_mod->where("downid=".$data["id"])->delete();
 					}
 				}
 
-				}				
+							
 				$this->success(L('operation_success'),U('Download/index'));
 			}else{
 				$this->error(L('operation_failure'));
@@ -158,7 +165,22 @@ $project_mod = D('project');
 			$this->assign('project_list',$project_list);
 			$this->assign('language_list',$language_list);
 			$this->assign('url_list',$url_list);
-			$this->assign('download',$download_info);			
+			$this->assign('download',$download_info);	
+
+			$tabinfo_mod = D('tabinfo');
+			$sql = 'select t.*  from cms_tabinfo t join cms_tabrelation r on t.id=r.attributeid where r.downid='.$download_id.' order by r.id asc,r.addtime asc';
+		    $tabinfo_list = $tabinfo_mod->query($sql);
+
+		    $tabinfos='';
+		    foreach ($tabinfo_list as  $value) {
+		    	$tabinfos.=$value["name"].",";
+		    }
+			$this->assign('tabinfos',substr($tabinfos, 0, -1));
+		   
+			$sql = 'select *  from cms_tabinfo  order by id desc limit 50 ';
+	    	$tabinfo_list = $tabinfo_mod->query($sql);
+			$this->assign('tabinfo_list',$tabinfo_list);
+
 			$this->display();
 		}
 
@@ -206,8 +228,8 @@ $project_mod = D('project');
 			$result = $download_mod->add($data);
 			if($result){//返回主键id			
 				if($_POST['durl'] && is_array($_POST['durl'])){
-				 $download_url_mod = D('download_url');					
-				 foreach($_POST['durl'] as $url){		
+				 	$download_url_mod = D('download_url');					
+				 	foreach($_POST['durl'] as $url){		
 					 $urldata = array();
 						$urldata['id']=$data['id'];
 						$arr = explode(',',$url);
@@ -219,27 +241,22 @@ $project_mod = D('project');
 							$r = $download_url_mod->add($urldata);									
 						  }
 				   }
-				foreach($_POST as $key=>$val) {
-					$download_relation = D('projectrelation');
-					if(strpos($key,"project_") === 0){
-						//echo $key.'=='.$val;
-						$relation['attributeid']= $val;						
-						$relation['articleid']= $data['id'];
-						$relation['addtime']= time();		
-						$insertCount = $download_relation->add($relation);									
-					
+				}
+				if($_POST['tabinfos']!=''){
+					$tabinfo_mod = D("tabinfo");		
+					$tabrelation_mod = D("tabrelation");					
+					$reldata = array();
+					$arr = explode(',',$_POST['tabinfos']);
+					$arr = array_unique($arr);
+					foreach($arr as $r){
+					 	$tabid = $tabinfo_mod->where("name='".$r."'")->getField("id");	
+						$reldata['attributeid']= $tabid;						
+						$reldata['addtime']= date('Y-m-d H:i:s',time());
+						$reldata['downid']=$result ;
+						$tabrelation_mod->add($reldata);									
 					}
 				}
-/*
-				$cate = M('download_cate')->field('id,pid')->where("id=".$data['cate_id'])->find();
-				if( $cate['pid']!=0 ){
-					M('download_cate')->where("id=".$cate['pid'])->setInc('download_nums');
-					M('download_cate')->where("id=".$data['cate_id'])->setInc('download_nums');
-				}else{
-					M('download_cate')->where("id=".$data['cate_id'])->setInc('download_nums');
-				}
-				*/
-				}
+				
 				$this->success('添加成功');
 			}else{
 				$this->error('添加失败');
@@ -257,6 +274,11 @@ $project_mod = D('project');
 			$this->assign('url_list',$url_list);
 			$this->assign('download',$download_info);	
 	    	
+
+	    	$tabinfo_mod = D('tabinfo');
+			$sql = 'select *  from cms_tabinfo  order by id desc limit 50 ';
+	    	$tabinfo_list = $tabinfo_mod->query($sql);
+			$this->assign('tabinfo_list',$tabinfo_list);
 	    	$this->display();
 		}
 	}

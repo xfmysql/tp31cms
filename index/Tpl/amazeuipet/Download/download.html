@@ -37,10 +37,7 @@
             <span>下载：</span>
             <span><{$article.downloads}></span>
         </div>
-		<div class="bdfw_nr_brief_info_nr">
-            <span>主页：</span>
-            <span><{$article.officialurl}></span>
-        </div>
+	
     </div>
   </div>
 
@@ -84,11 +81,11 @@
 
 <ul class="am_tuya_tag">
     <li><span class="am_tuya_tag_title">TAG</span></li>
-    <li><a href=""><span>行业</span><span>
-	<volist name="project_list" id="project"><{$project.name}> </volist></span></a></li>
-    <!-- <li><a href=""><span>颜色</span><span>红色</span></a></li>
-    <li><a href=""><span>关键词</span><span>54</span></a></li> -->
 </ul>
+<volist name="tabinfolist" id="vo" offset='0' length='50'>           
+       <span style="margin:5px;"><a href="<{:reurl($vo['id'],'tabinfo')}>"><{$vo.name}></a></span>
+     </volist>
+
 <div class="page_hot">
             <div class="page_hot_title">人气模板</div>
             <div class="page_hot_list">

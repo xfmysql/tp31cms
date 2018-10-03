@@ -207,6 +207,9 @@ function getCatalog($cid = 0)
 				case "search":
 				  return "/search.html";
 				  break;
+				case "tabinfo":
+				  return "/tab-".$id.".html";
+				  break;
 				default:
 					return $set["site_domain"];
 			}

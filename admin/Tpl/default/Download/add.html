@@ -65,46 +65,16 @@ $(function(){
           </tr>
       
 	   <tr>
-            <th>{:L('lproject')}:</th>
-            <td><select name="projectid" id="projectid" style="width:200px;">
-            	<option value="0">{:L('lselectcatalog')}</option>
-                <volist name="project_list['parent']" id="val">
-                  <option value="{$val.id}">{$val.name}</option>
-                  <notempty name="project_list['sub'][$val['id']]">
-                    <volist name="project_list['sub'][$val['id']]" id="sval">
-                      <option value="{$sval.id}">&nbsp;&nbsp;&nbsp;&nbsp;{$sval.name}</option>
-                      <notempty name="project_list['sub'][$sval['id']]">
-                        <volist name="project_list['sub'][$sval['id']]" id="ssval">
-                          <option value="{$ssval.id}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$ssval.cate_name}</option>
-                        </volist>
-                      </notempty>
-                    </volist>
-                  </notempty>
-                </volist>
-              </select></td>
+          <th>标签:</th>
+          <td>
+              <input type="text" name="tabinfos" id="tabinfos" class="input-text" size="100" >
+          <div id="tabinfos">
+           <volist name="tabinfo_list" id="vo">
+                <a class="cktab" data-status="">{$vo.name}</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+             </volist>       
+          </div>
+            </td>
           </tr>
-         <tr>
-
-		  <tr>
-            <th>{:L('llanguage')}:</th>
-            <td><select name="languageid" id="languageid" style="width:200px;">
-            	<option value="0">{:L('lselectcatalog')}</option>
-                <volist name="language_list['parent']" id="val">
-                  <option value="{$val.id}">{$val.name}</option>
-                  <notempty name="language_list['sub'][$val['id']]">
-                    <volist name="language_list['sub'][$val['id']]" id="sval">
-                      <option value="{$sval.id}">&nbsp;&nbsp;&nbsp;&nbsp;{$sval.name}</option>
-                      <notempty name="language_list['sub'][$sval['id']]">
-                        <volist name="language_list['sub'][$sval['id']]" id="ssval">
-                          <option value="{$ssval.id}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$ssval.cate_name}</option>
-                        </volist>
-                      </notempty>
-                    </volist>
-                  </notempty>
-                </volist>
-              </select></td>
-          </tr>
-         <tr>
 
 <tr>
           <tr>
@@ -115,7 +85,7 @@ $(function(){
         <th>{:L('ldescript')}</th>
         <td>        	
         <script id="detail" style="width:70%;height:350px;" name="detail" type="text/plain"></script>  
-        <tpl:editor id="content" name="content" type="UEDITOR" style="width:70%;height:350px;" ></tpl:editor>
+        <tpl:editor id="content" name="content" type="UEDITOR" style="width:84%;height:350px;" ></tpl:editor>
         <script type="text/javascript">var ue= UE.getEditor("detail");</script>
 
 
@@ -200,6 +170,18 @@ function submitFrom(){
 }
 
 $(document).ready(function() { 
+
+   $(".cktab").click(function(){
+       var oldtabs = $("#tabinfos").val();
+        var tab = $(this).text();        
+        if(oldtabs){
+          $("#tabinfos").val(oldtabs+","+tab);
+        }else{
+           $("#tabinfos").val(tab);
+        }
+    });//end click
+
+
 	var MaxInputs       = 8; //maximum input boxes allowed  
 	var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID  
 	var InputsWrapperDiv   = $("#InputsWrapper>div"); //Input boxes wrapper ID  
