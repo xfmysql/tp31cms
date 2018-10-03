@@ -70,6 +70,8 @@ class IndexAction extends CommonAction
 		//$this->assign('linkimg',$linkImgList);	
 		//显示模板	
 		$this->display('index');
+
+
 		
 	}
 	

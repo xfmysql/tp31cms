@@ -100,6 +100,7 @@ $project_mod = D('project');
 				$data['ishot4']='1';
 			}else
 				$data['ishot4']='0';
+ 			
 
 			$result = $download_mod->save($data);
 			if(false !== $result){				
@@ -225,6 +226,21 @@ $project_mod = D('project');
 			}else
 				$data['ishot4']='0';
 
+//标签
+	 		$tabinfo_mod = D('tabinfo');
+			$sql = 'select (select downid from cms_tabrelation where attributeid= t.id  limit 1) as id,name,descript,addtime,status,clicks  from cms_tabinfo t ';
+			$tabinfolist = $tabinfo_mod->query($sql);
+			$patter = $need = array();
+			foreach ($tabinfolist as $value) { 
+				if($value['id']){ 
+
+				    $patter[] = '/'.$value['name'].'/';
+				    $need[] =  '<a href="/download-'.$value['id'].'.html" title='.$value['name'].'>'.$value['name'].'</a>';
+			    }
+			}
+			$newcontent= preg_replace($patter,$need,$data['detail']);
+			$data['detail']=$newcontent;
+			
 			$result = $download_mod->add($data);
 			if($result){//返回主键id			
 				if($_POST['durl'] && is_array($_POST['durl'])){

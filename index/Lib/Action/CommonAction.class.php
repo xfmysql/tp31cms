@@ -58,6 +58,7 @@ class CommonAction extends Action
 	 	$tabinfo_mod = M('tabinfo');
 	    $tabinfolist = $tabinfo_mod->limit('50')->order('id desc')->select();    
 		$this->assign('tabinfolist',$tabinfolist);
+
 		//关键词
 	 	$keyword_mod = M('keyword');
 	    $KeywordList = $keyword_mod->limit('6')->order('id desc')->select();    
