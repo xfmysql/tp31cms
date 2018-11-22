@@ -17,6 +17,16 @@ class ArticleAction extends BaseAction
 
 		//搜索
 		$where = '1=1';
+		$orderby = " id desc";
+		$this->assign('status',"-1");
+		if (isset($_GET['status']) && trim($_GET['status'])) {
+			if($_GET['status']=="0") $where = " status=0";
+		    else if($_GET['status']=="1") $where = " status=1";
+			 else if($_GET['status']=="2") $where = " status=2";
+			else $where = " 1=1";
+		    $this->assign('status',$_GET['status']);
+		}
+		
 		if (isset($_GET['cate_id']) && intval($_GET['cate_id'])) {
 			if(intval($_GET['cate_id'])==-1){
 				$where .= " AND pid=0";	
@@ -39,12 +49,16 @@ class ArticleAction extends BaseAction
 		    $where .= " AND add_time<='".$time_end."'";
 		    $this->assign('time_end', $_GET['time_end']);
 		}
-		
+		if (isset($_GET['ordby']) && trim($_GET['ordby'])) {
+		    if($_GET['ordby']=="1") $orderby = " id asc";
+			else $orderby = " id desc";
+		    $this->assign('ordby',$_GET['ordby']);
+		}
 		 
 		import("ORG.Util.Page");
 		$count = $article_mod->where($where)->count();
 		$p = new Page($count,20);
-		$article_list = $article_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order('id DESC')->select();
+		$article_list = $article_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order($orderby)->select();
 
 		$key = 1;
 		foreach($article_list as $k=>$val){
@@ -68,6 +82,7 @@ class ArticleAction extends BaseAction
 		$this->assign('article_list',$article_list);		
 		$this->display();
 	}
+
 
 	function edit()
 	{
@@ -156,7 +171,7 @@ class ArticleAction extends BaseAction
 		    }
 			$this->assign('tabinfos',substr($tabinfos, 0, -1));
 		   
-			$sql = 'select *  from cms_tabinfo  order by id desc limit 50 ';
+			$sql = 'select *  from cms_tabinfo  order by id desc limit 20 ';
 	    	$tabinfo_list = $tabinfo_mod->query($sql);
 			$this->assign('tabinfo_list',$tabinfo_list);
 			//关键词
@@ -170,7 +185,7 @@ class ArticleAction extends BaseAction
 		    }
 			$this->assign('keywords',substr($keyword, 0, -1));
 			
-			$sql = 'select *  from cms_keyword  order by id desc limit 50 ';
+			$sql = 'select *  from cms_keyword  order by id desc limit 20 ';
 	    	$keyword_list = $keyword_mod->query($sql);
 			$this->assign('keyword_list',$keyword_list);
 
@@ -249,12 +264,12 @@ class ArticleAction extends BaseAction
 	    	}
 	    	$this->assign('cate_list',$cate_list);
 	    	$tabinfo_mod = D('tabinfo');
-			$sql = 'select *  from cms_tabinfo  order by id desc limit 50 ';
+			$sql = 'select *  from cms_tabinfo  order by id desc limit 20 ';
 	    	$tabinfo_list = $tabinfo_mod->query($sql);
 			$this->assign('tabinfo_list',$tabinfo_list);
 
 			$keyword_mod = D('keyword');
-			$sql = 'select *  from cms_keyword  order by id desc limit 50 ';
+			$sql = 'select *  from cms_keyword  order by id desc limit 20 ';
 	    	$keyword_list = $keyword_mod->query($sql);
 			$this->assign('keyword_list',$keyword_list);
 

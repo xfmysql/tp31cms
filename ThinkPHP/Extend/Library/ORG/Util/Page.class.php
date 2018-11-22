@@ -13,7 +13,7 @@
 class Page {
     
     // 分页栏每页显示的页数
-    public $rollPage = 5;
+    public $rollPage = 10;
     // 页数跳转时要带的参数
     public $parameter  ;
     // 分页URL地址

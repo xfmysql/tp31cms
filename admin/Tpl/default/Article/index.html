@@ -29,9 +29,21 @@
                 </volist>
                 <option value="-1">--未分类--</option>
               </select>
+			  <select name="status">
+				<option value="-1">--所有--</option>
+				<option value="1" <if condition="$status eq 1"> selected="selected" </if>>已发布</option>
+				<option value="0" <if condition="$status eq 0"> selected="selected" </if>>未发布</option>
+				<option value="2" <if condition="$status eq 2"> selected="selected" </if>>已删除</option>
+			 </select>
                 &nbsp;关键字 :
                 <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
-                <input type="hidden" name="m" value="Article" />
+				&nbsp;倒序 :
+				<input type="radio" name="ordby" class="radio_style" value="0"  <if condition="$ordby eq 0"> checked</if>>
+                &nbsp;顺序 :            
+               <input type="radio" name="ordby" class="radio_style" value="1" <if condition="$ordby eq 1"> checked</if>>
+
+
+                <input type="hidden" name="m" value="Article" />&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="submit" name="search" class="button" value="搜索" />
         	</div>
             </td>
