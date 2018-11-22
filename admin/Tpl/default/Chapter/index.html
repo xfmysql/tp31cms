@@ -1,0 +1,143 @@
+<tagLib name="tpl" />
+<include file="Public:header" />
+<div class="pad-10" >
+    <form name="searchform" action="" method="get" >
+    <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+            <tr>
+            <td>
+            <div class="explain-col">
+            	{:L('time')}：         
+				<wego:calendar name="time_start">{$time_start}</wego:calendar>
+                -      
+				<wego:calendar name="time_end" more="true">{$time_end}</wego:calendar>
+            	&nbsp;&nbsp;资讯分类：
+                <select name="cate_id">
+                <option value="0">--请选择分类--</option>
+                <volist name="cate_list['parent']" id="val">
+                  <option value="{$val.id}" <if condition="$cate_id eq $val['id']"> selected="selected" </if>>{$val.name}</option>
+                  <notempty name="cate_list['sub'][$val['id']]">
+                    <volist name="cate_list['sub'][$val['id']]" id="sval">
+                      <option value="{$sval.id}" <if condition="$cate_id eq $sval['id']"> selected="selected" </if>>&nbsp;&nbsp;&nbsp;&nbsp;{$sval.name}</option>
+                      <notempty name="cate_list['sub'][$sval['id']]">
+                        <volist name="cate_list['sub'][$sval['id']]" id="ssval">
+                          <option value="{$ssval.id}" <if condition="$cate_id eq $ssval['id']"> selected="selected" </if>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$ssval.cate_name}</option>
+                        </volist>
+                      </notempty>
+                    </volist>
+                  </notempty>
+                </volist>
+                <option value="-1">--未分类--</option>
+              </select>
+			  <select name="status">
+				<option value="-1">--所有--</option>
+				<option value="1" <if condition="$status eq 1"> selected="selected" </if>>已发布</option>
+				<option value="0" <if condition="$status eq 0"> selected="selected" </if>>未发布</option>
+				<option value="2" <if condition="$status eq 2"> selected="selected" </if>>已删除</option>
+			 </select>
+                &nbsp;关键字 :
+                <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
+				&nbsp;倒序 :
+				<input type="radio" name="ordby" class="radio_style" value="0"  <if condition="$ordby eq 0"> checked</if>>
+                &nbsp;顺序 :            
+               <input type="radio" name="ordby" class="radio_style" value="1" <if condition="$ordby eq 1"> checked</if>>
+
+
+                <input type="hidden" name="m" value="Article" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" name="search" class="button" value="搜索" />
+        	</div>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <form id="myform" name="myform" action="{:u('Article/delete')}" method="post" onsubmit="return check();">
+    <div class="table-list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width=50>{:L('lid')}</th>
+                <th width=25><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>               
+                <th >{:L('ltitle')}</th>
+                <th width=150>{:L('lcatalog')}</th>
+                <th width=70>{:L('laddtime')}</th>
+                <th width=70>{:L('ledittime')}</th>
+                <th width=40>{:L('lsort')}</th>
+                <th width="40">{:L('listop')}</th>
+                <th width="40">{:L('lishomepage')}</th>
+                <th width="40">{:L('lstatus')}</th>
+				<th width="80">{:L('loper')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+        <volist name="article_list" id="val" >
+        <tr>       
+		 	<td align="center"><a target="_blank" href="/index.php?a=index&m=article&id={$val.id}">{$val.id} - 访问</a></td> 	
+            <td align="center">
+           	 <input type="checkbox" value="{$val.id}" name="id[]">
+			</td>           
+            <td align="left"><a class="blue" target="_blank" ="" href="/article-{$val.id}.html">{$val.title}</a><if condition="$val['url'] neq ''"><br><a href="{$val.url}" target=_blank>{$val.url}</a></if>&nbsp;&nbsp;</td>
+            <td align="center"><b>{$val.cate_name.name}</b></td>
+            <td align="center">{$val.addtime||substr=0,10}</td>
+             <td align="center">{$val.publishtime||substr=0,10}</td>
+            <td align="center"><input  type="text" class="input-text-c input-text" value="{$val.sort}" id="sort_{$val.id}" onblur="sort({$val.id},'sort',this.value)" size="4" name="listorders[{$val.id}]"></td>
+            <td align="center" onclick="status({$val.id},'istop')" id="istop_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.istop}.gif" /></td>
+            <td align="center" onclick="status({$val.id},'ishomepage')" id="ishomepage_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.ishomepage}.gif" /></td>
+      		<td align="center" onclick="status({$val.id},'status')" id="status_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.status}.gif" /></td>
+			<td align="center"><a class="blue" href="{:u('Article/edit', array('id'=>$val['id']))}">编辑</a></td>
+        </volist>
+    	</tbody>
+    </table>
+
+    <div class="btn">
+    	<label for="check_box" style="float:left;"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></label>
+        
+    	<input type="submit" class="button" name="dosubmit" value="{$Think.lang.delete}" onclick="return confirm('{$Think.lang.sure_delete}')" style="float:left;margin:0 10px 0 10px;"/>
+    	
+    	<div id="pages">{$page}</div>
+    </div>
+
+    </div>
+    </form>
+</div>
+<script language="javascript">
+function edit(id, name) {
+	var lang_edit = "编辑资讯";
+	window.top.art.dialog({id:'edit'}).close();
+	window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'?m=Article&a=edit&id='+id,width:'550',height:'400'}, function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;d.document.getElementById('dosubmit').click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
+}
+
+var lang_cate_name = "资讯标题";
+function check(){
+	if($("#myform").attr('action') != '{:u("Article/sort_order")}') {
+		var ids='';
+		$("input[name='id[]']:checked").each(function(i, n){
+			ids += $(n).val() + ',';
+		});
+
+		if(ids=='') {
+			window.top.art.dialog({content:lang_please_select+lang_cate_name,lock:true,width:'200',height:'50',time:1.5},function(){});
+			return false;
+		}
+	}
+	return true;
+}
+
+function status(id,type){
+    $.get("{:u('Article/status')}", { id: id, type: type }, function(jsondata){
+		var return_data  = eval("("+jsondata+")");
+		$("#"+type+"_"+id+" img").attr('src', '__ROOT__/statics/images/status_'+return_data+'.gif')
+	}); 
+}
+//排序方法
+function sort(id,type,num){
+    
+    $.get("{:u('Article/sort')}", { id: id, type: type,num:num }, function(jsondata){
+        
+		$("#"+type+"_"+id+" ").attr('value', jsondata);
+	},'json'); 
+}
+</script>
+</body>
+</html>

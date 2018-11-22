@@ -9,6 +9,25 @@ class CommonAction extends Action
 		//if (ismobile()) {
         //    C('DEFAULT_THEME','mobile');
         //}
+/*
+ 关闭的话，显示关闭说明
+站点配置获取
+记住登录功能
+全局内容的显示，导航，标签，全站友情链接
+
+*/
+        if($this->setting["site_status"]==0){
+			echo $this->setting["closed_reason"];
+		    exit;
+		}
+		//获取网站配置信息
+		$setting_mod = M('setting');
+		$setting = $setting_mod->select();
+		foreach ( $setting as $val ) {
+			$set[$val['name']] = stripslashes($val['data']);
+		}
+		$this->setting = $set; 
+		//记住登录
         if(empty($_SESSION['_USERNAME'])){//检查一下session是不是为空
 
 	         if(!empty($_COOKIE['username']) && !empty($_COOKIE['password'])){//如果session为空，并且用户没有选择记录登录状
@@ -20,20 +39,15 @@ class CommonAction extends Action
 					$_SESSION['_USERNAME']=$result['username'];
 				}
 			  }
-		}
+		}		
+		//nav
+		
+		//标签
+	 	$tabinfo_mod = M('tabinfo');
+	    $tabinfolist = $tabinfo_mod->limit('50')->order('id desc')->select();    
+		$this->assign('tabinfolist',$tabinfolist);
+		
 
-		//获取网站配置信息
-		$setting_mod = M('setting');
-		$setting = $setting_mod->select();
-		foreach ( $setting as $val ) {
-			$set[$val['name']] = stripslashes($val['data']);
-		}
-		$this->setting = $set; 
-
-		if($this->setting["site_status"]==0){
-			header('Location: /welcome.html');
-		    exit;
-		}
 		//全局首页，显示推荐栏目，用户个人中心导航分类展示
 		$catalogList=M('catalog')->where('isnav=1 and status=1 and pid=0')->order('sort asc')->select();
 		foreach ($catalogList as $key=>$value) {
@@ -54,10 +68,7 @@ class CommonAction extends Action
 		$article=M('article');
 		$catalog = M('article_cate');
 				
-		//标签
-	 	$tabinfo_mod = M('tabinfo');
-	    $tabinfolist = $tabinfo_mod->limit('50')->order('id desc')->select();    
-		$this->assign('tabinfolist',$tabinfolist);
+		
 
 		//关键词
 	 	$keyword_mod = M('keyword');
