@@ -10,16 +10,14 @@ class CommonAction extends Action
         //    C('DEFAULT_THEME','mobile');
         //}
 /*
- 关闭的话，显示关闭说明
+
 站点配置获取
+ 关闭的话，显示关闭说明
 记住登录功能
-全局内容的显示，导航，标签，全站友情链接
+全局内容的显示，导航，标签，全站友链
 
 */
-        if($this->setting["site_status"]==0){
-			echo $this->setting["closed_reason"];
-		    exit;
-		}
+       
 		//获取网站配置信息
 		$setting_mod = M('setting');
 		$setting = $setting_mod->select();
@@ -27,6 +25,11 @@ class CommonAction extends Action
 			$set[$val['name']] = stripslashes($val['data']);
 		}
 		$this->setting = $set; 
+		//
+		if($this->setting["site_status"]==0){
+			echo $this->setting["closed_reason"];
+		    exit;
+		}
 		//记住登录
         if(empty($_SESSION['_USERNAME'])){//检查一下session是不是为空
 
@@ -47,6 +50,12 @@ class CommonAction extends Action
 	    $tabinfolist = $tabinfo_mod->limit('50')->order('id desc')->select();    
 		$this->assign('tabinfolist',$tabinfolist);
 		
+		//全站友链
+		$linkTxt=M('flink');
+		$linkTxtList=$linkTxt->where("status=1 and cate_id=2")->select();
+		$this->assign('siteflink',$linkTxtList);		
+
+
 
 		//全局首页，显示推荐栏目，用户个人中心导航分类展示
 		$catalogList=M('catalog')->where('isnav=1 and status=1 and pid=0')->order('sort asc')->select();
