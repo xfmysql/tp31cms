@@ -90,14 +90,17 @@ class ArticleAction extends BaseAction
 			$article_mod = D('article');	
 			$data = $article_mod->create();
 			if($data['pid']==0){
-				$this->error('请选择资讯分类');
+				$this->error('请选择资讯分类'.$data['icourltxt'].';');
 			}
 			if ($_FILES['icourl']['name']!='') {
 			    $icourls = $this->uploadByInfo("");//[0]=原图，[1]=缩略图	
 			    if(C('usethumb')){		    
 				    $data['icourl'] = $icourls[1];
 				}else $data['icourl'] = $icourls[0];
-			}			
+			}	
+			else if($_POST['icourltxt']){
+				 $data['icourl'] = $_POST['icourltxt'];
+			}
 			$result = $article_mod->save($data);
 			if(false !== $result){
 				if($_POST['tabinfos']!=''){
@@ -185,7 +188,7 @@ class ArticleAction extends BaseAction
 		    }
 			$this->assign('keywords',substr($keyword, 0, -1));
 			
-			$sql = 'select *  from cms_keyword  order by id desc limit 20 ';
+			$sql = 'select * from cms_keyword  order by id desc limit 20 ';
 	    	$keyword_list = $keyword_mod->query($sql);
 			$this->assign('keyword_list',$keyword_list);
 
@@ -213,6 +216,8 @@ class ArticleAction extends BaseAction
 			if ($_FILES['icourl']['name']!='') {
 				$upload_url = $this->upload("article");//封面
 				$data['icourl'] = $upload_url;
+			}else if($_POST['icourltxt']){
+				 $data['icourl'] = $_POST['icourltxt'];
 			}
 			$data['addtime']=date('Y-m-d H:i:s',time());
 			$data['edittime']=date('Y-m-d H:i:s',time());
@@ -353,7 +358,8 @@ class ArticleAction extends BaseAction
 		$sql 	= "update ".C('DB_PREFIX')."article set $type=($type+1)%2 where id='$id'";
 		$res 	= $article_mod->execute($sql);
 		$values = $article_mod->field("id,".$type)->where('id='.$id)->find();
-		$this->ajaxReturn($values[$type]);
+		 $data["status"] = $values[$type];
+		$this->ajaxReturn($data);
 	}
 
 }

@@ -18,7 +18,7 @@ $(function(){
         <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
           <tr>
             <th width="100">{:L('ltitle')}:</th>
-            <td><input type="text" name="title" id="title" class="input-text" size="100"> 根据标题自动匹配词</td>
+            <td><input type="text" name="title" id="title" class="input-text" size="100"> <a>过滤</a>&nbsp;&nbsp;<a >匹配词</a></td>
           </tr>  
 		  <tr>
           <th>标签:</th>
@@ -69,7 +69,10 @@ $(function(){
           </tr>
           <tr>
           	<th>{:L('licourl')} :</th>
-            <td><input type="file" name="icourl" id="icourl" class="input-text"  style="width:200px;" /></td>
+            <td><input type="file" name="icourl" id="icourl" class="input-text"  style="width:200px;" />
+			<br/><br/>
+			<input type="text" name="icourltxt" id="icourltxt" class="input-text"  style="width:68%;" />
+			</td>
           </tr>
          
            <tr>
@@ -81,14 +84,6 @@ $(function(){
 			</td>
           </tr>
             <tr>
-            <th>{:L('lishomepage')} :</th>
-            <td><input type="radio" name="ishomepage" class="radio_style" value="1">
-              &nbsp;首页显示&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="ishomepage" class="radio_style" value="0" checked="checked">
-              &nbsp;不显示
-              </td>
-          </tr>
-            <tr>
         	<th>{:L('listop')}:</th>
         	<td><input type="radio" name="istop" class="radio_style" value="1">
               &nbsp;推荐&nbsp;&nbsp;&nbsp;
@@ -96,15 +91,22 @@ $(function(){
               &nbsp;不推荐
             </td>
           </tr>
-          
+            <tr>
+            <th>{:L('lishomepage')} :</th>
+            <td><input type="radio" name="ishomepage" class="radio_style" value="1">
+              &nbsp;首页显示&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="ishomepage" class="radio_style" value="0" checked="checked">
+              &nbsp;不显示
+              </td>
+          </tr>
          <tr>
             <th>{:L('lstatus')} :</th>
             <td><input type="radio" name="status" class="radio_style" value="1">
               &nbsp;已审核&nbsp;&nbsp;&nbsp;
               <input type="radio" name="status" class="radio_style" value="0" checked="checked">
-              &nbsp;待审核
-			   <input type="radio" name="status" class="radio_style" value="2" >
-              &nbsp;草稿
+              &nbsp;待审核&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="status" class="radio_style" value="2">
+			  草稿
               </td>
           </tr>
 
@@ -124,28 +126,12 @@ $(function(){
            <tr>
           <th>说明:</th>
           <td>
-             标签和内容关联，类似栏目，多级栏目可以用标签。关键词贯穿内容，自动替换内容的词语成链接。
+             
             </td>
           </tr>
         </table>
       </div>
       
-      <!--div id="div_setting_2" class="contentList pad-10 hidden">
-        <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
-          <tr>
-            <th width="100">{$Think.lang.seo_title} :</th>
-            <td><input type="text" name="seo_title" id="seo_title" class="input-text" size="60"></td>
-          </tr>
-          <tr>
-            <th>{$Think.lang.seo_keys} :</th>
-            <td><input type="text" name="seo_keys" id="seo_keys" class="input-text" size="60"></td>
-          </tr>
-          <tr>
-            <th>{$Think.lang.seo_desc} :</th>
-            <td><textarea name="seo_desc" id="seo_desc" cols="80" rows="8"></textarea></td>
-          </tr>
-        </table>
-      </div-->
       <div class="bk15"></div>
       <div class="btn"><input type="submit" value="{$Think.lang.submit}" onclick="return submitFrom();" name="dosubmit" class="button" id="dosubmit"></div>
     </div>

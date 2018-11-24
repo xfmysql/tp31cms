@@ -7,10 +7,6 @@
             <tr>
             <td>
             <div class="explain-col">
-            	{:L('time')}：         
-				<wego:calendar name="time_start">{$time_start}</wego:calendar>
-                -      
-				<wego:calendar name="time_end" more="true">{$time_end}</wego:calendar>
             	&nbsp;&nbsp;资讯分类：
                 <select name="cate_id">
                 <option value="0">--请选择分类--</option>
@@ -63,7 +59,6 @@
                 <th width=150>{:L('lcatalog')}</th>
                 <th width=70>{:L('laddtime')}</th>
                 <th width=70>{:L('ledittime')}</th>
-                <th width=40>{:L('lsort')}</th>
                 <th width="40">{:L('listop')}</th>
                 <th width="40">{:L('lishomepage')}</th>
                 <th width="40">{:L('lstatus')}</th>
@@ -80,8 +75,7 @@
             <td align="left"><a class="blue" target="_blank" ="" href="/article-{$val.id}.html">{$val.title}</a><if condition="$val['url'] neq ''"><br><a href="{$val.url}" target=_blank>{$val.url}</a></if>&nbsp;&nbsp;</td>
             <td align="center"><b>{$val.cate_name.name}</b></td>
             <td align="center">{$val.addtime||substr=0,10}</td>
-             <td align="center">{$val.publishtime||substr=0,10}</td>
-            <td align="center"><input  type="text" class="input-text-c input-text" value="{$val.sort}" id="sort_{$val.id}" onblur="sort({$val.id},'sort',this.value)" size="4" name="listorders[{$val.id}]"></td>
+             <td align="center">{$val.pubtime||substr=0,10}</td>
             <td align="center" onclick="status({$val.id},'istop')" id="istop_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.istop}.gif" /></td>
             <td align="center" onclick="status({$val.id},'ishomepage')" id="ishomepage_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.ishomepage}.gif" /></td>
       		<td align="center" onclick="status({$val.id},'status')" id="status_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.status}.gif" /></td>
@@ -126,18 +120,12 @@ function check(){
 
 function status(id,type){
     $.get("{:u('Article/status')}", { id: id, type: type }, function(jsondata){
-		var return_data  = eval("("+jsondata+")");
-		$("#"+type+"_"+id+" img").attr('src', '__ROOT__/statics/images/status_'+return_data+'.gif')
+		var data  = eval("("+jsondata+")");
+		console.log(data);
+		$("#"+type+"_"+id+" img").attr('src', '__ROOT__/statics/images/status_'+data.status+'.gif')
 	}); 
 }
-//排序方法
-function sort(id,type,num){
-    
-    $.get("{:u('Article/sort')}", { id: id, type: type,num:num }, function(jsondata){
-        
-		$("#"+type+"_"+id+" ").attr('value', jsondata);
-	},'json'); 
-}
+
 </script>
 </body>
 </html>
