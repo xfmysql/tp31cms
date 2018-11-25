@@ -44,7 +44,8 @@ class CommonAction extends Action
 			  }
 		}		
 		//nav
-		
+		$navList=M('nav')->where(" is_show=1 ")->order(' sort_order asc')->select();
+		$this->assign('NavList',$navList);	
 		//标签
 	 	$tabinfo_mod = M('tabinfo');
 	    $tabinfolist = $tabinfo_mod->limit('50')->order('id desc')->select();    

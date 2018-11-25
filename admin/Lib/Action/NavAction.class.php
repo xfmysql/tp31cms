@@ -10,13 +10,11 @@
 
 
 class NavAction extends BaseAction{	
-	private $nav_mod;
-	function __construct(){
-		$this->nav_mod=M('nav');
-	}
+	
 	function index()
-	{		
-		$nav_list = $this->nav_mod->order('sort_order ASC')->select();
+	{	
+	 	$nav_mod = D('nav');	
+		$nav_list = $nav_mod->order('sort_order ASC')->select();
 		$list_rel=array();
 		foreach ($nav_list as $value){			
 			$list_rel[]=$value;
@@ -29,19 +27,19 @@ class NavAction extends BaseAction{
 	}
 	function add()
 	{
+		
 		if(isset($_POST['dosubmit'])){
-			if( false === $vo = $this->nav_mod->create() ){
-				$this->error( $this->nav_mod->error() );
-			}
+			$nav_mod = D('nav');	
+			$vo = $nav_mod->create() ;
 			if($vo['name']==''){
 				$this->error('导航名称不能为空');
 			}
-			$result = $this->nav_mod->where("pid=".$vo['pid']." AND name='".$vo['name']."'")->count();
+			$result = $nav_mod->where("pid=".$vo['pid']." AND name='".$vo['name']."'")->count();
 			if($result != 0){
 				$this->error('该导航已经存在');
 			}
 			//保存当前数据
-			$app_cate_id = $this->nav_mod->add();
+			$app_cate_id = $nav_mod->add();
 			$this->success('添加成功', '', '', 'add');
 		}else{			
 			$this->assign('show_header', false);
@@ -51,12 +49,13 @@ class NavAction extends BaseAction{
 
 	function edit()
 	{
+		$nav_mod = D('nav');	
 		if(isset($_POST['dosubmit'])){
-			if( false === $vo = $this->nav_mod->create() ){
-				$this->error( $this->nav_mod->error() );
+			if( false === $vo = $nav_mod->create() ){
+				$this->error( $nav_mod->error() );
 			}
 
-			$old_nav = $this->nav_mod->where('id='.$_POST['id'])->find();
+			$old_nav = $nav_mod->where('id='.$_POST['id'])->find();
 
 			//导航不能重复
 			if ($_POST['name'] != $old_nav['name']) {
@@ -65,11 +64,11 @@ class NavAction extends BaseAction{
 				}
 			}
 
-			$app_cate_id = $this->nav_mod->save($vo);
+			$app_cate_id = $nav_mod->save($vo);
 			$this->success('修改成功', '', '', 'edit');
 		}else{
 			$id = isset($_REQUEST['id'])&&intval($_REQUEST['id'])?intval($_REQUEST['id']):$this->error('请选择分类');
-			$nav = $this->nav_mod->where('id='.$id)->find();			
+			$nav = $nav_mod->where('id='.$id)->find();			
 			//print_r($nav);
 			$this->assign('nav',$nav);			
 			$this->assign('show_header', false);
@@ -92,16 +91,16 @@ class NavAction extends BaseAction{
 		if((!isset($_GET['id']) || empty($_GET['id'])) && (!isset($_POST['id']) || empty($_POST['id']))) {
 			$this->error('请选择要删除的导航！');
 		}
-		$old_nav = $this->nav_mod->where('id='.$_REQUEST['id'])->find();
+		$old_nav = $nav_mod->where('id='.$_REQUEST['id'])->find();
 		if( $old_nav['system']=='1' ){
 			$this->error('您无权删除');
 		}
 		if (isset($_POST['id']) && is_array($_POST['id'])) {
 			$cate_ids = implode(',', $_POST['id']);
-			$this->nav_mod->delete($cate_ids);
+			$nav_mod->delete($cate_ids);
 		} else {
 			$cate_id = intval($_GET['id']);
-			$this->nav_mod->delete($cate_id);
+			$nav_mod->delete($cate_id);
 		}
 		$this->success('已成功删除');
 	}
@@ -111,7 +110,7 @@ class NavAction extends BaseAction{
 		if (isset($_POST['listorders'])) {
 			foreach ($_POST['listorders'] as $id=>$sort_order) {
 				$data['sort_order'] = $sort_order;
-				$this->nav_mod->where('id='.$id)->save($data);
+				$nav_mod->where('id='.$id)->save($data);
 			}
 			$this->success('排序已完成');
 		}
@@ -124,8 +123,8 @@ class NavAction extends BaseAction{
 		$id 	= intval($_REQUEST['id']);
 		$type 	= trim($_REQUEST['type']);
 		$sql 	= "update ".C('DB_PREFIX')."nav set $type=($type+1)%2 where id='$id'";
-		$res 	= $this->nav_mod->execute($sql);
-		$values = $this->nav_mod->where('id='.$id)->find();
+		$res 	= $nav_mod->execute($sql);
+		$values = $nav_mod->where('id='.$id)->find();
 		$this->ajaxReturn($values[$type]);
 
 	}

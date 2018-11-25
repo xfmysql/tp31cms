@@ -8,14 +8,14 @@ $(function(){
 	$(".delete_attatch").click(function(){
 		var article_id = $("#article_id").val();
 		var aid = $(this).attr('aid');
-		$.get("admin.php?m=article&a=delete_attatch&id="+article_id+"&aid="+aid, function(data){
+		$.get("admin.php?m=book&a=delete_attatch&id="+article_id+"&aid="+aid, function(data){
 			$("#list_"+aid).hide();
 		});
 	});
 })
 </script>
 
-<form action="{:u('Article/edit')}" method="post" name="myform" id="myform" enctype="multipart/form-data" style="margin-top:10px;">
+<form action="{:u('Book/edit')}" method="post" name="myform" id="myform" enctype="multipart/form-data" style="margin-top:10px;">
   <div class="pad-10">
   <div class="col-tab">
   <ul class="tabBut cu-li">
@@ -26,7 +26,7 @@ $(function(){
     <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
       <tr>
         <th width="100">{:L('ltitle')} :</th>
-        <td><input type="text" name="title" id="title" class="input-text" size="100" value="{$article.title}"></td>
+        <td><input type="text" name="title" id="title" class="input-text" size="100" value="{$book.title}"></td>
       </tr>
 	  
      <tr>
@@ -73,16 +73,16 @@ $(function(){
       
           <tr>
             <th>{:L('lintro')} :</th>
-            <td><textarea name="intro" id="intro" style="width:68%;height:50px;">{$article.intro}</textarea></td>
+            <td><textarea name="intro" id="intro" style="width:68%;height:50px;">{$book.intro}</textarea></td>
           </tr>
       <tr>
         <th>{:L('licourl')} :</th>
         <td>
           <input type="file" name="icourl" id="icourl" class="input-text" style="width:200px;" />
-            <if condition="$article['icourl'] neq ''">
-            <br /><br /><img id="icoimg" src="{$article.icourl}" style="width:80px;height:80px;"/>
+            <if condition="$book['icourl'] neq ''">
+            <br /><br /><img id="icoimg" src="{$book.icourl}" style="width:80px;height:80px;"/>
             </if>
-            <php>if(!empty($article['icourl'])) { $ricourl=str_replace("thumb_","",$article['icourl']);
+            <php>if(!empty($book['icourl'])) { $ricourl=str_replace("thumb_","",$book['icourl']);
                 echo '<input type="hidden" name="ricourl" id="ricourl" value="'.$ricourl.'" />'.$ricourl;
               }
              </php>
@@ -94,7 +94,7 @@ $(function(){
  <tr>
         <th>{:L('lcontent')} :</th>
         <td> 
-        <script id="content" style="width:84%;height:350px;" name="content" type="text/plain">{$article.content}</script>  
+        <script id="content" style="width:84%;height:350px;" name="content" type="text/plain">{$book.content}</script>  
         
       <tpl:editor id="edtcontent" name="edtcontent" type="UEDITOR" style="width:84%;height:350px;" ></tpl:editor>
        <script type="text/javascript">var ue= UE.getEditor("content");</script>
@@ -103,18 +103,18 @@ $(function(){
 
   <tr>
           <th>{:L('lishomepage')}:</th>
-          <td><input type="radio" name="ishomepage" class="radio_style" value="1" <if condition="$article.ishomepage eq 1"> checked</if>>
+          <td><input type="radio" name="ishomepage" class="radio_style" value="1" <if condition="$book.ishomepage eq 1"> checked</if>>
               &nbsp;首页显示&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="ishomepage" class="radio_style" value="0" <if condition="$article.ishomepage eq 0"> checked</if>>
+              <input type="radio" name="ishomepage" class="radio_style" value="0" <if condition="$book.ishomepage eq 0"> checked</if>>
               &nbsp;不显示
             </td>
           </tr>
      
      <tr>
           <th>{:L('listop')}:</th>
-          <td><input type="radio" name="istop" class="radio_style" value="1" <if condition="$article.istop eq 1"> checked</if>>
+          <td><input type="radio" name="istop" class="radio_style" value="1" <if condition="$book.istop eq 1"> checked</if>>
               &nbsp;推荐&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="istop" class="radio_style" value="0" <if condition="$article.istop eq 0"> checked</if>>
+              <input type="radio" name="istop" class="radio_style" value="0" <if condition="$book.istop eq 0"> checked</if>>
               &nbsp;不推荐
             </td>
           </tr>
@@ -123,33 +123,33 @@ $(function(){
      
       <tr>
         <th>{:L('lstatus')} :</th>
-        <td><input type="radio" name="status" class="radio_style" value="1" <if condition="$article.status eq 1"> checked</if>>
+        <td><input type="radio" name="status" class="radio_style" value="1" <if condition="$book.status eq 1"> checked</if>>
           &nbsp;已审核&nbsp;&nbsp;&nbsp;
-          <input type="radio" name="status" class="radio_style" value="0" <if condition="$article.status eq 0">  checked</if>>
+          <input type="radio" name="status" class="radio_style" value="0" <if condition="$book.status eq 0">  checked</if>>
           &nbsp;未审核
-		  <input type="radio" name="status" class="radio_style" value="2" <if condition="$article.status eq 2">  checked</if>>
+		  <input type="radio" name="status" class="radio_style" value="2" <if condition="$book.status eq 2">  checked</if>>
           &nbsp;草稿
           </td>
       </tr>
        <tr>
             <th width="100">{:L('laddtime')}:</th>
-            <td><input type="text" id="addtime" name="addtime" value="{$article.addtime}" /> 用来排序，最新的排前面</td>
+            <td><input type="text" id="addtime" name="addtime" value="{$book.addtime}" /> 用来排序，最新的排前面</td>
           </tr>
 
        <tr>
             <th width="100">{:L('lpubtime')}:</th>
-            <td><input type="text" id="pubtime" name="pubtime" value="{$article.pubtime}" />  用来控制显示，小于当前时间的显示</td>
+            <td><input type="text" id="pubtime" name="pubtime" value="{$book.pubtime}" />  用来控制显示，小于当前时间的显示</td>
           </tr>
         <tr>
             <th>{:L('lsort')} :</th>
-            <td><input type="text" name="sort" id="sort" class="input-text" size="8" value="{$article.sort}">
-              &nbsp;&nbsp;&nbsp;{:L('lclicks')} :&nbsp;<input type="text" name="clicks" id="clicks" class="input-text" size="8"  value="{$article.clicks}">
-              &nbsp;&nbsp;&nbsp;{:L('lzan')} :&nbsp;<input type="text" name="zan" id="zan" class="input-text" size="8"  value="{$article.zan}">
-              &nbsp;&nbsp;&nbsp;{:L('lcai')} :&nbsp;<input type="text" name="cai" id="cai" class="input-text" size="8"  value="{$article.cai}">
+            <td><input type="text" name="sort" id="sort" class="input-text" size="8" value="{$book.sort}">
+              &nbsp;&nbsp;&nbsp;{:L('lclicks')} :&nbsp;<input type="text" name="clicks" id="clicks" class="input-text" size="8"  value="{$book.clicks}">
+              &nbsp;&nbsp;&nbsp;{:L('lzan')} :&nbsp;<input type="text" name="zan" id="zan" class="input-text" size="8"  value="{$book.zan}">
+              &nbsp;&nbsp;&nbsp;{:L('lcai')} :&nbsp;<input type="text" name="cai" id="cai" class="input-text" size="8"  value="{$book.cai}">
             </td>
           </tr>
 
-      <tr><td><input type="hidden" name="id" value="{$article.id}" id="article_id"/></td></tr>
+      <tr><td><input type="hidden" name="id" value="{$book.id}" id="article_id"/></td></tr>
       <tr>
           <th>说明:</th>
           <td>

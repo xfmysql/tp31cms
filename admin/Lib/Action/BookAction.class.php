@@ -12,7 +12,7 @@ class BookAction extends BaseAction
 {
 	public function index()
 	{
-		$article_mod = D('article');
+		$book_mod = D('book');
 		$article_cate_mod = D('catalog');
 
 		//搜索
@@ -56,14 +56,14 @@ class BookAction extends BaseAction
 		}
 		 
 		import("ORG.Util.Page");
-		$count = $article_mod->where($where)->count();
+		$count = $book_mod->where($where)->count();
 		$p = new Page($count,20);
-		$article_list = $article_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order($orderby)->select();
+		$book_list = $book_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order($orderby)->select();
 
 		$key = 1;
-		foreach($article_list as $k=>$val){
-			$article_list[$k]['key'] = ++$p->firstRow;
-			$article_list[$k]['cate_name'] = $article_cate_mod->field('name')->where('id='.$val['pid'])->find();
+		foreach($book_list as $k=>$val){
+			$book_list[$k]['key'] = ++$p->firstRow;
+			$book_list[$k]['cate_name'] = $article_cate_mod->field('name')->where('id='.$val['pid'])->find();
 		}
 		$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort asc')->select();
     	$cate_list = array();
@@ -79,7 +79,7 @@ class BookAction extends BaseAction
 		$page = $p->show();
 		$this->assign('page',$page);
     	$this->assign('cate_list', $cate_list);
-		$this->assign('article_list',$article_list);		
+		$this->assign('book_list',$book_list);		
 		$this->display();
 	}
 
@@ -87,8 +87,8 @@ class BookAction extends BaseAction
 	function edit()
 	{
 		if(isset($_POST['dosubmit'])){
-			$article_mod = D('article');	
-			$data = $article_mod->create();
+			$book_mod = D('book');	
+			$data = $book_mod->create();
 			if($data['pid']==0){
 				$this->error('请选择资讯分类');
 			}
@@ -98,7 +98,7 @@ class BookAction extends BaseAction
 				    $data['icourl'] = $icourls[1];
 				}else $data['icourl'] = $icourls[0];
 			}			
-			$result = $article_mod->save($data);
+			$result = $book_mod->save($data);
 			if(false !== $result){
 				if($_POST['tabinfos']!=''){
 					$tabrelation_mod = D("tabrelation");
@@ -138,12 +138,12 @@ class BookAction extends BaseAction
 					$keywordrelation_mod = D("keywordrelation");
 					$keywordrelation_mod->where("articleid=".$data["id"])->delete();
 				}
-				$this->success(L('operation_success'),U('Article/index'));
+				$this->success(L('operation_success'),U('Book/index'));
 			}else{
 				$this->error(L('operation_failure'));
 			}
 		}else{
-			$article_mod = D('article');
+			$book_mod = D('book');
 			if( isset($_GET['id']) ){
 				$article_id = isset($_GET['id']) && intval($_GET['id']) ? intval($_GET['id']) : $this->error(L('please_select'));
 			}
@@ -157,9 +157,9 @@ class BookAction extends BaseAction
 		    	    $cate_list['sub'][$val['pid']][] = $val;
 		    	}
 		    }
-			$article_info = $article_mod->where('id='.$article_id)->find();				
+			$book_info = $book_mod->where('id='.$article_id)->find();				
 	    	$this->assign('cate_list',$cate_list);
-			$this->assign('article',$article_info);
+			$this->assign('book',$book_info);
 
 			$tabinfo_mod = D('tabinfo');
 			$sql = 'select t.*  from cms_tabinfo t join cms_tabrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
@@ -199,12 +199,12 @@ class BookAction extends BaseAction
 	{
 		if(isset($_POST['dosubmit'])){
 			
-			$article_mod = D('article');		
+			$book_mod = D('book');		
 			if($_POST['title']==''){
 				$this->error(L('input').L('title'));
 			}
-			if(false === $data = $article_mod->create()){
-				$this->error($article_mod->error());
+			if(false === $data = $book_mod->create()){
+				$this->error($book_mod->error());
 			}
 
 			if($data['pid']==0){
@@ -301,30 +301,30 @@ class BookAction extends BaseAction
 
 	function delete()
     {
-		$article_mod = D('article');
+		$book_mod = D('book');
 		if((!isset($_GET['id']) || empty($_GET['id'])) && (!isset($_POST['id']) || empty($_POST['id']))) {
             $this->error('请选择要删除的资讯！');
 		}
 		if( isset($_POST['id'])&&is_array($_POST['id']) ){
 			$cate_ids = implode(',',$_POST['id']);
 			foreach( $_POST['id'] as $val ){
-				$article = $article_mod->field("id,cate_id,info")->where("id=".$val)->find();
-				$cate = M('catalog')->field('id,pid')->where("id=".$article['cate_id'])->find();
+				$book = $book_mod->field("id,cate_id,info")->where("id=".$val)->find();
+				$cate = M('catalog')->field('id,pid')->where("id=".$book['cate_id'])->find();
 				if( $cate['pid']!=0 ){
 					M('catalog')->where("id=".$cate['pid'])->setDec('article_nums');
-					M('catalog')->where("id=".$article['cate_id'])->setDec('article_nums');
+					M('catalog')->where("id=".$book['cate_id'])->setDec('article_nums');
 				}else{
-					M('catalog')->where("id=".$article['cate_id'])->setDec('article_nums');
+					M('catalog')->where("id=".$book['cate_id'])->setDec('article_nums');
 				}
-				$this->_deletepic($article['info']);
+				$this->_deletepic($book['info']);
 			}
-			$article_mod->delete($cate_ids);
+			$book_mod->delete($cate_ids);
 		}else{
 			$cate_id = intval($_GET['id']);
-			$article = $article_mod->field("id,cate_id,info")->where("id=".$cate_id)->find();
-			M('catalog')->where("id=".$article['cate_id'])->setDec('article_nums');
+			$book = $book_mod->field("id,cate_id,info")->where("id=".$cate_id)->find();
+			M('catalog')->where("id=".$book['cate_id'])->setDec('article_nums');
 		    $article_mod->where('id='.$cate_id)->delete();
-			$this->_deletepic($article['info']);
+			$this->_deletepic($book['info']);
 		}
 		$this->success(L('operation_success'));
     }
@@ -333,7 +333,7 @@ class BookAction extends BaseAction
 
 	function sort_order()
     {
-    	$article_mod = D('article');
+    	$book_mod = D('book');
 		if (isset($_POST['listorders'])) {
             foreach ($_POST['listorders'] as $id=>$sort_order) {
             	$data['ordid'] = $sort_order;
@@ -347,12 +347,12 @@ class BookAction extends BaseAction
     //修改状态
 	function status()
 	{
-		$article_mod = D('article');
+		$book_mod = D('book');
 		$id 	= intval($_REQUEST['id']);
 		$type 	= trim($_REQUEST['type']);
 		$sql 	= "update ".C('DB_PREFIX')."article set $type=($type+1)%2 where id='$id'";
-		$res 	= $article_mod->execute($sql);
-		$values = $article_mod->field("id,".$type)->where('id='.$id)->find();
+		$res 	= $book_mod->execute($sql);
+		$values = $book_mod->field("id,".$type)->where('id='.$id)->find();
 		$this->ajaxReturn($values[$type]);
 	}
 

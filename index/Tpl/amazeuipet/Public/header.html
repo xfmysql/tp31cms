@@ -17,34 +17,9 @@
         <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse-5">
             <ul class="am-nav am-nav-pills am-topbar-nav">
                 <li class="am-active"><a href="/"><{$set.site_name}></a></li>
-				<volist name="catalogList" id="catalog" offset='0' length='10'>
-				 <if condition="($catalog['childcount'] eq '0')">
-                <li>
-					<if condition="($catalog['model'] eq '3')">
-					<a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a>
-					<else />
-					<a href="<{:reurl($catalog['id'],'articlelist')}>"><{$catalog.name}></a>
-					</if>
-				</li>
-				<else /><li class="am-dropdown" data-am-dropdown="">
-                    <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
-                        <{$catalog.name}><span class="am-icon-caret-down"></span></a>
-                    <ul class="am-dropdown-content">
-                        <volist name="catalog['child']" id="childcatalog" offset='0' length='10'>
-						
-						<if condition="($childcatalog['model'] eq '3')">
-						<li><a href="<{:reurl($childcatalog['id'],'downloadlist')}>"><{$childcatalog.name}></a></li>
-						<else />
-						<li><a href="<{:reurl($childcatalog['id'],'articlelist')}>"><{$childcatalog.name}></a></li>
-						</if>
-
-                        </volist>
-                    </ul>
-                </li>
-</if>
+				<volist name="NavList" id="entity" >				
+                <li><a href="<{$entity.url}>" title="<{$set.site_name}>-<{$entity.name}>"><{$entity.name}></a></li>				
 				</volist>
-
-
             </ul>
 
              <form class="am-topbar-form am-topbar-right am-form-inline" role="search" action="/index.php?a=index&m=search" method="post">
