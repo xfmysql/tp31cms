@@ -7,17 +7,16 @@
    
 </volist>
 <br/><br/>
-  <div class="blog-sidebar-widget blog-bor">
-            <h2 class="blog-title"><span>最新文章</span></h2>
+ <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>热门文章</span></h2>
             <ul class="am-list">
-                 <volist name="newArticleList" id="article" offset='0' length='6'>
-                <li><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></li>
+              <volist name="hotArticleList" id="article" offset='0' length='6'>
+                <li><a href="<{:reurl($article['id'],'article')}>" title="<{$article.title}>"><{$article.title}></a>
+                </li>
                </volist>
             </ul>
         </div>
 
-
-       
         <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
             <h2 class="blog-title"><span>热门标签</span></h2>
             <div class="am-u-sm-12 blog-clear-padding">
@@ -29,11 +28,15 @@
             </div>
         </div>
       
- <div class="blog-sidebar-widget blog-bor">
-            <h2 class="blog-title"><span>热门文章</span></h2>
+        
+  <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>最新文章</span></h2>
             <ul class="am-list">
-              <volist name="bestArticleList" id="article" offset='0' length='6'>
-                <li><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></li>
+                 <volist name="newArticleList" id="article" offset='0' length='6'>
+                <li><a href="<{:reurl($article['id'],'article')}>" title="<{$article.title}>"><{$article.title}></a></li>
                </volist>
             </ul>
         </div>
+
+
+       

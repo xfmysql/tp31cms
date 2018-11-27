@@ -34,7 +34,7 @@
 <div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-article-margin">
     <div data-am-widget="slider" class="am-slider am-slider-b1" data-am-slider='{&quot;controlNav&quot;:false}' >
     <ul class="am-slides">
-	 <volist name="adList" id="adv" offset='0' length='5'>
+	 <volist name="flashList" id="adv" offset='0' length='5'>
       <li>
             <a href="<{$adv.url}>" class="blog-color"><img style="width:1000px;height:250px;" src="/data/advert/<{$adv.code}>"></a>
             <!--div class="blog-slider-desc am-slider-desc ">
@@ -91,8 +91,8 @@
                
                 <h1><a href="<{:reurl($article['id'],'article')}>"><{$article.title}></a></h1>
                 <p><{$article.intro}></p>
-                 <!--span><a href="<{:reurl($article['id'],'article')}>" class="blog-color">作者</a></span-->
-                <!--span> @amazeUI &nbsp;</span-->
+                 <span>访问:</span>
+                <span><{$article.clicks}> &nbsp;</span>
                 <span><{$article.addtime||substr=0,10}></span>
 
             </div>

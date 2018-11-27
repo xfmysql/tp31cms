@@ -13,32 +13,9 @@
   <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
       <li class="am-active"><a href="/">首页</a></li>
-	  <foreach name="catalogList" item="catalog">
-
-	   <if condition="($catalog['childcount'] eq '0')">
-			<if condition="($catalog['channel'] eq C('Model_Download'))">
-			<li><a href="<{:reurl($catalog['id'],'downloadlist')}>"><{$catalog.name}></a></li>
-			<else />
-			<li><a href="<{:reurl($catalog['id'],'articlelist')}>"><{$catalog.name}></a></li>
-			</if>
-		<else />
-		<li class="am-dropdown" data-am-dropdown>
-        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-          <{$catalog.name}><span class="am-icon-caret-down"></span>
-        </a>
-        <ul class="am-dropdown-content">
-          <volist name="catalog['child']" id="childcatalog" offset='0' length='10'>
-						
-						<if condition="($childcatalog['channel'] eq C('Model_Download'))">
-						<li><a href="<{:reurl($childcatalog['id'],'downloadlist')}>"><{$childcatalog.name}></a></li>
-						<else />
-						<li><a href="<{:reurl($childcatalog['id'],'articlelist')}>"><{$childcatalog.name}></a></li>
-						</if>
-         </volist>
-        </ul>
-      </li>
-	</if>
-      </foreach>
+      <volist name="navList" id="entity" >              
+    <li><a href="<{$entity.url}>" title="<{$set.site_name}>-<{$entity.name}>"><{$entity.name}></a></li>             
+    </volist>
   
     </ul>
    

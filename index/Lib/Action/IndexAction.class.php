@@ -7,7 +7,11 @@ class IndexAction extends CommonAction
 { 
 	Public function index(){		
 
-		$this->assign('set',$this->setting);	
+		$this->assign('set',$this->setting);
+		//幻灯片
+		$flashList=M('ad')->limit('6')->where(" status=1 and type='image' ")->order(' ordid asc')->select();
+		$this->assign('flashList',$flashList);	
+
 		$article = D('article');		
 		//推荐文章 =置顶
 		$bestArticleList=$article->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1")->order('pubtime desc')->select();
@@ -34,18 +38,18 @@ class IndexAction extends CommonAction
 		//$this->assign('articleCatalogList',$articleCatalogList);
 		
 		//右侧热门文章
-		$hotArticleList=$article->limit('10')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 ")->order('clicks desc')->select();	
+		$hotArticleList=$article->limit('10')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 ")->order('clicks desc,id desc')->select();	
 		$this->assign('hotArticleList',$hotArticleList);
 
 		//右侧最新文章
-		$newArticleList=$article->limit('10')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 ")->order('pubtime desc')->select();	
+		$newArticleList=$article->limit('10')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 ")->order('pubtime desc,id desc')->select();	
 		$this->assign('newArticleList',$newArticleList);
 
 
 		//ad
-		$ad_mod = D('ad');
-		$adList = $ad_mod->limit('6')->where("  type='image'")->order('ordid ASC')->select();
-		$this->assign('adList',$adList);
+		$admode=M('flink');
+		$adList=$admode->where("status=1 and cate_id=4 ")->select();
+		$this->assign('adList',$adList);	
 
 
 		//主页友情链接
