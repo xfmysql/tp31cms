@@ -31,6 +31,16 @@
 				<option value="0" <if condition="$status eq 0"> selected="selected" </if>>未发布</option>
 				<option value="2" <if condition="$status eq 2"> selected="selected" </if>>已删除</option>
 			 </select>
+             <select name="istop">
+                <option value="-1">--首页置顶--</option>
+                <option value="1" <if condition="$istop eq 1"> selected="selected" </if>>置顶</option>
+                <option value="0" <if condition="$istop eq 0"> selected="selected" </if>>未置顶</option>
+             </select>
+             <select name="ishomepage">
+                <option value="-1">--首页显示--</option>
+                <option value="1" <if condition="$ishomepage eq 1"> selected="selected" </if>>首页显示</option>
+                <option value="0" <if condition="$ishomepage eq 0"> selected="selected" </if>>未显示</option>
+             </select>
                 &nbsp;关键字 :
                 <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
 				&nbsp;倒序 :

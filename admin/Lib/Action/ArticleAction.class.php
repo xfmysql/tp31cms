@@ -49,12 +49,25 @@ class ArticleAction extends BaseAction
 		    $where .= " AND add_time<='".$time_end."'";
 		    $this->assign('time_end', $_GET['time_end']);
 		}
+
+		if (isset($_GET['istop']) ) {
+			if($_GET['istop']=="0") $where .= " and istop=0";
+		    else if($_GET['istop']=="1") $where .= " and  istop=1"; 
+		    $this->assign('istop',$_GET['istop']);
+		}
+		if (isset($_GET['ishomepage']) ) {
+			if($_GET['ishomepage']=="0") $where .= " and  ishomepage=0";
+		    else if($_GET['ishomepage']=="1")  $where .= " and  ishomepage=1"; 
+		    $this->assign('ishomepage',$_GET['ishomepage']);
+		}
+
 		if (isset($_GET['ordby']) && trim($_GET['ordby'])) {
 		    if($_GET['ordby']=="1") $orderby = " id asc";
 			else $orderby = " id desc";
 		    $this->assign('ordby',$_GET['ordby']);
 		}
 		 
+
 		import("ORG.Util.Page");
 		$count = $article_mod->where($where)->count();
 		$p = new Page($count,20);

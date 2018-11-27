@@ -44,8 +44,9 @@ class CommonAction extends Action
 			  }
 		}		
 		//nav
-		$navList=M('nav')->where(" is_show=1 ")->order(' sort_order asc')->select();
-		$this->assign('NavList',$navList);	
+		$navigation=M('flink');
+		$navList=$navigation->where("status=1 and cate_id=1")->order('id desc')->select();
+		$this->assign('navList',$navList);
 		//标签
 	 	$tabinfo_mod = M('tabinfo');
 	    $tabinfolist = $tabinfo_mod->limit('50')->order('id desc')->select();    
@@ -57,6 +58,7 @@ class CommonAction extends Action
 		$this->assign('siteflink',$linkTxtList);		
 
 
+///////////////下面的要删除
 
 		//全局首页，显示推荐栏目，用户个人中心导航分类展示
 		$catalogList=M('catalog')->where('isnav=1 and status=1 and pid=0')->order('sort asc')->select();
