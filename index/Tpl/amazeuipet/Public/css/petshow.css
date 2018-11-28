@@ -23,7 +23,7 @@ ul,li,dl,dt,dd { margin: 0; padding: 0; list-style: none;}
 .am-gallery-bordered>li, .am-gallery-default>li, .am-gallery-imgbordered>li, .am-gallery-overlay>li { padding: 15px; padding-bottom: 10px;}
 .am-dropdown-content:after { display: none;}
 .am-dropdown-content { background: #454648; border:none; margin-top:0px; }
-.am-nav { font-size: 14px; margin-left: 20px;}
+.am-nav { font-size: 14px; margin-left: 20px; width:70%;}
 ul.am-dropdown-content { padding:0px;}
 .am-dropdown-content  { min-width: 106px; text-align: center;}
 ul.am-dropdown-content>li>a { color: #8C8C8C; font-size: 12px;}

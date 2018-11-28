@@ -19,6 +19,8 @@ class ArticleAction extends BaseAction
 		$where = '1=1';
 		$orderby = " id desc";
 		$this->assign('status',"-1");
+		$this->assign('istop',"-1");
+		$this->assign('ishomepage',"-1");
 		if (isset($_GET['status']) && trim($_GET['status'])) {
 			if($_GET['status']=="0") $where = " status=0";
 		    else if($_GET['status']=="1") $where = " status=1";
