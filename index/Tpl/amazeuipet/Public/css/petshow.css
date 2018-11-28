@@ -46,8 +46,8 @@ ul.am-dropdown-content>li>a:focus, ul.am-dropdown-content>li>a:hover { backgroun
 .banner_ios:visited , .banner_android:visited { color: #fff;}
  .am-btn {  border:none; }
 .banner_navbg { background: url(../img/bannner_smallbg.png) repeat-x; width: 100%; height: 62px;}
-.am-g { max-width: 1500px;}
-.am-imglist { max-width: 1540px; padding: 20px 0;}
+.am-g { max-width: 250px;;}
+.am-imglist { max-width: 1250px; padding: 20px 0;width:1250px;}
 .banner_nav { line-height: 61px; font-size: 12px; margin: 0 10px;}
 .am_list_block { padding: 10px; background: #fff; position: relative; }
 .am_listimg_info { color: #d1d1d1; padding-top: 5px; }
