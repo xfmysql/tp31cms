@@ -37,6 +37,11 @@ switch ($action) {
     case 'catchimage':
         $result = include("action_crawler.php");
         break;
+    /* 删除图片命令处理 */
+    case 'deleteimage':
+         $result = include('action_delete.php');
+         break;
+
 
     default:
         $result = json_encode(array(

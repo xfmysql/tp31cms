@@ -14,7 +14,7 @@ try {
     $path = str_replace('../', '', $path);
     $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
     
-    //安全判断(只允许删除 ueditor 目录下的文件)
+    //安全判断(只允许删除 ueditor 目录下的文件) windows下是\uploads\
     if(stripos($path, '/uploads/') !== 0)
     {
         return '非法删除';

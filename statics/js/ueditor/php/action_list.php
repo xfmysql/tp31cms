@@ -41,7 +41,7 @@ if (!count($files)) {
     ));
 }
 
-$files=array_sort($files,'mtime','desc');
+$files=array_sort($files,'mtime','asc');
 /* 获取指定范围的列表 */
 $len = count($files);
 for ($i = min($end, $len) - 1, $list = array(); $i < $len && $i >= 0 && $i >= $start; $i--){
