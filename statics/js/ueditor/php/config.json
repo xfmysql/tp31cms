@@ -77,7 +77,6 @@
     "imageManagerUrlPrefix": "", /* 图片访问路径前缀 */
     "imageManagerInsertAlign": "none", /* 插入的图片浮动方式 */
     "imageManagerAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 列出的文件类型 */
- 
 
     /* 列出指定目录下的文件 */
     "fileManagerActionName": "listfile", /* 执行文件管理的action名称 */
