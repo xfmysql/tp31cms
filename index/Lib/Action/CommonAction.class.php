@@ -45,7 +45,7 @@ class CommonAction extends Action
 		}		
 		//nav
 		$navigation=M('flink');
-		$navList=$navigation->where("status=1 and cate_id=1")->order('id desc')->select();
+		$navList=$navigation->where("status=1 and cate_id=1")->order('ordid asc')->select();
 		$this->assign('navList',$navList);
 		//标签
 	 	$tabinfo_mod = M('tabinfo');
