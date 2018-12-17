@@ -44,15 +44,18 @@ class ArticleAction extends CommonAction
 		$this->assign('seokeywords',$seokeywords);
 
 		$article_mod = D('article');
-		//推荐文章 
-		$bestArticleList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1 and pid=".$article['pid'])->order('clicks desc')->select();
-		$this->assign('bestArticleList',$bestArticleList);	
+		//推荐文章 istop
+		$topList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1 and pid=".$article['pid'])->order('pubtime desc')->select();
+		$this->assign('topList',$topList);	
+		//热门文章 hotList
+		$hotList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$article['pid'])->order('clicks desc')->select();	
+		$this->assign('hotList',$hotList);
 		//最新文章
-		$newArticleList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$article['pid'])->order('addtime desc')->select();	
-		$this->assign('newArticleList',$newArticleList);
+		$newList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$article['pid'])->order('pubtime desc')->select();	
+		$this->assign('newList',$newList);
 		//相关阅读
-		$sameList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$article['pid'])->order('addtime desc')->select();	
-		$this->assign('sameList',$sameList);
+		$likeList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$article['pid'])->order('addtime desc')->select();	
+		$this->assign('likeList',$likeList);
 
 		$this->display('article');
 	}

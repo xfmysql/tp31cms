@@ -1,0 +1,43 @@
+ 
+
+
+<volist name="adList" id="adv" offset='0' length='1'>
+     
+            <a href="<{$adv.url}>" class="blog-color"><img style="width:100%" src="/data/advert/<{$adv.code}>"></a>           
+   
+</volist>
+<br/><br/>
+ <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>推荐文章</span></h2>
+            <ul class="am-list">
+              <volist name="topList" id="article" offset='0' length='6'>
+                <li><a href="<{:reurl($article['id'],'article')}>" title="<{$article.title}>"><{$article.title}></a>
+                </li>
+               </volist>
+            </ul>
+        </div>
+<br/><br/>
+ <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>热门文章</span></h2>
+            <ul class="am-list">
+              <volist name="hotList" id="article" offset='0' length='6'>
+                <li><a href="<{:reurl($article['id'],'article')}>" title="<{$article.title}>"><{$article.title}></a>
+                </li>
+               </volist>
+            </ul>
+        </div>
+
+
+        <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+            <h2 class="blog-title"><span>热门标签</span></h2>
+            <div class="am-u-sm-12 blog-clear-padding">
+               <volist name="tabinfolist" id="vo" offset='0' length='6'>
+                <a class="blog-tag" href="<{:reurl($vo['id'],'tabinfo')}>" ><{$vo.name}></a>
+               </volist>
+            </ul>
+
+            </div>
+        </div>
+    
+
+       

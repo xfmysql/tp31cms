@@ -12,13 +12,15 @@ class IndexAction extends CommonAction
 		$flashList=M('ad')->limit('6')->where(" status=1 and type='image' ")->order(' ordid asc')->select();
 		$this->assign('flashList',$flashList);	
 
-		$article = D('article');		
-		//推荐文章 =置顶
-		$bestArticleList=$article->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1")->order('pubtime desc')->select();
-			$this->assign('bestArticleList',$bestArticleList);	
-		//文章=ishomepage
-		$articlelist=M('article')->limit(30)->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and ishomepage=1 ")->order('pubtime desc')->select();
-		$this->assign('articlelist',$articlelist);	
+		$article = D('article');	
+		//首页显示ishomepage
+		$homeList=M('article')->limit(6)->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and ishomepage=1 ")->order('pubtime desc')->select();
+		$this->assign('homeList',$homeList);	
+
+		//推荐文章istop
+		$topList=$article->limit(30)->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1")->order('pubtime desc')->select();
+			$this->assign('topList',$topList);	
+		
 			
 		
 		//join

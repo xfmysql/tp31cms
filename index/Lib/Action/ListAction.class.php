@@ -34,11 +34,12 @@ class ListAction extends CommonAction
 		
 		$article_mod = D('article');
 		//推荐文章 
-		$bestArticleList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1 and pid=".$catsid)->order('clicks desc')->select();
-		$this->assign('bestArticleList',$bestArticleList);	
-		//最新文章
-		$newArticleList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$catsid)->order('addtime desc')->select();	
-		$this->assign('newArticleList',$newArticleList);
+		$topList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and  status=1 and istop=1 and pid=".$catsid)->order('clicks desc')->select();
+		$this->assign('topList',$topList);	
+		//热门文章 hotList
+		$hotList=$article_mod->limit('6')->where(" (pubtime is null or pubtime<CURRENT_TIMESTAMP()) and status=1 and pid=".$catsid)->order('clicks desc')->select();	
+		$this->assign('hotList',$hotList);
+		
 
 		//面包屑
 		$this->assign('bread',$this->now_here($catsid));
