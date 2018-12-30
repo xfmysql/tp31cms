@@ -20,7 +20,7 @@ $array = array(
 //	'URL_PATHINFO_DEPR' =>'-',  //参数之间的分割符号    	
     'DEFAULT_LANG' => 'zh-cn', // 默认语言	
 	
-	'DEFAULT_THEME' => 'yqx',
+	'DEFAULT_THEME' => 'amazeuiblog',//amazeuiblog amazeuipet xyq
 	'SHOW_PAGE_TRACE'=>false,
 
 	/* URL配置 */
