@@ -15,7 +15,7 @@ $(function(){
 })
 </script>
 
-<form action="{:u('Article/edit')}" method="post" name="myform" id="myform" enctype="multipart/form-data" style="margin-top:10px;">
+<form action="{:u('Chapter/edit')}" method="post" name="myform" id="myform" enctype="multipart/form-data" style="margin-top:10px;">
   <div class="pad-10">
   <div class="col-tab">
   <ul class="tabBut cu-li">
@@ -26,7 +26,7 @@ $(function(){
     <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
       <tr>
         <th width="100">{:L('ltitle')} :</th>
-        <td><input type="text" name="title" id="title" class="input-text" size="100" value="{$article.title}"></td>
+        <td><input type="text" name="title" id="title" class="input-text" size="100" value="{$chapter.title}"></td>
       </tr>
 	  
      <tr>
@@ -53,10 +53,10 @@ $(function(){
           </tr>
       <tr>
         <th>{:L('lcatalog')} :</th>
-        <td><select name="pid" id="pid" style="width:200px;">
+        <td><select name="bid" id="pid" style="width:200px;">
         	<option value="0">{:L('lselectcatalog')}</option>
             <volist name="cate_list['parent']" id="val">
-              <option  <if condition="$article['pid'] eq $val['id']"> selected="selected" </if> value="{$val.id}">{$val.name}</option>
+              <option  <if condition="$chapter['pid'] eq $val['id']"> selected="selected" </if> value="{$val.id}">{$val.name}</option>
               <notempty name="cate_list['sub'][$val['id']]">
                 <volist name="cate_list['sub'][$val['id']]" id="sval">
                   <option <if condition="$article['pid'] eq $sval['id']"> selected="selected" </if> value="{$sval.id}">&nbsp;&nbsp;&nbsp;&nbsp;{$sval.name}</option>
@@ -73,28 +73,13 @@ $(function(){
       
           <tr>
             <th>{:L('lintro')} :</th>
-            <td><textarea name="intro" id="intro" style="width:68%;height:50px;">{$article.intro}</textarea></td>
+            <td><textarea name="intro" id="intro" style="width:68%;height:50px;">{$chapter.intro}</textarea></td>
           </tr>
-      <tr>
-        <th>{:L('licourl')} :</th>
-        <td>
-          <input type="file" name="icourl" id="icourl" class="input-text" style="width:200px;" />
-            <if condition="$article['icourl'] neq ''">
-            <br /><br /><img id="icoimg" src="{$article.icourl}" style="width:80px;height:80px;"/>
-            </if>
-            <php>if(!empty($article['icourl'])) { $ricourl=str_replace("thumb_","",$article['icourl']);
-                echo '<input type="hidden" name="ricourl" id="ricourl" value="'.$ricourl.'" />'.$ricourl;
-              }
-             </php>
-            
-            <a id="copyBtn" name="copyBtn">复制缩略图</a>
-            <a id="copyBtn2" name="copyBtn2">复制原图</a>
-        </td>
-      </tr>
+      
  <tr>
         <th>{:L('lcontent')} :</th>
         <td> 
-        <script id="content" style="width:84%;height:350px;" name="content" type="text/plain">{$article.content}</script>  
+        <script id="content" style="width:84%;height:350px;" name="content" type="text/plain">{$chapter.content}</script>  
         
       <tpl:editor id="edtcontent" name="edtcontent" type="UEDITOR" style="width:84%;height:350px;" ></tpl:editor>
        <script type="text/javascript">var ue= UE.getEditor("content");</script>
@@ -103,18 +88,18 @@ $(function(){
 
   <tr>
           <th>{:L('lishomepage')}:</th>
-          <td><input type="radio" name="ishomepage" class="radio_style" value="1" <if condition="$article.ishomepage eq 1"> checked</if>>
+          <td><input type="radio" name="ishomepage" class="radio_style" value="1" <if condition="$chapter.ishomepage eq 1"> checked</if>>
               &nbsp;首页显示&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="ishomepage" class="radio_style" value="0" <if condition="$article.ishomepage eq 0"> checked</if>>
+              <input type="radio" name="ishomepage" class="radio_style" value="0" <if condition="$chapter.ishomepage eq 0"> checked</if>>
               &nbsp;不显示
             </td>
           </tr>
      
      <tr>
           <th>{:L('listop')}:</th>
-          <td><input type="radio" name="istop" class="radio_style" value="1" <if condition="$article.istop eq 1"> checked</if>>
+          <td><input type="radio" name="istop" class="radio_style" value="1" <if condition="$chapter.istop eq 1"> checked</if>>
               &nbsp;推荐&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="istop" class="radio_style" value="0" <if condition="$article.istop eq 0"> checked</if>>
+              <input type="radio" name="istop" class="radio_style" value="0" <if condition="$chapter.istop eq 0"> checked</if>>
               &nbsp;不推荐
             </td>
           </tr>
@@ -123,33 +108,33 @@ $(function(){
      
       <tr>
         <th>{:L('lstatus')} :</th>
-        <td><input type="radio" name="status" class="radio_style" value="1" <if condition="$article.status eq 1"> checked</if>>
+        <td><input type="radio" name="status" class="radio_style" value="1" <if condition="$chapter.status eq 1"> checked</if>>
           &nbsp;已审核&nbsp;&nbsp;&nbsp;
-          <input type="radio" name="status" class="radio_style" value="0" <if condition="$article.status eq 0">  checked</if>>
+          <input type="radio" name="status" class="radio_style" value="0" <if condition="$chapter.status eq 0">  checked</if>>
           &nbsp;未审核
-		  <input type="radio" name="status" class="radio_style" value="2" <if condition="$article.status eq 2">  checked</if>>
+		  <input type="radio" name="status" class="radio_style" value="2" <if condition="$chapter.status eq 2">  checked</if>>
           &nbsp;草稿
           </td>
       </tr>
        <tr>
             <th width="100">{:L('laddtime')}:</th>
-            <td><input type="text" id="addtime" name="addtime" value="{$article.addtime}" /> 用来排序，最新的排前面</td>
+            <td><input type="text" id="addtime" name="addtime" value="{$chapter.addtime}" /> 用来排序，最新的排前面</td>
           </tr>
 
        <tr>
             <th width="100">{:L('lpubtime')}:</th>
-            <td><input type="text" id="pubtime" name="pubtime" value="{$article.pubtime}" />  用来控制显示，小于当前时间的显示</td>
+            <td><input type="text" id="pubtime" name="pubtime" value="{$chapter.pubtime}" />  用来控制显示，小于当前时间的显示</td>
           </tr>
         <tr>
             <th>{:L('lsort')} :</th>
-            <td><input type="text" name="sort" id="sort" class="input-text" size="8" value="{$article.sort}">
-              &nbsp;&nbsp;&nbsp;{:L('lclicks')} :&nbsp;<input type="text" name="clicks" id="clicks" class="input-text" size="8"  value="{$article.clicks}">
-              &nbsp;&nbsp;&nbsp;{:L('lzan')} :&nbsp;<input type="text" name="zan" id="zan" class="input-text" size="8"  value="{$article.zan}">
-              &nbsp;&nbsp;&nbsp;{:L('lcai')} :&nbsp;<input type="text" name="cai" id="cai" class="input-text" size="8"  value="{$article.cai}">
+            <td><input type="text" name="sort" id="sort" class="input-text" size="8" value="{$chapter.sort}">
+              &nbsp;&nbsp;&nbsp;{:L('lclicks')} :&nbsp;<input type="text" name="clicks" id="clicks" class="input-text" size="8"  value="{$chapter.clicks}">
+              &nbsp;&nbsp;&nbsp;{:L('lzan')} :&nbsp;<input type="text" name="zan" id="zan" class="input-text" size="8"  value="{$chapter.zan}">
+              &nbsp;&nbsp;&nbsp;{:L('lcai')} :&nbsp;<input type="text" name="cai" id="cai" class="input-text" size="8"  value="{$chapter.cai}">
             </td>
           </tr>
 
-      <tr><td><input type="hidden" name="id" value="{$article.id}" id="article_id"/></td></tr>
+      <tr><td><input type="hidden" name="id" value="{$chapter.id}" id="chapter"/></td></tr>
       <tr>
           <th>说明:</th>
           <td>
@@ -159,23 +144,7 @@ $(function(){
 
     </table>
   </div>
-
-  <!--div id="div_setting_2" class="contentList pad-10 hidden">
-    <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
-      <tr>
-        <th width="100">{$Think.lang.seo_title} :</th>
-        <td><input type="text" name="seo_title" id="seo_title" class="input-text" size="60" value="{$article.seo_title}"></td>
-      </tr>
-      <tr>
-        <th>{$Think.lang.seo_keys} :</th>
-        <td><input type="text" name="seo_keys" id="seo_keys" class="input-text" size="60" value="{$article.seo_keys}"></td>
-      </tr>
-      <tr>
-        <th>{$Think.lang.seo_desc} :</th>
-        <td><textarea name="seo_desc" id="seo_desc" cols="80" rows="8">{$article.seo_desc}</textarea></td>
-      </tr>
-    </table>
-  </div-->
+ 
   <div class="bk15"></div>
   <div class="btn">
     <input type="submit" value="{$Think.lang.submit}" name="dosubmit" onclick="return submitFrom();" class="button" id="dosubmit">

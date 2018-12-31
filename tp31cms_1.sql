@@ -710,3 +710,42 @@ CREATE TABLE `cms_tabrelation` (
 -- ----------------------------
 INSERT INTO `cms_tabrelation` VALUES ('116', '6', '2018-08-30 15:11:28', '5', null);
 INSERT INTO `cms_tabrelation` VALUES ('115', '7', '2018-08-30 15:11:28', '5', null);
+
+
+CREATE TABLE `cms_book` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `cid` tinyint(4) unsigned NOT NULL,
+  `intro` varchar(255) NOT NULL,
+  `icourl` varchar(255) NOT NULL,
+  `content` mediumtext NOT NULL,
+  `istop` tinyint(1) NOT NULL,
+  `ishomepage` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-待审核 1-已审核',
+  `sort` int(11) NOT NULL DEFAULT '0',
+  `clicks` int(11) NOT NULL DEFAULT '0',
+  `addtime` datetime NOT NULL,
+  `edittime` datetime NOT NULL,
+  `pubtime` datetime DEFAULT NULL,
+  `sourceurl` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+CREATE TABLE `cms_chapter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `bid` tinyint(4) unsigned NOT NULL,
+  `intro` varchar(255) NOT NULL,
+  `content` mediumtext NOT NULL,
+  `istop` tinyint(1) NOT NULL,
+  `ishomepage` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-待审核 1-已审核',
+  `sort` int(11) NOT NULL DEFAULT '0',
+  `clicks` int(11) NOT NULL DEFAULT '0',
+  `addtime` datetime NOT NULL,
+  `edittime` datetime NOT NULL,
+  `pubtime` datetime DEFAULT NULL,
+  `sourceurl` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;

@@ -148,7 +148,7 @@ class BookAction extends BaseAction
 				$article_id = isset($_GET['id']) && intval($_GET['id']) ? intval($_GET['id']) : $this->error(L('please_select'));
 			}
 			$article_cate_mod = D('catalog');
-		    $result = $article_cate_mod->where(" model=".C("Model_Article") )->order('sort ASC')->select();
+		    $result = $article_cate_mod->where(" model=".C("Model_Chapter") )->order('sort ASC')->select();
 		    $cate_list = array();
 		    foreach ($result as $val) {
 		    	if ($val['pid']==0) {
@@ -253,7 +253,7 @@ class BookAction extends BaseAction
 			}
 		}else{
 			$article_cate_mod = D('catalog');
-	    	$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort ASC')->select();
+	    	$result = $article_cate_mod->where(" model=".C("Model_Chapter"))->order('sort ASC')->select();
 	    	$cate_list = array();
 	    	foreach ($result as $val) {
 	    	    if ($val['pid']==0) {

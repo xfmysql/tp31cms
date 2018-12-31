@@ -43,7 +43,7 @@
                <input type="radio" name="ordby" class="radio_style" value="1" <if condition="$ordby eq 1"> checked</if>>
 
 
-                <input type="hidden" name="m" value="Article" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="hidden" name="m" value="Chapter" />&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="submit" name="search" class="button" value="搜索" />
         	</div>
             </td>
@@ -52,7 +52,7 @@
     </table>
     </form>
 
-    <form id="myform" name="myform" action="{:u('Article/delete')}" method="post" onsubmit="return check();">
+    <form id="myform" name="myform" action="{:u('Chapter/delete')}" method="post" onsubmit="return check();">
     <div class="table-list">
     <table width="100%" cellspacing="0">
         <thead>
@@ -71,13 +71,13 @@
             </tr>
         </thead>
     	<tbody>
-        <volist name="article_list" id="val" >
+        <volist name="chapterlist" id="val" >
         <tr>       
-		 	<td align="center"><a target="_blank" href="/index.php?a=index&m=article&id={$val.id}">{$val.id} - 访问</a></td> 	
+		 	<td align="center"><a target="_blank" href="/index.php?a=index&m=chapter&id={$val.id}">{$val.id} - 访问</a></td> 	
             <td align="center">
            	 <input type="checkbox" value="{$val.id}" name="id[]">
 			</td>           
-            <td align="left"><a class="blue" target="_blank" ="" href="/article-{$val.id}.html">{$val.title}</a><if condition="$val['url'] neq ''"><br><a href="{$val.url}" target=_blank>{$val.url}</a></if>&nbsp;&nbsp;</td>
+            <td align="left"><a class="blue" target="_blank" ="" href="/chapter-{$val.id}.html">{$val.title}</a><if condition="$val['url'] neq ''"><br><a href="{$val.url}" target=_blank>{$val.url}</a></if>&nbsp;&nbsp;</td>
             <td align="center"><b>{$val.cate_name.name}</b></td>
             <td align="center">{$val.addtime||substr=0,10}</td>
              <td align="center">{$val.publishtime||substr=0,10}</td>
@@ -85,7 +85,7 @@
             <td align="center" onclick="status({$val.id},'istop')" id="istop_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.istop}.gif" /></td>
             <td align="center" onclick="status({$val.id},'ishomepage')" id="ishomepage_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.ishomepage}.gif" /></td>
       		<td align="center" onclick="status({$val.id},'status')" id="status_{$val.id}"><img src="__ROOT__/statics/images/status_{$val.status}.gif" /></td>
-			<td align="center"><a class="blue" href="{:u('Article/edit', array('id'=>$val['id']))}">编辑</a></td>
+			<td align="center"><a class="blue" href="{:u('Chapter/edit', array('id'=>$val['id']))}">编辑</a></td>
         </volist>
     	</tbody>
     </table>
@@ -105,12 +105,12 @@
 function edit(id, name) {
 	var lang_edit = "编辑资讯";
 	window.top.art.dialog({id:'edit'}).close();
-	window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'?m=Article&a=edit&id='+id,width:'550',height:'400'}, function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;d.document.getElementById('dosubmit').click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
+	window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'?m=chapter&a=edit&id='+id,width:'550',height:'400'}, function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;d.document.getElementById('dosubmit').click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
 }
 
 var lang_cate_name = "资讯标题";
 function check(){
-	if($("#myform").attr('action') != '{:u("Article/sort_order")}') {
+	if($("#myform").attr('action') != '{:u("Chapter/sort_order")}') {
 		var ids='';
 		$("input[name='id[]']:checked").each(function(i, n){
 			ids += $(n).val() + ',';
@@ -125,7 +125,7 @@ function check(){
 }
 
 function status(id,type){
-    $.get("{:u('Article/status')}", { id: id, type: type }, function(jsondata){
+    $.get("{:u('Chapter/status')}", { id: id, type: type }, function(jsondata){
 		var return_data  = eval("("+jsondata+")");
 		$("#"+type+"_"+id+" img").attr('src', '__ROOT__/statics/images/status_'+return_data+'.gif')
 	}); 
@@ -133,7 +133,7 @@ function status(id,type){
 //排序方法
 function sort(id,type,num){
     
-    $.get("{:u('Article/sort')}", { id: id, type: type,num:num }, function(jsondata){
+    $.get("{:u('Chapter/sort')}", { id: id, type: type,num:num }, function(jsondata){
         
 		$("#"+type+"_"+id+" ").attr('value', jsondata);
 	},'json'); 

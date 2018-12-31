@@ -10,7 +10,7 @@ return array (
   'Model_Article'=>2,
   'Model_Download'=>3,
   'Model_Album'=>4,
-
+  'Model_Chapter'=>5,
   'config_upload_dir'=>'/uploads/',
 ); 
 ?>

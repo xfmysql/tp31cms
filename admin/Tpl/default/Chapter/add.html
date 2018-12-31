@@ -7,7 +7,7 @@ $(function(){
 	});
 })
 </script>
-<form action="{:u('Article/add')}" method="post" name="myform" id="myform"  enctype="multipart/form-data" style="margin-top:10px;">
+<form action="{:u('Chapter/add')}" method="post" name="myform" id="myform"  enctype="multipart/form-data" style="margin-top:10px;">
   <div class="pad-10">
     <div class="col-tab">
       <ul class="tabBut cu-li">
@@ -18,7 +18,7 @@ $(function(){
         <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
           <tr>
             <th width="100">{:L('ltitle')}:</th>
-            <td><input type="text" name="title" id="title" class="input-text" size="100"> 根据标题自动匹配词</td>
+            <td><input type="text" name="title" id="title" class="input-text" size="100"></td>
           </tr>  
 		  <tr>
           <th>标签:</th>
@@ -44,21 +44,11 @@ $(function(){
           </tr>
 
           <tr>
-            <th>{:L('lcatalog')}:</th>
-            <td><select name="pid" id="pid" style="width:200px;">
-            	<option value="0">{:L('lselectcatalog')}</option>
-                <volist name="cate_list['parent']" id="val">
-                  <option value="{$val.id}">{$val.name}</option>
-                  <notempty name="cate_list['sub'][$val['id']]">
-                    <volist name="cate_list['sub'][$val['id']]" id="sval">
-                      <option value="{$sval.id}">&nbsp;&nbsp;&nbsp;&nbsp;{$sval.name}</option>
-                      <notempty name="cate_list['sub'][$sval['id']]">
-                        <volist name="cate_list['sub'][$sval['id']]" id="ssval">
-                          <option value="{$ssval.id}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$ssval.cate_name}</option>
-                        </volist>
-                      </notempty>
-                    </volist>
-                  </notempty>
+            <th>{:L('lbook')}:</th>
+            <td><select name="bid" id="bid" style="width:200px;">
+            	<option value="0">{:L('lselectbook')}</option>
+                <volist name="booklist" id="val">
+                  <option value="{$val.id}">{$val.title}</option>
                 </volist>
               </select></td>
           </tr>
@@ -66,11 +56,7 @@ $(function(){
           <tr>
             <th>{:L('lintro')} :</th>
             <td><textarea name="intro" id="intro" style="width:68%;height:50px;"></textarea></td>
-          </tr>
-          <tr>
-          	<th>{:L('licourl')} :</th>
-            <td><input type="file" name="icourl" id="icourl" class="input-text"  style="width:200px;" /></td>
-          </tr>
+          </tr> 
          
            <tr>
             <th>{:L('lcontent')} :</th>
@@ -129,23 +115,7 @@ $(function(){
           </tr>
         </table>
       </div>
-      
-      <!--div id="div_setting_2" class="contentList pad-10 hidden">
-        <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
-          <tr>
-            <th width="100">{$Think.lang.seo_title} :</th>
-            <td><input type="text" name="seo_title" id="seo_title" class="input-text" size="60"></td>
-          </tr>
-          <tr>
-            <th>{$Think.lang.seo_keys} :</th>
-            <td><input type="text" name="seo_keys" id="seo_keys" class="input-text" size="60"></td>
-          </tr>
-          <tr>
-            <th>{$Think.lang.seo_desc} :</th>
-            <td><textarea name="seo_desc" id="seo_desc" cols="80" rows="8"></textarea></td>
-          </tr>
-        </table>
-      </div-->
+    
       <div class="bk15"></div>
       <div class="btn"><input type="submit" value="{$Think.lang.submit}" onclick="return submitFrom();" name="dosubmit" class="button" id="dosubmit"></div>
     </div>

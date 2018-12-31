@@ -12,8 +12,8 @@ class ChapterAction extends BaseAction
 {
 	public function index()
 	{
-		$article_mod = D('article');
-		$article_cate_mod = D('catalog');
+		$chapter_mod = D('chapter');
+		$book_mod = D('book');
 
 		//搜索
 		$where = '1=1';
@@ -27,13 +27,13 @@ class ChapterAction extends BaseAction
 		    $this->assign('status',$_GET['status']);
 		}
 		
-		if (isset($_GET['cate_id']) && intval($_GET['cate_id'])) {
-			if(intval($_GET['cate_id'])==-1){
-				$where .= " AND pid=0";	
-			}else if(intval($_GET['cate_id'])>0){
-		    	$where .= " AND pid=".$_GET['cate_id'];
+		if (isset($_GET['bookid']) && intval($_GET['bookid'])) {
+			if(intval($_GET['bookid'])==-1){
+				$where .= " AND bid=0";	
+			}else if(intval($_GET['bookid'])>0){
+		    	$where .= " AND bid=".$_GET['bookid'];
 		    }// if ==0 query all
-		    $this->assign('cate_id', $_GET['cate_id']);
+		    $this->assign('bookid', $_GET['bookid']);
 		}
 		if (isset($_GET['keyword']) && trim($_GET['keyword'])) {
 		    $where .= " AND title LIKE '%".$_GET['keyword']."%'";
@@ -56,30 +56,30 @@ class ChapterAction extends BaseAction
 		}
 		 
 		import("ORG.Util.Page");
-		$count = $article_mod->where($where)->count();
+		$count = $chapter_mod->where($where)->count();
 		$p = new Page($count,20);
-		$article_list = $article_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order($orderby)->select();
+		$chapter_list = $chapter_mod->where($where)->limit($p->firstRow.','.$p->listRows)->order($orderby)->select();
 
 		$key = 1;
-		foreach($article_list as $k=>$val){
-			$article_list[$k]['key'] = ++$p->firstRow;
-			$article_list[$k]['cate_name'] = $article_cate_mod->field('name')->where('id='.$val['pid'])->find();
+		foreach($chapter_list as $k=>$val){
+			$chapter_list[$k]['key'] = ++$p->firstRow;
+			$chapter_list[$k]['bookname'] = $book_mod->field('name')->where('id='.$val['bid'])->find();
 		}
-		$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort asc')->select();
-    	$cate_list = array();
+		$result = $book_mod->where(" model=".C("Model_Chapter"))->order('sort asc')->select();
+    	$book_list = array();
     	foreach ($result as $val) {
-    	    if ($val['pid']==0) {
-    	        $cate_list['parent'][$val['id']] = $val;
+    	    if ($val['bid']==0) {
+    	        $book_list['parent'][$val['id']] = $val;
     	    } else {
-    	        $cate_list['sub'][$val['pid']][] = $val;
+    	        $book_list['sub'][$val['bid']][] = $val;
     	    }
     	}
 
 		//网站信息/应用资讯
 		$page = $p->show();
 		$this->assign('page',$page);
-    	$this->assign('cate_list', $cate_list);
-		$this->assign('article_list',$article_list);		
+    	$this->assign('booklist', $cate_list);
+		$this->assign('chapterlist',$chapter_list);		
 		$this->display();
 	}
 
@@ -87,8 +87,8 @@ class ChapterAction extends BaseAction
 	function edit()
 	{
 		if(isset($_POST['dosubmit'])){
-			$article_mod = D('article');	
-			$data = $article_mod->create();
+			$chapter_mod = D('chapter');	
+			$data = $chapter_mod->create();
 			if($data['pid']==0){
 				$this->error('请选择资讯分类');
 			}
@@ -98,11 +98,11 @@ class ChapterAction extends BaseAction
 				    $data['icourl'] = $icourls[1];
 				}else $data['icourl'] = $icourls[0];
 			}			
-			$result = $article_mod->save($data);
+			$result = $chapter_mod->save($data);
 			if(false !== $result){
 				if($_POST['tabinfos']!=''){
 					$tabrelation_mod = D("tabrelation");
-					$tabrelation_mod->where("articleid=".$data["id"])->delete();
+					$tabrelation_mod->where("chapterid=".$data["id"])->delete();
 					$tabinfo_mod = D("tabinfo");
 
 					$reldata = array();
@@ -112,16 +112,16 @@ class ChapterAction extends BaseAction
 					 	$tabid = $tabinfo_mod->where("name='".$r."'")->getField("id");	
 						$reldata['attributeid']= $tabid;						
 						$reldata['addtime']= date('Y-m-d H:i:s',time());
-						$reldata['articleid']=$data["id"];
+						$reldata['chapterid']=$data["id"];
 						$tabrelation_mod->add($reldata);									
 					}
 				}else{
 					$tabrelation_mod = D("tabrelation");
-					$tabrelation_mod->where("articleid=".$data["id"])->delete();
+					$tabrelation_mod->where("chapterid=".$data["id"])->delete();
 				}
 				if($_POST['keywords']!=''){
 					$keywordrelation_mod = D("keywordrelation");
-					$keywordrelation_mod->where("articleid=".$data["id"])->delete();
+					$keywordrelation_mod->where("chapterid=".$data["id"])->delete();
 					$keyword_mod = D("keyword");
 
 					$reldata = array();
@@ -131,38 +131,31 @@ class ChapterAction extends BaseAction
 					 	$keyid = $keyword_mod->where("name='".$r."'")->getField("id");	
 						$reldata['attributeid']= $keyid;						
 						$reldata['addtime']= date('Y-m-d H:i:s',time());
-						$reldata['articleid']=$data["id"];
+						$reldata['chapterid']=$data["id"];
 						$keywordrelation_mod->add($reldata);									
 					}
 				}else{
 					$keywordrelation_mod = D("keywordrelation");
-					$keywordrelation_mod->where("articleid=".$data["id"])->delete();
+					$keywordrelation_mod->where("chapterid=".$data["id"])->delete();
 				}
-				$this->success(L('operation_success'),U('Article/index'));
+				$this->success(L('operation_success'),U('chapter/index'));
 			}else{
 				$this->error(L('operation_failure'));
 			}
 		}else{
-			$article_mod = D('article');
+			$chapter_mod = D('chapter');
 			if( isset($_GET['id']) ){
-				$article_id = isset($_GET['id']) && intval($_GET['id']) ? intval($_GET['id']) : $this->error(L('please_select'));
+				$chapter_id = isset($_GET['id']) && intval($_GET['id']) ? intval($_GET['id']) : $this->error(L('please_select'));
 			}
-			$article_cate_mod = D('catalog');
-		    $result = $article_cate_mod->where(" model=".C("Model_Article") )->order('sort ASC')->select();
-		    $cate_list = array();
-		    foreach ($result as $val) {
-		    	if ($val['pid']==0) {
-		    	    $cate_list['parent'][$val['id']] = $val;
-		    	} else {
-		    	    $cate_list['sub'][$val['pid']][] = $val;
-		    	}
-		    }
-			$article_info = $article_mod->where('id='.$article_id)->find();				
-	    	$this->assign('cate_list',$cate_list);
-			$this->assign('article',$article_info);
+			$book_mod = D('book');
+		    $booklist = $book_mod->where(" status=1")->order('sort ASC')->select();
+		   
+			$chapter_info = $chapter_mod->where('id='.$chapter_id)->find();				
+	    	$this->assign('booklist',$booklist);
+			$this->assign('chapter',$chapter_info);
 
 			$tabinfo_mod = D('tabinfo');
-			$sql = 'select t.*  from cms_tabinfo t join cms_tabrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
+			$sql = 'select t.*  from cms_tabinfo t join cms_tabrelation r on t.id=r.attributeid where r.chapterid='.$chapter_id.' order by r.id asc,r.addtime asc';
 		    $tabinfo_list = $tabinfo_mod->query($sql);
 
 		    $tabinfos='';
@@ -176,7 +169,7 @@ class ChapterAction extends BaseAction
 			$this->assign('tabinfo_list',$tabinfo_list);
 			//关键词
 			$keyword_mod = D('keyword');
-			$sql = 'select t.*  from cms_keyword t join cms_keywordrelation r on t.id=r.attributeid where r.articleid='.$article_id.' order by r.id asc,r.addtime asc';
+			$sql = 'select t.*  from cms_keyword t join cms_keywordrelation r on t.id=r.attributeid where r.chapterid='.$chapter_id.' order by r.id asc,r.addtime asc';
 		    $keyword_list = $keyword_mod->query($sql);
 
 		    $keyword='';
@@ -199,24 +192,20 @@ class ChapterAction extends BaseAction
 	{
 		if(isset($_POST['dosubmit'])){
 			
-			$article_mod = D('article');		
+			$chapter_mod = D('chapter');		
 			if($_POST['title']==''){
 				$this->error(L('input').L('title'));
 			}
-			if(false === $data = $article_mod->create()){
-				$this->error($article_mod->error());
+			if(false === $data = $chapter_mod->create()){
+				$this->error($chapter_mod->error());
 			}
 
-			if($data['pid']==0){
+			if($data['bid']==0){
 				$this->error('请选择资讯分类');
-			}
-			if ($_FILES['icourl']['name']!='') {
-				$upload_url = $this->upload("article");//封面
-				$data['icourl'] = $upload_url;
 			}
 			$data['addtime']=date('Y-m-d H:i:s',time());
 			$data['edittime']=date('Y-m-d H:i:s',time());
-			$newid = $article_mod->add($data);
+			$newid = $chapter_mod->add($data);
 
 			if($newid>0){
 				if($_POST['tabinfos']!=''){
@@ -229,7 +218,7 @@ class ChapterAction extends BaseAction
 					 	$tabid = $tabinfo_mod->where("name='".$r."'")->getField("id");	
 						$reldata['attributeid']= $tabid;						
 						$reldata['addtime']= date('Y-m-d H:i:s',time());
-						$reldata['articleid']=$data["id"];
+						$reldata['chapterid']=$data["id"];
 						$tabrelation_mod->add($reldata);									
 					}
 					if($_POST['keywords']!=''){
@@ -242,7 +231,7 @@ class ChapterAction extends BaseAction
 						 	$keyid = $keywords_mod->where("name='".$r."'")->getField("id");	
 							$reldata['attributeid']= $keyid;						
 							$reldata['addtime']= date('Y-m-d H:i:s',time());
-							$reldata['articleid']=$data["id"];
+							$reldata['chapterid']=$data["id"];
 							$keywordrelation_mod->add($reldata);									
 						}
 					}
@@ -252,17 +241,10 @@ class ChapterAction extends BaseAction
 				$this->error('添加失败');
 			}
 		}else{
-			$article_cate_mod = D('catalog');
-	    	$result = $article_cate_mod->where(" model=".C("Model_Article"))->order('sort ASC')->select();
-	    	$cate_list = array();
-	    	foreach ($result as $val) {
-	    	    if ($val['pid']==0) {
-	    	        $cate_list['parent'][$val['id']] = $val;
-	    	    } else {
-	    	        $cate_list['sub'][$val['pid']][] = $val;
-	    	    }
-	    	}
-	    	$this->assign('cate_list',$cate_list);
+			$book_mod = D('book');
+	    	$booklist = $book_mod->where(" status=1")->order('sort ASC')->select();
+
+	    	$this->assign('booklist',$booklist);
 	    	$tabinfo_mod = D('tabinfo');
 			$sql = 'select *  from cms_tabinfo  order by id desc limit 20 ';
 	    	$tabinfo_list = $tabinfo_mod->query($sql);
@@ -301,30 +283,30 @@ class ChapterAction extends BaseAction
 
 	function delete()
     {
-		$article_mod = D('article');
+		$chapter_mod = D('chapter');
 		if((!isset($_GET['id']) || empty($_GET['id'])) && (!isset($_POST['id']) || empty($_POST['id']))) {
             $this->error('请选择要删除的资讯！');
 		}
 		if( isset($_POST['id'])&&is_array($_POST['id']) ){
 			$cate_ids = implode(',',$_POST['id']);
 			foreach( $_POST['id'] as $val ){
-				$article = $article_mod->field("id,cate_id,info")->where("id=".$val)->find();
-				$cate = M('catalog')->field('id,pid')->where("id=".$article['cate_id'])->find();
+				$chapter = $chapter_mod->field("id,cate_id,info")->where("id=".$val)->find();
+				$cate = M('catalog')->field('id,pid')->where("id=".$chapter['cate_id'])->find();
 				if( $cate['pid']!=0 ){
-					M('catalog')->where("id=".$cate['pid'])->setDec('article_nums');
-					M('catalog')->where("id=".$article['cate_id'])->setDec('article_nums');
+					M('catalog')->where("id=".$cate['pid'])->setDec('chapter_nums');
+					M('catalog')->where("id=".$chapter['cate_id'])->setDec('chapter_nums');
 				}else{
-					M('catalog')->where("id=".$article['cate_id'])->setDec('article_nums');
+					M('catalog')->where("id=".$chapter['cate_id'])->setDec('chapter_nums');
 				}
-				$this->_deletepic($article['info']);
+				$this->_deletepic($chapter['info']);
 			}
-			$article_mod->delete($cate_ids);
+			$chapter_mod->delete($cate_ids);
 		}else{
 			$cate_id = intval($_GET['id']);
-			$article = $article_mod->field("id,cate_id,info")->where("id=".$cate_id)->find();
-			M('catalog')->where("id=".$article['cate_id'])->setDec('article_nums');
-		    $article_mod->where('id='.$cate_id)->delete();
-			$this->_deletepic($article['info']);
+			$chapter = $chapter_mod->field("id,cate_id,info")->where("id=".$cate_id)->find();
+			M('catalog')->where("id=".$chapter['cate_id'])->setDec('chapter_nums');
+		    $chapter_mod->where('id='.$cate_id)->delete();
+			$this->_deletepic($chapter['info']);
 		}
 		$this->success(L('operation_success'));
     }
@@ -333,11 +315,11 @@ class ChapterAction extends BaseAction
 
 	function sort_order()
     {
-    	$article_mod = D('article');
+    	$chapter_mod = D('chapter');
 		if (isset($_POST['listorders'])) {
             foreach ($_POST['listorders'] as $id=>$sort_order) {
             	$data['ordid'] = $sort_order;
-                $article_mod->where('id='.$id)->save($data);
+                $chapter_mod->where('id='.$id)->save($data);
             }
             $this->success(L('operation_success'));
         }
@@ -347,12 +329,12 @@ class ChapterAction extends BaseAction
     //修改状态
 	function status()
 	{
-		$article_mod = D('article');
+		$chapter_mod = D('chapter');
 		$id 	= intval($_REQUEST['id']);
 		$type 	= trim($_REQUEST['type']);
-		$sql 	= "update ".C('DB_PREFIX')."article set $type=($type+1)%2 where id='$id'";
-		$res 	= $article_mod->execute($sql);
-		$values = $article_mod->field("id,".$type)->where('id='.$id)->find();
+		$sql 	= "update ".C('DB_PREFIX')."chapter set $type=($type+1)%2 where id='$id'";
+		$res 	= $chapter_mod->execute($sql);
+		$values = $chapter_mod->field("id,".$type)->where('id='.$id)->find();
 		$this->ajaxReturn($values[$type]);
 	}
 
