@@ -15,7 +15,7 @@ $(function(){
 })
 </script>
 
-<form action="{:u('Article/edit')}" method="post" name="myform" id="myform" enctype="multipart/form-data" style="margin-top:10px;">
+<form action="{:u('Articletmp/edit')}" method="post" name="myform" id="myform" enctype="multipart/form-data" style="margin-top:10px;">
   <div class="pad-10">
   <div class="col-tab">
   <ul class="tabBut cu-li">
@@ -108,7 +108,7 @@ $(function(){
   <tr>
           <th>首页幻灯:</th>
           <td><input type="radio" name="ishomepage" class="radio_style" value="1" <if condition="$article.ishomepage eq 1"> checked</if>>
-              &nbsp;显示&nbsp;&nbsp;&nbsp;
+              &nbsp;幻灯片&nbsp;&nbsp;&nbsp;
               <input type="radio" name="ishomepage" class="radio_style" value="0" <if condition="$article.ishomepage eq 0"> checked</if>>
               &nbsp;不显示
             </td>
@@ -129,8 +129,7 @@ $(function(){
           &nbsp;已审核&nbsp;&nbsp;&nbsp;
           <input type="radio" name="status" class="radio_style" value="0" <if condition="$article.status eq 0">  checked</if>>
           &nbsp;待审核&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="status" class="radio_style" value="2" <if condition="$article.status eq 2">  checked</if>>
-			  草稿
+             
           </td>
       </tr>
        <tr>

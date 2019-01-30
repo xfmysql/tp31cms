@@ -7,7 +7,7 @@ $(function(){
 	});
 })
 </script>
-<form action="{:u('Article/add')}" method="post" name="myform" id="myform"  enctype="multipart/form-data" style="margin-top:10px;">
+<form action="{:u('Articletmp/add')}" method="post" name="myform" id="myform"  enctype="multipart/form-data" style="margin-top:10px;">
   <div class="pad-10">
     <div class="col-tab">
       <ul class="tabBut cu-li">
@@ -106,8 +106,6 @@ $(function(){
               &nbsp;已审核&nbsp;&nbsp;&nbsp;
               <input type="radio" name="status" class="radio_style" value="0" checked="checked">
               &nbsp;待审核&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="status" class="radio_style" value="2">
-			  草稿
               </td>
           </tr>
 
